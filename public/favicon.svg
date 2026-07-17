@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <!-- Background -->
+  <defs>
+    <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="50%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#fef08a" />
+    </linearGradient>
+    <radialGradient id="bg-grad" cx="50%" cy="50%" r="50%" fx="30%" fy="30%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </radialGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" opacity="0.6" operator="over" />
+    </filter>
+  </defs>
+  
+  <rect width="512" height="512" rx="100" fill="url(#bg-grad)" />
+  
+  <!-- Outer gold Ring -->
+  <circle cx="256" cy="256" r="220" fill="none" stroke="url(#gold-grad)" stroke-width="8" opacity="0.8" />
+  <circle cx="256" cy="256" r="205" fill="none" stroke="url(#gold-grad)" stroke-width="2" opacity="0.3" stroke-dasharray="10 10" />
+
+  <!-- Globe Lines -->
+  <!-- Horizontal lines -->
+  <ellipse cx="256" cy="256" rx="200" ry="80" fill="none" stroke="url(#gold-grad)" stroke-width="3" opacity="0.25" />
+  <ellipse cx="256" cy="256" rx="200" ry="140" fill="none" stroke="url(#gold-grad)" stroke-width="3" opacity="0.25" />
+  <!-- Vertical lines -->
+  <ellipse cx="256" cy="256" rx="80" ry="200" fill="none" stroke="url(#gold-grad)" stroke-width="3" opacity="0.25" />
+  <ellipse cx="256" cy="256" rx="140" ry="200" fill="none" stroke="url(#gold-grad)" stroke-width="3" opacity="0.25" />
+  <!-- Center Cross -->
+  <line x1="256" y1="56" x2="256" y2="456" stroke="url(#gold-grad)" stroke-width="3" opacity="0.25" />
+  <line x1="56" y1="256" x2="456" y2="256" stroke="url(#gold-grad)" stroke-width="3" opacity="0.25" />
+
+  <!-- Visa Stamp Overlay / Flight Path -->
+  <path d="M 120,200 A 180,180 0 0,1 392,200" fill="none" stroke="url(#gold-grad)" stroke-width="4" stroke-dasharray="8 8" opacity="0.6" />
+  
+  <!-- Stylized V letter in the center, bold and premium -->
+  <path d="M 176,176 L 256,352 L 336,176" fill="none" stroke="url(#gold-grad)" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)" />
+  
+  <!-- Glowing stars representing guidance -->
+  <path d="M 256,110 L 260,120 L 270,120 L 262,126 L 265,136 L 256,130 L 247,136 L 250,126 L 242,120 L 252,120 Z" fill="url(#gold-grad)" filter="url(#glow)" />
+  <path d="M 370,330 L 372,335 L 377,335 L 373,338 L 375,343 L 370,340 L 365,343 L 367,338 L 363,335 L 368,335 Z" fill="url(#gold-grad)" opacity="0.8" />
+  <path d="M 142,330 L 144,335 L 149,335 L 145,338 L 147,343 L 142,340 L 137,343 L 139,338 L 135,335 L 140,335 Z" fill="url(#gold-grad)" opacity="0.8" />
+</svg>
