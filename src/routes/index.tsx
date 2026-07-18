@@ -758,60 +758,104 @@ function Index() {
             </p>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { flag: "🇺🇸", country: "United States", slug: "us-visa",        type: "B-1/B-2 Visitor",    method: "Embassy Interview",  processing: "3–5 weeks",  fee: "$185",  accent: "oklch(0.55 0.18 240)" },
-              { flag: "🇪🇺", country: "Schengen Area", slug: "schengen-visa",  type: "Schengen Visa",      method: "Consulate Submit",    processing: "15 days",    fee: "€90",   accent: "oklch(0.55 0.18 200)" },
-              { flag: "🇨🇦", country: "Canada",        slug: "canada-visa",    type: "Visitor Visa (TRV)", method: "Online Portal",   processing: "4–6 weeks",  fee: "CA$100", accent: "oklch(0.55 0.18 30)" },
-              { flag: "🇬🇧", country: "United Kingdom", slug: "uk-visa",       type: "Standard Visitor",   method: "Online Application",   processing: "3 weeks",    fee: "£115",  accent: "oklch(0.55 0.18 0)" },
-              { flag: "🇦🇺", country: "Australia",     slug: "australia-visa", type: "ETA / eVisitor",     method: "100% Online eVisa",    processing: "24–72 hrs",  fee: "A$20",  accent: "oklch(0.55 0.18 160)" },
-              { flag: "🇯🇵", country: "Japan",         slug: "japan-visa",     type: "Short-Stay Visa",    method: "Embassy / Agency",  processing: "5–7 days",   fee: "¥3,000", accent: "oklch(0.55 0.18 5)" },
-              { flag: "🇦🇪", country: "UAE (Dubai)",   slug: "us-visa",        type: "Visit Visa",         method: "VoA / Online Web", processing: "On arrival", fee: "AED 100", accent: "oklch(0.55 0.18 70)" },
-              { flag: "🇸🇬", country: "Singapore",     slug: "us-visa",        type: "Short Visit Pass",   method: "SG Arrival Card",   processing: "3–5 days",   fee: "SGD 30", accent: "oklch(0.55 0.18 140)" },
-            ].map((row, i) => (
-              <motion.div
-                key={row.country}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.05 }}
-                className="group relative flex flex-col justify-between rounded-3xl border border-border/80 bg-white p-6 shadow-soft hover:shadow-card hover:-translate-y-1 transition-all duration-300"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="h-12 w-12 rounded-full flex items-center justify-center bg-secondary border border-border/40 text-2xl shadow-sm group-hover:scale-105 transition-transform duration-300">
-                      {row.flag}
-                    </div>
-                    <span
-                      className="text-[9px] font-extrabold uppercase px-2.5 py-0.5 rounded-full tracking-wider"
-                      style={{ background: `${row.accent}15`, color: row.accent }}
-                    >
-                      {row.type}
-                    </span>
-                  </div>
-
-                  <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors">{row.country}</h3>
-                  <p className="text-[10px] text-muted-foreground font-semibold mt-1 uppercase tracking-wider">{row.method}</p>
-                </div>
-
-                <div className="mt-6 pt-4 border-t border-dashed border-border/80">
-                  <div className="flex items-center justify-between text-xs mb-3">
-                    <span className="text-muted-foreground font-medium flex items-center gap-1">
-                      <Hourglass className="h-3.5 w-3.5 text-primary shrink-0" />
-                      {row.processing}
-                    </span>
-                    <span className="font-bold text-accent" style={{ color: "var(--accent)" }}>{row.fee}</span>
-                  </div>
-                  <Link
-                    to="/services/$slug"
-                    params={{ slug: row.slug }}
-                    className="flex items-center justify-center gap-1.5 w-full py-2 px-4 rounded-xl text-[10px] font-bold border border-border/80 hover:border-primary hover:bg-primary/5 text-foreground hover:text-primary transition-all duration-200"
+          <div className="overflow-x-auto rounded-3xl border border-border/80 bg-white shadow-soft">
+            <table className="w-full min-w-[800px] text-sm text-left">
+              <thead>
+                <tr className="border-b border-border/60 bg-secondary/60">
+                  <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">Destination</th>
+                  <th className="px-4 py-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">Visa Category</th>
+                  <th className="px-4 py-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">Application Mode</th>
+                  <th className="px-4 py-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">Processing</th>
+                  <th className="px-4 py-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">Est. Fee</th>
+                  <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-muted-foreground text-right">Guide Link</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { flag: "🇺🇸", country: "United States", slug: "us-visa",        type: "B-1/B-2 Visitor",    method: "Embassy Interview",  processing: "3–5 weeks",  fee: "$185", isPrimary: true },
+                  { flag: "🇪🇺", country: "Schengen Area", slug: "schengen-visa",  type: "Schengen Visa",      method: "Consulate Submit",    processing: "15 days",    fee: "€90", isPrimary: false },
+                  { flag: "🇨🇦", country: "Canada",        slug: "canada-visa",    type: "Visitor Visa",       method: "Online Portal",   processing: "4–6 weeks",  fee: "CA$100", isPrimary: true },
+                  { flag: "🇬🇧", country: "United Kingdom", slug: "uk-visa",       type: "Standard Visitor",   method: "Online Application",   processing: "3 weeks",    fee: "£115", isPrimary: false },
+                  { flag: "🇦🇺", country: "Australia",     slug: "australia-visa", type: "ETA / eVisitor",     method: "100% Online eVisa",    processing: "24–72 hrs",  fee: "A$20", isPrimary: true },
+                  { flag: "🇯🇵", country: "Japan",         slug: "japan-visa",     type: "Short-Stay Visa",    method: "Embassy / Agency",  processing: "5–7 days",   fee: "¥3,000", isPrimary: false },
+                  { flag: "🇦🇪", country: "UAE (Dubai)",   slug: "us-visa",        type: "Visit Visa",         method: "VoA / Online Web", processing: "On arrival", fee: "AED 100", isPrimary: true },
+                  { flag: "🇸🇬", country: "Singapore",     slug: "us-visa",        type: "Short Visit Pass",   method: "SG Arrival Card",   processing: "3–5 days",   fee: "SGD 30", isPrimary: false },
+                ].map((row, i) => (
+                  <motion.tr
+                    key={row.country}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.3, delay: i * 0.04 }}
+                    className="border-b border-border/40 hover:bg-secondary/40 transition-colors group"
                   >
-                    View Guide <ArrowRight className="h-3 w-3 group-hover:translate-x-0.5 transition-transform" />
-                  </Link>
-                </div>
-              </motion.div>
-            ))}
+                    {/* Destination name & flag */}
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="flex items-center gap-3">
+                        <span className="text-2xl select-none">{row.flag}</span>
+                        <span className="font-bold text-foreground group-hover:text-primary transition-colors">{row.country}</span>
+                      </div>
+                    </td>
+
+                    {/* Visa Type Badge */}
+                    <td className="px-4 py-4 whitespace-nowrap">
+                      <span
+                        className="inline-block px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider border"
+                        style={{
+                          background: row.isPrimary ? "var(--primary)" : "var(--accent)",
+                          color: "white",
+                          borderColor: row.isPrimary ? "var(--primary)" : "var(--accent)",
+                          opacity: 0.95
+                        }}
+                      >
+                        {row.type}
+                      </span>
+                    </td>
+
+                    {/* Mode of application */}
+                    <td className="px-4 py-4 whitespace-nowrap text-xs text-muted-foreground font-semibold">
+                      {row.method}
+                    </td>
+
+                    {/* Processing */}
+                    <td className="px-4 py-4 whitespace-nowrap">
+                      <span className="flex items-center gap-1.5 text-xs font-bold text-foreground/80">
+                        <Hourglass className="h-3.5 w-3.5 text-primary shrink-0" />
+                        {row.processing}
+                      </span>
+                    </td>
+
+                    {/* Fee */}
+                    <td className="px-4 py-4 whitespace-nowrap text-xs font-extrabold" style={{ color: "var(--accent)" }}>
+                      {row.fee}
+                    </td>
+
+                    {/* Link */}
+                    <td className="px-6 py-4 whitespace-nowrap text-right">
+                      <Link
+                        to="/services/$slug"
+                        params={{ slug: row.slug }}
+                        className="inline-flex items-center gap-1.5 text-[11px] font-bold rounded-full px-4.5 py-2 border text-white transition-all duration-300"
+                        style={{
+                          background: "var(--primary)",
+                          borderColor: "var(--primary)",
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background = "var(--primary-deep)";
+                          e.currentTarget.style.borderColor = "var(--primary-deep)";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = "var(--primary)";
+                          e.currentTarget.style.borderColor = "var(--primary)";
+                        }}
+                      >
+                        Explore Guide <ArrowRight className="h-3 w-3" />
+                      </Link>
+                    </td>
+                  </motion.tr>
+                ))}
+              </tbody>
+            </table>
           </div>
 
           <p className="mt-8 text-center text-xs text-muted-foreground">
