@@ -746,7 +746,7 @@ function Index() {
       {/* ── POPULAR DESTINATIONS REQUIREMENTS TABLE ────────── */}
       <section className="py-24 bg-gradient-to-b from-background to-secondary/20">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="mx-auto max-w-3xl text-center mb-14">
+          <div className="mx-auto max-w-3xl text-center mb-16">
             <p className="text-xs font-bold uppercase tracking-[0.3em]" style={{ color: "var(--primary)" }}>
               Quick Reference Guide
             </p>
@@ -754,80 +754,68 @@ function Index() {
               Travel Visa Requirements for Popular Destinations
             </h2>
             <p className="mt-4 text-muted-foreground text-lg">
-              A at-a-glance comparison of visa requirements, fees, and processing times for the world's most visited countries.
+              At-a-glance comparison of visa requirements, approximate fees, and processing times for key hubs.
             </p>
           </div>
 
-          <div className="overflow-x-auto rounded-3xl border border-border/80 bg-white shadow-soft">
-            <table className="w-full min-w-[700px] text-sm">
-              <thead>
-                <tr className="border-b border-border/60 bg-secondary/30">
-                  <th className="text-left px-6 py-4 text-[11px] font-extrabold uppercase tracking-wider text-muted-foreground">Destination</th>
-                  <th className="text-left px-4 py-4 text-[11px] font-extrabold uppercase tracking-wider text-muted-foreground">Visa Type</th>
-                  <th className="text-left px-4 py-4 text-[11px] font-extrabold uppercase tracking-wider text-muted-foreground">Method</th>
-                  <th className="text-left px-4 py-4 text-[11px] font-extrabold uppercase tracking-wider text-muted-foreground">Processing</th>
-                  <th className="text-left px-4 py-4 text-[11px] font-extrabold uppercase tracking-wider text-muted-foreground">Fee (Approx.)</th>
-                  <th className="px-4 py-4 text-[11px] font-extrabold uppercase tracking-wider text-muted-foreground text-center">Guide</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  { flag: "🇺🇸", country: "United States", slug: "us-visa",        type: "B-1/B-2 Visitor",    method: "Embassy",  processing: "3–5 weeks",  fee: "$185",  accent: "oklch(0.55 0.18 240)" },
-                  { flag: "🇪🇺", country: "Schengen Area", slug: "schengen-visa",  type: "Schengen Visa",      method: "Embassy",  processing: "15 days",    fee: "€90",   accent: "oklch(0.55 0.18 200)" },
-                  { flag: "🇨🇦", country: "Canada",        slug: "canada-visa",    type: "Visitor Visa (TRV)", method: "Online",   processing: "4–6 weeks",  fee: "CA$100", accent: "oklch(0.55 0.18 30)" },
-                  { flag: "🇬🇧", country: "United Kingdom", slug: "uk-visa",       type: "Standard Visitor",   method: "Online",   processing: "3 weeks",    fee: "£115",  accent: "oklch(0.55 0.18 0)" },
-                  { flag: "🇦🇺", country: "Australia",     slug: "australia-visa", type: "ETA / eVisitor",     method: "eVisa",    processing: "24–72 hrs",  fee: "A$20",  accent: "oklch(0.55 0.18 160)" },
-                  { flag: "🇯🇵", country: "Japan",         slug: "japan-visa",     type: "Short-Stay Visa",    method: "Embassy",  processing: "5–7 days",   fee: "¥3,000", accent: "oklch(0.55 0.18 5)" },
-                  { flag: "🇦🇪", country: "UAE (Dubai)",   slug: "us-visa",        type: "Visit Visa",         method: "VoA / Online", processing: "On arrival", fee: "AED 100", accent: "oklch(0.55 0.18 70)" },
-                  { flag: "🇸🇬", country: "Singapore",     slug: "us-visa",        type: "Short Visit Pass",   method: "Online",   processing: "3–5 days",   fee: "SGD 30", accent: "oklch(0.55 0.18 140)" },
-                ].map((row, i) => (
-                  <motion.tr
-                    key={row.country}
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: i * 0.05 }}
-                    className="border-b border-border/40 hover:bg-secondary/20 transition-colors group"
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { flag: "🇺🇸", country: "United States", slug: "us-visa",        type: "B-1/B-2 Visitor",    method: "Embassy Interview",  processing: "3–5 weeks",  fee: "$185",  accent: "oklch(0.55 0.18 240)" },
+              { flag: "🇪🇺", country: "Schengen Area", slug: "schengen-visa",  type: "Schengen Visa",      method: "Consulate Submit",    processing: "15 days",    fee: "€90",   accent: "oklch(0.55 0.18 200)" },
+              { flag: "🇨🇦", country: "Canada",        slug: "canada-visa",    type: "Visitor Visa (TRV)", method: "Online Portal",   processing: "4–6 weeks",  fee: "CA$100", accent: "oklch(0.55 0.18 30)" },
+              { flag: "🇬🇧", country: "United Kingdom", slug: "uk-visa",       type: "Standard Visitor",   method: "Online Application",   processing: "3 weeks",    fee: "£115",  accent: "oklch(0.55 0.18 0)" },
+              { flag: "🇦🇺", country: "Australia",     slug: "australia-visa", type: "ETA / eVisitor",     method: "100% Online eVisa",    processing: "24–72 hrs",  fee: "A$20",  accent: "oklch(0.55 0.18 160)" },
+              { flag: "🇯🇵", country: "Japan",         slug: "japan-visa",     type: "Short-Stay Visa",    method: "Embassy / Agency",  processing: "5–7 days",   fee: "¥3,000", accent: "oklch(0.55 0.18 5)" },
+              { flag: "🇦🇪", country: "UAE (Dubai)",   slug: "us-visa",        type: "Visit Visa",         method: "VoA / Online Web", processing: "On arrival", fee: "AED 100", accent: "oklch(0.55 0.18 70)" },
+              { flag: "🇸🇬", country: "Singapore",     slug: "us-visa",        type: "Short Visit Pass",   method: "SG Arrival Card",   processing: "3–5 days",   fee: "SGD 30", accent: "oklch(0.55 0.18 140)" },
+            ].map((row, i) => (
+              <motion.div
+                key={row.country}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.05 }}
+                className="group relative flex flex-col justify-between rounded-3xl border border-border/80 bg-white p-6 shadow-soft hover:shadow-card hover:-translate-y-1 transition-all duration-300"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="h-12 w-12 rounded-full flex items-center justify-center bg-secondary border border-border/40 text-2xl shadow-sm group-hover:scale-105 transition-transform duration-300">
+                      {row.flag}
+                    </div>
+                    <span
+                      className="text-[9px] font-extrabold uppercase px-2.5 py-0.5 rounded-full tracking-wider"
+                      style={{ background: `${row.accent}15`, color: row.accent }}
+                    >
+                      {row.type}
+                    </span>
+                  </div>
+
+                  <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors">{row.country}</h3>
+                  <p className="text-[10px] text-muted-foreground font-semibold mt-1 uppercase tracking-wider">{row.method}</p>
+                </div>
+
+                <div className="mt-6 pt-4 border-t border-dashed border-border/80">
+                  <div className="flex items-center justify-between text-xs mb-3">
+                    <span className="text-muted-foreground font-medium flex items-center gap-1">
+                      <Hourglass className="h-3.5 w-3.5 text-primary shrink-0" />
+                      {row.processing}
+                    </span>
+                    <span className="font-bold text-accent" style={{ color: "var(--accent)" }}>{row.fee}</span>
+                  </div>
+                  <Link
+                    to="/services/$slug"
+                    params={{ slug: row.slug }}
+                    className="flex items-center justify-center gap-1.5 w-full py-2 px-4 rounded-xl text-[10px] font-bold border border-border/80 hover:border-primary hover:bg-primary/5 text-foreground hover:text-primary transition-all duration-200"
                   >
-                    <td className="px-6 py-4">
-                      <div className="flex items-center gap-3">
-                        <span className="text-2xl">{row.flag}</span>
-                        <span className="font-bold text-foreground">{row.country}</span>
-                      </div>
-                    </td>
-                    <td className="px-4 py-4">
-                      <span
-                        className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider"
-                        style={{ background: `${row.accent}15`, color: row.accent }}
-                      >
-                        {row.type}
-                      </span>
-                    </td>
-                    <td className="px-4 py-4 text-sm text-muted-foreground font-medium">{row.method}</td>
-                    <td className="px-4 py-4">
-                      <span className="flex items-center gap-1.5 text-sm font-semibold text-foreground">
-                        <Hourglass className="h-3.5 w-3.5 text-primary shrink-0" />
-                        {row.processing}
-                      </span>
-                    </td>
-                    <td className="px-4 py-4 text-sm font-bold" style={{ color: "var(--accent)" }}>{row.fee}</td>
-                    <td className="px-4 py-4 text-center">
-                      <Link
-                        to="/services/$slug"
-                        params={{ slug: row.slug }}
-                        className="inline-flex items-center gap-1 text-[11px] font-bold rounded-full px-3 py-1.5 border border-primary/30 text-primary hover:bg-primary hover:text-white transition-all duration-200"
-                      >
-                        Guide <ArrowRight className="h-3 w-3" />
-                      </Link>
-                    </td>
-                  </motion.tr>
-                ))}
-              </tbody>
-            </table>
+                    View Guide <ArrowRight className="h-3 w-3 group-hover:translate-x-0.5 transition-transform" />
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
           </div>
 
-          <p className="mt-6 text-center text-xs text-muted-foreground">
-            * Requirements vary by nationality. Always check the official embassy website for the most current information.
+          <p className="mt-8 text-center text-xs text-muted-foreground">
+            * Rules vary by applicant passport. Check country details for specific entry waivers.
           </p>
         </div>
       </section>
@@ -1026,48 +1014,86 @@ function Index() {
         </div>
       </section>
 
-      {/* ── WHAT IS A VISA? ─────────────────────────────────── */}
-      <section className="py-20 bg-background">
-        <div className="mx-auto max-w-4xl px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.55 }}
-            className="rounded-3xl border border-border/70 bg-white p-10 shadow-soft"
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <div className="h-10 w-10 rounded-xl flex items-center justify-center" style={{ background: "var(--primary)", opacity: 1 }}>
-                <Globe className="h-5 w-5 text-white" />
-              </div>
-              <p className="text-xs font-bold uppercase tracking-[0.3em]" style={{ color: "var(--primary)" }}>
-                Visa Guide Basics
-              </p>
-            </div>
-            <h2 className="text-3xl font-bold mb-5">What is a Travel Visa?</h2>
-            <div className="space-y-4 text-muted-foreground leading-relaxed text-[15px]">
-              <p>
-                A <strong className="text-foreground">travel visa</strong> is an official document issued by a country's government that permits a foreign national to enter, stay in, or transit through that country for a specified period and purpose. Visas are typically affixed as a stamp or sticker inside your passport.
-              </p>
-              <p>
-                In recent years, many countries have introduced <strong className="text-foreground">electronic visas (eVisas)</strong> — digital authorisations that are linked to your passport electronically and don't require a physical stamp. These can often be obtained online within days.
-              </p>
-              <p>
-                Whether you're travelling for tourism, work, study, or family reasons, understanding the correct visa type and application process is essential to a successful trip. Our guides cover requirements, fees, processing times, and step-by-step instructions for destinations worldwide.
-              </p>
-            </div>
-            <div className="mt-8 flex flex-wrap gap-3">
-              {["Tourist Visa", "Work Visa", "Student Visa", "eVisa", "Visa on Arrival", "Visa-Free Travel"].map(tag => (
-                <span
-                  key={tag}
-                  className="px-3 py-1 rounded-full text-xs font-semibold border border-primary/20 bg-primary/5"
-                  style={{ color: "var(--primary)" }}
-                >
-                  {tag}
+      {/* ── VISA GUIDE BASICS ────────────────────────────────── */}
+      <section className="py-24 bg-background relative overflow-hidden">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="grid gap-12 lg:grid-cols-12 items-center">
+            
+            {/* Left Column: Context & Stats */}
+            <div className="lg:col-span-5">
+              <div className="flex items-center gap-3 mb-6">
+                <span className="h-2 w-2 rounded-full gradient-primary animate-pulse" />
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary">
+                  Visa Guide Basics
                 </span>
-              ))}
+              </div>
+              <h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl leading-tight">
+                What is a <br />
+                <span className="text-gradient">Travel Visa?</span>
+              </h2>
+              <p className="mt-6 text-base text-muted-foreground leading-relaxed">
+                A travel visa is an official government authorization allowing a foreign citizen to enter, stay, or transit through their territory. Affixed as a sticker/stamp in your passport or issued digitally as an eVisa, it defines the legal boundaries of your trip.
+              </p>
+              
+              {/* Quick stats list */}
+              <div className="mt-8 grid grid-cols-2 gap-6 pt-8 border-t border-border/60">
+                <div>
+                  <h4 className="text-3xl font-bold text-foreground">195+</h4>
+                  <p className="text-xs text-muted-foreground mt-1 uppercase tracking-wider font-semibold">Countries Guided</p>
+                </div>
+                <div>
+                  <h4 className="text-3xl font-bold text-foreground">100%</h4>
+                  <p className="text-xs text-muted-foreground mt-1 uppercase tracking-wider font-semibold">Digital Up-To-Date</p>
+                </div>
+              </div>
             </div>
-          </motion.div>
+
+            {/* Right Column: Comparative Interactive Card */}
+            <div className="lg:col-span-7">
+              <div className="relative rounded-3xl border border-border/80 bg-white p-8 shadow-card overflow-hidden">
+                <div className="absolute right-0 top-0 h-40 w-40 bg-primary/5 rounded-full blur-3xl" />
+                
+                <h3 className="text-lg font-bold text-foreground mb-6 flex items-center gap-2">
+                  <Globe className="h-5 w-5 text-primary" /> Key Travel Credentials compared
+                </h3>
+
+                <div className="space-y-4">
+                  {/* Passport card */}
+                  <div className="p-5 rounded-2xl bg-secondary/30 border border-border/40 hover:border-primary/20 transition-all duration-300">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm font-bold text-foreground">1. Passport (Identity)</span>
+                      <span className="text-[9px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20">Issued by Home Country</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground leading-relaxed">
+                      Your globally recognized identification document. Proves who you are and establishes your citizenship. Necessary to exit and enter any country.
+                    </p>
+                  </div>
+
+                  {/* Visa card */}
+                  <div className="p-5 rounded-2xl bg-white border border-border/85 hover:border-primary/20 transition-all duration-300 shadow-soft">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm font-bold text-foreground">2. Visa (Permission)</span>
+                      <span className="text-[9px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-accent/15 text-accent border border-accent/30" style={{ color: "var(--accent)" }}>Granted by Destination</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground leading-relaxed">
+                      A specific permit linked to your passport detailing how long you can visit, whether you can work, and the exact purpose of entry.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Tag badges row */}
+                <div className="mt-6 pt-6 border-t border-dashed border-border/80 flex flex-wrap gap-2">
+                  {["Tourist", "eVisa", "Visa-Free", "Student", "Work"].map((tag) => (
+                    <span key={tag} className="px-2.5 py-1 rounded-lg text-[10px] font-bold bg-secondary text-foreground/80 border border-border/40">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+              </div>
+            </div>
+
+          </div>
         </div>
       </section>
 
