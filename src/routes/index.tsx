@@ -242,6 +242,45 @@ const FAQ_ITEMS = [
   },
 ];
 
+function FeedbackWidget() {
+  const [voted, setVoted] = useState<"yes" | "no" | null>(null);
+  return (
+    <section className="py-12 bg-secondary/20">
+      <div className="mx-auto max-w-xl px-6 text-center">
+        <p className="text-sm font-semibold text-muted-foreground mb-4">
+          Did you find this page helpful?
+        </p>
+        {voted === null ? (
+          <div className="flex items-center justify-center gap-4">
+            <button
+              onClick={() => setVoted("yes")}
+              className="flex items-center gap-2 rounded-full border border-border/80 bg-white px-6 py-2.5 text-sm font-bold shadow-soft hover:border-primary hover:text-primary hover:bg-primary/5 transition-all duration-200"
+            >
+              <span>👍</span> Yes
+            </button>
+            <button
+              onClick={() => setVoted("no")}
+              className="flex items-center gap-2 rounded-full border border-border/80 bg-white px-6 py-2.5 text-sm font-bold shadow-soft hover:border-destructive hover:text-destructive hover:bg-destructive/5 transition-all duration-200"
+            >
+              <span>👎</span> No
+            </button>
+          </div>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
+            className="inline-flex items-center gap-2 rounded-full bg-white border border-border/60 px-6 py-2.5 text-sm font-semibold text-muted-foreground shadow-soft"
+          >
+            <CheckCircle2 className="h-4 w-4 text-green-500" />
+            Thank you for your feedback!
+          </motion.div>
+        )}
+      </div>
+    </section>
+  );
+}
+
 function Index() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [activeTimelineStep, setActiveTimelineStep] = useState(0);
@@ -790,6 +829,179 @@ function Index() {
       </section>
 
       <Testimonials />
+
+
+      {/* ── REGION SELECTOR ─────────────────────────────────── */}
+      <section className="py-20 bg-gradient-to-b from-secondary/20 to-background">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="mx-auto max-w-3xl text-center mb-14">
+            <p className="text-xs font-bold uppercase tracking-[0.3em]" style={{ color: "var(--primary)" }}>
+              Explore by Region
+            </p>
+            <h2 className="mt-3 text-4xl font-bold md:text-5xl">
+              Browse Visa Guides by Region
+            </h2>
+            <p className="mt-4 text-muted-foreground text-lg">
+              For information about other destinations, choose a region below to explore country-specific visa requirements.
+            </p>
+          </div>
+
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+            {[
+              { name: "Europe",   icon: "🇪🇺", link: "/visas-by-country", color: "oklch(0.55 0.18 240)", desc: "Schengen, UK, Switzerland & more" },
+              { name: "Americas", icon: "🌎", link: "/visas-by-country", color: "oklch(0.55 0.18 160)", desc: "USA, Canada, Brazil & more" },
+              { name: "Asia",     icon: "🌏", link: "/visas-by-country", color: "oklch(0.55 0.18 60)",  desc: "Japan, India, UAE & more" },
+              { name: "Africa",   icon: "🌍", link: "/visas-by-country", color: "oklch(0.55 0.18 30)",  desc: "South Africa, Kenya & more" },
+              { name: "Oceania",  icon: "🦘", link: "/visas-by-country", color: "oklch(0.55 0.18 200)", desc: "Australia, NZ & more" },
+            ].map((region, i) => (
+              <motion.div
+                key={region.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.07 }}
+              >
+                <Link
+                  to={region.link}
+                  className="group flex flex-col items-center gap-3 rounded-3xl bg-white border border-border/80 p-8 text-center shadow-soft hover:shadow-card hover:-translate-y-1.5 transition-all duration-300"
+                >
+                  <div
+                    className="h-16 w-16 rounded-2xl flex items-center justify-center text-3xl shadow-sm group-hover:scale-105 transition-transform duration-300"
+                    style={{ background: `${region.color}18`, border: `1.5px solid ${region.color}30` }}
+                  >
+                    {region.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-base font-bold text-foreground">{region.name}</h3>
+                    <p className="text-[11px] text-muted-foreground mt-0.5">{region.desc}</p>
+                  </div>
+                  <span
+                    className="mt-1 inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider"
+                    style={{ color: region.color }}
+                  >
+                    Explore <ArrowRight className="h-3 w-3" />
+                  </span>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── WHAT IS A VISA? ─────────────────────────────────── */}
+      <section className="py-20 bg-background">
+        <div className="mx-auto max-w-4xl px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55 }}
+            className="rounded-3xl border border-border/70 bg-white p-10 shadow-soft"
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <div className="h-10 w-10 rounded-xl flex items-center justify-center" style={{ background: "var(--primary)", opacity: 1 }}>
+                <Globe className="h-5 w-5 text-white" />
+              </div>
+              <p className="text-xs font-bold uppercase tracking-[0.3em]" style={{ color: "var(--primary)" }}>
+                Visa Guide Basics
+              </p>
+            </div>
+            <h2 className="text-3xl font-bold mb-5">What is a Travel Visa?</h2>
+            <div className="space-y-4 text-muted-foreground leading-relaxed text-[15px]">
+              <p>
+                A <strong className="text-foreground">travel visa</strong> is an official document issued by a country's government that permits a foreign national to enter, stay in, or transit through that country for a specified period and purpose. Visas are typically affixed as a stamp or sticker inside your passport.
+              </p>
+              <p>
+                In recent years, many countries have introduced <strong className="text-foreground">electronic visas (eVisas)</strong> — digital authorisations that are linked to your passport electronically and don't require a physical stamp. These can often be obtained online within days.
+              </p>
+              <p>
+                Whether you're travelling for tourism, work, study, or family reasons, understanding the correct visa type and application process is essential to a successful trip. Our guides cover requirements, fees, processing times, and step-by-step instructions for destinations worldwide.
+              </p>
+            </div>
+            <div className="mt-8 flex flex-wrap gap-3">
+              {["Tourist Visa", "Work Visa", "Student Visa", "eVisa", "Visa on Arrival", "Visa-Free Travel"].map(tag => (
+                <span
+                  key={tag}
+                  className="px-3 py-1 rounded-full text-xs font-semibold border border-primary/20 bg-primary/5"
+                  style={{ color: "var(--primary)" }}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── LATEST NEWS ─────────────────────────────────────── */}
+      <section className="py-20 bg-gradient-to-b from-background to-secondary/20">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="mx-auto max-w-3xl text-center mb-12">
+            <p className="text-xs font-bold uppercase tracking-[0.3em]" style={{ color: "var(--primary)" }}>
+              Stay Informed
+            </p>
+            <h2 className="mt-3 text-4xl font-bold md:text-5xl">Latest Visa News</h2>
+            <p className="mt-4 text-muted-foreground text-lg">
+              Recent updates on visa policy changes, new eVisa programs, and travel advisories worldwide.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {[
+              {
+                tag: "Policy Update",
+                date: "Jul 2025",
+                title: "Schengen Area Expands eVisa Programme",
+                excerpt: "European Union announces a streamlined digital visa application system for travellers from 60+ countries, cutting processing times by 40%.",
+                color: "oklch(0.55 0.18 240)",
+              },
+              {
+                tag: "New Programme",
+                date: "Jun 2025",
+                title: "Japan Launches Digital Nomad Visa",
+                excerpt: "Japan introduces a 6-month visa for remote workers and freelancers with income above ¥10M/year — a first for the country.",
+                color: "oklch(0.55 0.18 30)",
+              },
+              {
+                tag: "Travel Advisory",
+                date: "Jun 2025",
+                title: "Canada Temporary Resident Visa Backlog Eases",
+                excerpt: "IRCC reports a 35% reduction in processing backlogs for Canadian visitor visas, with most applications now processed within 4-6 weeks.",
+                color: "oklch(0.55 0.18 160)",
+              },
+            ].map((article, i) => (
+              <motion.article
+                key={article.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: i * 0.1 }}
+                className="group flex flex-col rounded-3xl bg-white border border-border/80 p-7 shadow-soft hover:shadow-card hover:-translate-y-1 transition-all duration-300"
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <span
+                    className="text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-full"
+                    style={{ background: `${article.color}18`, color: article.color }}
+                  >
+                    {article.tag}
+                  </span>
+                  <span className="text-[11px] text-muted-foreground font-medium">{article.date}</span>
+                </div>
+                <h3 className="text-base font-bold text-foreground leading-snug mb-2 group-hover:text-primary transition-colors">
+                  {article.title}
+                </h3>
+                <p className="text-[13px] text-muted-foreground leading-relaxed flex-1">{article.excerpt}</p>
+                <div className="mt-5 flex items-center gap-1.5 text-[11px] font-bold" style={{ color: article.color }}>
+                  Read More <ArrowRight className="h-3 w-3 group-hover:translate-x-0.5 transition-transform" />
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── FEEDBACK WIDGET ─────────────────────────────────── */}
+      <FeedbackWidget />
 
       {/* CTA with background */}
       <section className="py-24">
