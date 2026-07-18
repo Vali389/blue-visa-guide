@@ -1018,11 +1018,11 @@ function Index() {
 
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
             {[
-              { name: "Europe",   icon: "🇪🇺", link: "/visas-by-country", color: "oklch(0.55 0.18 240)", desc: "Schengen, UK, Switzerland & more" },
-              { name: "Americas", icon: "🌎", link: "/visas-by-country", color: "oklch(0.55 0.18 160)", desc: "USA, Canada, Brazil & more" },
-              { name: "Asia",     icon: "🌏", link: "/visas-by-country", color: "oklch(0.55 0.18 60)",  desc: "Japan, India, UAE & more" },
-              { name: "Africa",   icon: "🌍", link: "/visas-by-country", color: "oklch(0.55 0.18 30)",  desc: "South Africa, Kenya & more" },
-              { name: "Oceania",  icon: "🦘", link: "/visas-by-country", color: "oklch(0.55 0.18 200)", desc: "Australia, NZ & more" },
+              { name: "Europe",   icon: "🇪🇺", link: "/visas-by-country", color: "var(--primary)", desc: "Schengen, UK, Switzerland & more" },
+              { name: "Americas", icon: "🌎", link: "/visas-by-country", color: "var(--accent)",  desc: "USA, Canada, Brazil & more" },
+              { name: "Asia",     icon: "🌏", link: "/visas-by-country", color: "var(--primary)", desc: "Japan, India, UAE & more" },
+              { name: "Africa",   icon: "🌍", link: "/visas-by-country", color: "var(--accent)",  desc: "South Africa, Kenya & more" },
+              { name: "Oceania",  icon: "🦘", link: "/visas-by-country", color: "var(--primary)", desc: "Australia, NZ & more" },
             ].map((region, i) => (
               <motion.div
                 key={region.name}
@@ -1033,23 +1033,35 @@ function Index() {
               >
                 <Link
                   to={region.link}
-                  className="group flex flex-col items-center gap-3 rounded-3xl bg-white border border-border/80 p-8 text-center shadow-soft hover:shadow-card hover:-translate-y-1.5 transition-all duration-300"
+                  className="group flex flex-col items-center gap-3 rounded-3xl bg-white border border-border/85 p-8 text-center shadow-soft hover:shadow-card hover:-translate-y-1.5 transition-all duration-300 cursor-pointer"
+                  style={{
+                    // Dynamic hover styles defined inline for clean presentation
+                    "--hover-border": region.color,
+                  } as React.CSSProperties}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = region.color;
+                    e.currentTarget.style.background = `${region.color}05`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = "var(--border)";
+                    e.currentTarget.style.background = "white";
+                  }}
                 >
                   <div
                     className="h-16 w-16 rounded-2xl flex items-center justify-center text-3xl shadow-sm group-hover:scale-105 transition-transform duration-300"
-                    style={{ background: `${region.color}18`, border: `1.5px solid ${region.color}30` }}
+                    style={{ background: `${region.color}15`, border: `1.5px solid ${region.color}25` }}
                   >
                     {region.icon}
                   </div>
                   <div>
-                    <h3 className="text-base font-bold text-foreground">{region.name}</h3>
-                    <p className="text-[11px] text-muted-foreground mt-0.5">{region.desc}</p>
+                    <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors">{region.name}</h3>
+                    <p className="text-[11px] text-muted-foreground mt-0.5 leading-relaxed">{region.desc}</p>
                   </div>
                   <span
                     className="mt-1 inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider"
                     style={{ color: region.color }}
                   >
-                    Explore <ArrowRight className="h-3 w-3" />
+                    Explore <ArrowRight className="h-3 w-3 group-hover:translate-x-0.5 transition-transform" />
                   </span>
                 </Link>
               </motion.div>
