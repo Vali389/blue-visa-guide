@@ -100,12 +100,20 @@ const PURPOSE_VISAS = [
     workAllowed: false,
   },
   {
-    title: "Business Visa",
-    icon: Briefcase,
-    validity: "Short-Stay",
-    description: "Issued for professionals participating in meetings, commercial conferences, contract signings, or exploratory business activities.",
-    requirements: ["Host Letter of Invitation", "Employment Cover Letter", "Business Entity Registration", "Event Tickets / Schedules"],
+    title: "Transit Visa",
+    icon: Plane,
+    validity: "Ultra Short-Stay",
+    description: "For passengers transferring flights or connecting vessels inside a country's ports en route to a separate third destination.",
+    requirements: ["Confirmed Ticket to Third Country", "Valid Destination Country Visa", "Passport and Transit Forms"],
     workAllowed: false,
+  },
+  {
+    title: "Working Holiday Visa",
+    icon: Compass,
+    validity: "Up to 12–24 Months",
+    description: "Allows young adults (typically 18–35) to live, travel, and work temporarily in a participating country — combining tourism with short-term employment.",
+    requirements: ["Age Proof (18–35)", "Valid Passport", "Sufficient Funds", "Health Insurance"],
+    workAllowed: true,
   },
   {
     title: "Student Visa",
@@ -124,22 +132,63 @@ const PURPOSE_VISAS = [
     workAllowed: true,
   },
   {
-    title: "Transit Visa",
-    icon: Plane,
-    validity: "Ultra Short-Stay",
-    description: "For passengers transferring flights or connecting vessels inside a country's ports en route to a separate third destination.",
-    requirements: ["Confirmed Ticket to Third Country", "Valid Destination Country Visa", "Passport and Transit Forms"],
+    title: "Family Reunification Visa",
+    icon: Users,
+    validity: "Long-Stay",
+    description: "Issued to join a spouse, parent, or close relative who is a citizen or permanent resident of the destination country.",
+    requirements: ["Proof of Family Relationship", "Sponsor's Residency Proof", "Financial Sponsorship Declaration", "Marriage / Birth Certificate"],
+    workAllowed: true,
+  },
+  {
+    title: "Investment Visa",
+    icon: DollarSign,
+    validity: "Long-Stay / PR Path",
+    description: "Also called 'Golden Visas', these are granted to high-net-worth individuals who make qualifying real-estate, business, or government bond investments.",
+    requirements: ["Proof of Investment Funds", "Clean Criminal Record", "Business Plan / Asset Declaration", "Local Investment Certificate"],
+    workAllowed: true,
+  },
+  {
+    title: "Official / Diplomatic Visa",
+    icon: Award,
+    validity: "Mission Duration",
+    description: "Issued for diplomatic or official government-related duties abroad — such as diplomatic, service, or courtesy visas for delegations and envoys.",
+    requirements: ["Diplomatic Passport", "Official Government Letter", "Ministry of Foreign Affairs Note Verbale", "Mission Orders"],
     workAllowed: false,
   },
   {
-    title: "Medical Visa",
-    icon: Activity,
-    validity: "Treatment Term",
-    description: "For individuals traveling to seek specific surgeries, specialist clinical consults, or therapeutic rehabilitation programs overseas.",
-    requirements: ["Local Doctor Referral Letter", "Host Medical Clinic Admission letter", "Prepaid Expense proof", "Escort / Companion passport"],
+    title: "Refuge / Asylum Visa",
+    icon: ShieldCheck,
+    validity: "Protection Period",
+    description: "Granted to individuals fleeing persecution, conflict, or humanitarian crises — providing legal protection and temporary or permanent residence.",
+    requirements: ["Asylum Claim Filing", "Personal Statement of Persecution", "Supporting Evidence", "UNHCR Referral (where applicable)"],
+    workAllowed: true,
+  },
+  {
+    title: "Digital Nomad Visa",
+    icon: Laptop,
+    validity: "6–24 Months",
+    description: "A modern visa category for remote workers and freelancers who wish to live in a country while working for overseas employers or clients.",
+    requirements: ["Proof of Remote Employment", "Monthly Income Threshold", "Health Insurance", "Clean Background Check"],
+    workAllowed: true,
+  },
+  {
+    title: "Retirement Visa",
+    icon: Clock,
+    validity: "Renewable Long-Stay",
+    description: "Designed for retirees who wish to live long-term in a foreign country, typically requiring a minimum pension or passive income threshold.",
+    requirements: ["Proof of Pension / Retirement Income", "Health Insurance", "Clean Criminal Record", "No Employment Declaration"],
+    workAllowed: false,
+  },
+  {
+    title: "Pilgrimage Visa",
+    icon: Globe,
+    validity: "Religious Event Period",
+    description: "A specialized category issued for travel to religious sites — most notably Saudi Arabia's Hajj and Umrah visas for Muslim pilgrims worldwide.",
+    requirements: ["Proof of Religious Affiliation", "Sponsoring Agent Letter", "Vaccination Certificates", "Return Travel Ticket"],
     workAllowed: false,
   },
 ];
+
 
 const APPLICATION_METHODS = [
   {
@@ -691,6 +740,95 @@ function Index() {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* ── POPULAR DESTINATIONS REQUIREMENTS TABLE ────────── */}
+      <section className="py-24 bg-gradient-to-b from-background to-secondary/20">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="mx-auto max-w-3xl text-center mb-14">
+            <p className="text-xs font-bold uppercase tracking-[0.3em]" style={{ color: "var(--primary)" }}>
+              Quick Reference Guide
+            </p>
+            <h2 className="mt-3 text-4xl font-bold md:text-5xl">
+              Travel Visa Requirements for Popular Destinations
+            </h2>
+            <p className="mt-4 text-muted-foreground text-lg">
+              A at-a-glance comparison of visa requirements, fees, and processing times for the world's most visited countries.
+            </p>
+          </div>
+
+          <div className="overflow-x-auto rounded-3xl border border-border/80 bg-white shadow-soft">
+            <table className="w-full min-w-[700px] text-sm">
+              <thead>
+                <tr className="border-b border-border/60 bg-secondary/30">
+                  <th className="text-left px-6 py-4 text-[11px] font-extrabold uppercase tracking-wider text-muted-foreground">Destination</th>
+                  <th className="text-left px-4 py-4 text-[11px] font-extrabold uppercase tracking-wider text-muted-foreground">Visa Type</th>
+                  <th className="text-left px-4 py-4 text-[11px] font-extrabold uppercase tracking-wider text-muted-foreground">Method</th>
+                  <th className="text-left px-4 py-4 text-[11px] font-extrabold uppercase tracking-wider text-muted-foreground">Processing</th>
+                  <th className="text-left px-4 py-4 text-[11px] font-extrabold uppercase tracking-wider text-muted-foreground">Fee (Approx.)</th>
+                  <th className="px-4 py-4 text-[11px] font-extrabold uppercase tracking-wider text-muted-foreground text-center">Guide</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { flag: "🇺🇸", country: "United States", slug: "us-visa",        type: "B-1/B-2 Visitor",    method: "Embassy",  processing: "3–5 weeks",  fee: "$185",  accent: "oklch(0.55 0.18 240)" },
+                  { flag: "🇪🇺", country: "Schengen Area", slug: "schengen-visa",  type: "Schengen Visa",      method: "Embassy",  processing: "15 days",    fee: "€90",   accent: "oklch(0.55 0.18 200)" },
+                  { flag: "🇨🇦", country: "Canada",        slug: "canada-visa",    type: "Visitor Visa (TRV)", method: "Online",   processing: "4–6 weeks",  fee: "CA$100", accent: "oklch(0.55 0.18 30)" },
+                  { flag: "🇬🇧", country: "United Kingdom", slug: "uk-visa",       type: "Standard Visitor",   method: "Online",   processing: "3 weeks",    fee: "£115",  accent: "oklch(0.55 0.18 0)" },
+                  { flag: "🇦🇺", country: "Australia",     slug: "australia-visa", type: "ETA / eVisitor",     method: "eVisa",    processing: "24–72 hrs",  fee: "A$20",  accent: "oklch(0.55 0.18 160)" },
+                  { flag: "🇯🇵", country: "Japan",         slug: "japan-visa",     type: "Short-Stay Visa",    method: "Embassy",  processing: "5–7 days",   fee: "¥3,000", accent: "oklch(0.55 0.18 5)" },
+                  { flag: "🇦🇪", country: "UAE (Dubai)",   slug: "us-visa",        type: "Visit Visa",         method: "VoA / Online", processing: "On arrival", fee: "AED 100", accent: "oklch(0.55 0.18 70)" },
+                  { flag: "🇸🇬", country: "Singapore",     slug: "us-visa",        type: "Short Visit Pass",   method: "Online",   processing: "3–5 days",   fee: "SGD 30", accent: "oklch(0.55 0.18 140)" },
+                ].map((row, i) => (
+                  <motion.tr
+                    key={row.country}
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.3, delay: i * 0.05 }}
+                    className="border-b border-border/40 hover:bg-secondary/20 transition-colors group"
+                  >
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+                        <span className="text-2xl">{row.flag}</span>
+                        <span className="font-bold text-foreground">{row.country}</span>
+                      </div>
+                    </td>
+                    <td className="px-4 py-4">
+                      <span
+                        className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider"
+                        style={{ background: `${row.accent}15`, color: row.accent }}
+                      >
+                        {row.type}
+                      </span>
+                    </td>
+                    <td className="px-4 py-4 text-sm text-muted-foreground font-medium">{row.method}</td>
+                    <td className="px-4 py-4">
+                      <span className="flex items-center gap-1.5 text-sm font-semibold text-foreground">
+                        <Hourglass className="h-3.5 w-3.5 text-primary shrink-0" />
+                        {row.processing}
+                      </span>
+                    </td>
+                    <td className="px-4 py-4 text-sm font-bold" style={{ color: "var(--accent)" }}>{row.fee}</td>
+                    <td className="px-4 py-4 text-center">
+                      <Link
+                        to="/services/$slug"
+                        params={{ slug: row.slug }}
+                        className="inline-flex items-center gap-1 text-[11px] font-bold rounded-full px-3 py-1.5 border border-primary/30 text-primary hover:bg-primary hover:text-white transition-all duration-200"
+                      >
+                        Guide <ArrowRight className="h-3 w-3" />
+                      </Link>
+                    </td>
+                  </motion.tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <p className="mt-6 text-center text-xs text-muted-foreground">
+            * Requirements vary by nationality. Always check the official embassy website for the most current information.
+          </p>
         </div>
       </section>
 
