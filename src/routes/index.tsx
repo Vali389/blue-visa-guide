@@ -129,6 +129,69 @@ const DESTINATIONS = [
   }
 ];
 
+const WORLD_REGIONS = [
+  {
+    name: "Europe",
+    emoji: "🇪🇺",
+    gradient: "from-blue-500/20 to-indigo-600/10",
+    glow: "hover:shadow-[0_0_30px_rgba(99,102,241,0.15)]",
+    border: "hover:border-indigo-400/40",
+    countries: 44,
+    popular: ["Schengen Area", "United Kingdom", "Germany", "France", "Italy"],
+    desc: "Schengen Zone + UK: the world's largest borderless travel area"
+  },
+  {
+    name: "Asia",
+    emoji: "🌏",
+    gradient: "from-red-500/20 to-orange-600/10",
+    glow: "hover:shadow-[0_0_30px_rgba(239,68,68,0.15)]",
+    border: "hover:border-red-400/40",
+    countries: 48,
+    popular: ["Japan", "UAE", "Thailand", "Singapore", "India"],
+    desc: "From Tokyo to Dubai — Asia's rich mix of culture and commerce"
+  },
+  {
+    name: "Americas",
+    emoji: "🌎",
+    gradient: "from-emerald-500/20 to-teal-600/10",
+    glow: "hover:shadow-[0_0_30px_rgba(16,185,129,0.15)]",
+    border: "hover:border-emerald-400/40",
+    countries: 35,
+    popular: ["United States", "Canada", "Brazil", "Mexico", "Argentina"],
+    desc: "North to South — business hubs and stunning landscapes"
+  },
+  {
+    name: "Africa",
+    emoji: "🌍",
+    gradient: "from-amber-500/20 to-yellow-600/10",
+    glow: "hover:shadow-[0_0_30px_rgba(245,158,11,0.15)]",
+    border: "hover:border-amber-400/40",
+    countries: 54,
+    popular: ["South Africa", "Morocco", "Kenya", "Egypt", "Nigeria"],
+    desc: "A continent of diversity — safari, culture, and fast-growing economies"
+  },
+  {
+    name: "Oceania",
+    emoji: "🌊",
+    gradient: "from-cyan-500/20 to-sky-600/10",
+    glow: "hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]",
+    border: "hover:border-cyan-400/40",
+    countries: 14,
+    popular: ["Australia", "New Zealand", "Fiji", "Papua New Guinea"],
+    desc: "Pacific paradise destinations with streamlined eVisa systems"
+  },
+  {
+    name: "Middle East",
+    emoji: "🕌",
+    gradient: "from-purple-500/20 to-violet-600/10",
+    glow: "hover:shadow-[0_0_30px_rgba(139,92,246,0.15)]",
+    border: "hover:border-purple-400/40",
+    countries: 18,
+    popular: ["UAE", "Saudi Arabia", "Qatar", "Jordan", "Oman"],
+    desc: "Gulf states and ancient civilisations with modern visa infrastructure"
+  }
+];
+
 const HIGHLIGHTED_DESTINATIONS = [
   {
     country: "Schengen Area",
@@ -525,6 +588,62 @@ function Home() {
         </div>
       </section>
 
+      {/* World Region Selector [NEW] */}
+      <section className="py-24 border-t border-border/40 bg-[linear-gradient(180deg,var(--navy-deep),transparent)]">
+        <div className="max-w-7xl mx-auto px-6">
+          <SectionHeader
+            eyebrow="BROWSE BY REGION"
+            title="For other destinations, choose a region"
+            subtitle="Select a world region to explore visa requirements, entry conditions, and processing guidance for every country."
+          />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {WORLD_REGIONS.map((region, i) => (
+              <Link
+                key={region.name}
+                to="/visas-by-country"
+                className={`group relative overflow-hidden rounded-2xl border border-white/8 bg-gradient-to-br ${region.gradient} p-6 ${region.glow} ${region.border} hover:-translate-y-1 transition-all duration-400 animate-fade-up`}
+                style={{ animationDelay: `${i * 0.07}s` }}
+              >
+                {/* Ambient glow blob */}
+                <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/5 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700 pointer-events-none" />
+
+                <div className="flex items-start justify-between mb-4">
+                  <span className="text-4xl">{region.emoji}</span>
+                  <span className="text-xs font-bold text-primary bg-primary/10 border border-primary/20 px-2.5 py-1 rounded-full">
+                    {region.countries} Countries
+                  </span>
+                </div>
+
+                <h3 className="text-xl font-bold font-display text-foreground mb-1.5 group-hover:text-primary transition-colors">
+                  {region.name}
+                </h3>
+                <p className="text-xs text-muted-foreground leading-relaxed mb-5">
+                  {region.desc}
+                </p>
+
+                <div className="flex flex-wrap gap-1.5 mb-5">
+                  {region.popular.slice(0, 3).map(c => (
+                    <span key={c} className="text-[10px] bg-card/60 border border-border/40 px-2 py-0.5 rounded-full text-muted-foreground">
+                      {c}
+                    </span>
+                  ))}
+                  {region.popular.length > 3 && (
+                    <span className="text-[10px] bg-primary/10 border border-primary/20 px-2 py-0.5 rounded-full text-primary font-semibold">
+                      +{region.popular.length - 3} more
+                    </span>
+                  )}
+                </div>
+
+                <div className="flex items-center gap-1.5 text-primary text-xs font-bold group-hover:gap-3 transition-all duration-300">
+                  Explore Region <ArrowRight className="w-3.5 h-3.5" />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Visa Types by Purpose [NEW] */}
       <section className="py-24 border-t border-border/40 bg-[color:var(--navy-deep)]">
         <div className="max-w-7xl mx-auto px-6">
@@ -821,6 +940,60 @@ function Home() {
               </div>
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      {/* Latest News [NEW] */}
+      <section className="py-24 border-t border-border/40">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left: Heading */}
+            <div>
+              <span className="text-[10px] uppercase tracking-widest font-bold text-primary bg-primary/10 border border-primary/20 px-3 py-1 rounded-full inline-block mb-4">
+                BLOG &amp; NEWS
+              </span>
+              <h2 className="text-4xl md:text-5xl font-bold font-display mb-4">
+                Latest <span className="gradient-gold-text italic">Visa News</span>
+              </h2>
+              <p className="text-muted-foreground leading-relaxed mb-8 max-w-lg">
+                Stay up to date with the latest changes to visa policies, new entry requirements, travel advisories, and global immigration news.
+              </p>
+              <Link
+                to="/blog"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-primary text-primary-foreground font-bold hover:opacity-90 transition shadow-[0_0_30px_-5px_var(--gold)]"
+              >
+                Browse All Articles <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+
+            {/* Right: Highlight cards */}
+            <div className="space-y-4">
+              {[
+                { tag: "Schengen", title: "2026 Schengen Visa Fee Increase: What Travelers Need to Know", date: "Jul 15, 2026", emoji: "🇪🇺" },
+                { tag: "UK", title: "UK Standard Visitor Visa Processing Times Updated for Summer", date: "Jul 10, 2026", emoji: "🇬🇧" },
+                { tag: "USA", title: "US B1/B2 Interview Wait Times Hit Record Low in 2026", date: "Jul 5, 2026", emoji: "🇺🇸" },
+              ].map((article, i) => (
+                <Link
+                  key={article.title}
+                  to="/blog"
+                  className="flex items-start gap-4 p-5 rounded-2xl bg-card/40 border border-border/30 hover:border-primary/30 hover:bg-card/60 transition-all duration-300 group animate-fade-up"
+                  style={{ animationDelay: `${i * 0.08}s` }}
+                >
+                  <span className="text-3xl shrink-0 mt-0.5">{article.emoji}</span>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <span className="text-[9px] font-bold uppercase tracking-widest text-primary bg-primary/10 border border-primary/20 px-2 py-0.5 rounded-full">{article.tag}</span>
+                      <span className="text-[10px] text-muted-foreground">{article.date}</span>
+                    </div>
+                    <p className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors leading-snug line-clamp-2">
+                      {article.title}
+                    </p>
+                  </div>
+                  <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary shrink-0 mt-1 group-hover:translate-x-1 transition-all" />
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>
