@@ -35,34 +35,34 @@
 
 :root {
   --radius: 0.75rem;
-  /* Colors inspired by visaguide.world: cyan blue primary, green accent */
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.22 0.03 240);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.22 0.03 240);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.22 0.03 240);
-  --primary: oklch(0.72 0.14 220);          /* cyan blue ~ #22aae0 */
-  --primary-foreground: oklch(1 0 0);
-  --primary-deep: oklch(0.52 0.13 235);
-  --accent: oklch(0.78 0.19 135);           /* green ~ #8dc63f */
-  --accent-foreground: oklch(0.15 0.02 240);
-  --secondary: oklch(0.97 0.01 240);
-  --secondary-foreground: oklch(0.22 0.03 240);
-  --muted: oklch(0.97 0.01 240);
-  --muted-foreground: oklch(0.5 0.02 240);
-  --destructive: oklch(0.6 0.22 25);
-  --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.92 0.01 240);
-  --input: oklch(0.92 0.01 240);
-  --ring: oklch(0.72 0.14 220);
+  /* Colors inspired by Visaenter logo */
+  --background: #ffffff;
+  --foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --popover: #ffffff;
+  --popover-foreground: #000000;
+  --primary: #0099ff;
+  --primary-foreground: #ffffff;
+  --primary-deep: #0077cc;
+  --accent: #f0f8ff;
+  --accent-foreground: #0099ff;
+  --secondary: #f4f4f5;
+  --secondary-foreground: #000000;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #e4e4e7;
+  --input: #e4e4e7;
+  --ring: #0099ff;
 
-  --gradient-primary: linear-gradient(135deg, oklch(0.72 0.14 220), oklch(0.78 0.19 135));
-  --gradient-hero: linear-gradient(180deg, oklch(0.15 0.03 240 / 0.55), oklch(0.15 0.03 240 / 0.85));
-  --shadow-soft: 0 10px 30px -12px oklch(0.22 0.03 240 / 0.18);
-  --shadow-card: 0 20px 40px -20px oklch(0.22 0.03 240 / 0.25);
-  --shadow-glow-primary: 0 12px 25px -5px oklch(0.72 0.14 220 / 0.25), 0 8px 10px -6px oklch(0.72 0.14 220 / 0.25);
-  --shadow-glow-accent: 0 12px 25px -5px oklch(0.78 0.19 135 / 0.25), 0 8px 10px -6px oklch(0.78 0.19 135 / 0.25);
+  --gradient-primary: linear-gradient(135deg, #0099ff, #00c6ff);
+  --gradient-hero: linear-gradient(180deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.85));
+  --shadow-soft: 0 10px 30px -12px rgba(0, 0, 0, 0.18);
+  --shadow-card: 0 20px 40px -20px rgba(0, 0, 0, 0.25);
+  --shadow-glow-primary: 0 12px 25px -5px rgba(0, 153, 255, 0.4), 0 8px 10px -6px rgba(0, 153, 255, 0.4);
+  --shadow-glow-accent: 0 12px 25px -5px rgba(0, 153, 255, 0.4), 0 8px 10px -6px rgba(0, 153, 255, 0.4);
 }
 
 @layer base {
