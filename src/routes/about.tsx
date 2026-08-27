@@ -1,70 +1,182 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { Globe, HandshakeIcon, Rocket, Target } from "lucide-react";
-import { Hero } from "@/components/site/Hero";
+import { Award, CheckCircle2, Globe, Phone, Rocket, ShieldCheck, Target, Users } from "lucide-react";
 import { PageLayout } from "@/components/site/PageLayout";
 import { Testimonials } from "@/components/site/Testimonials";
+import { CONTACT_INFO, AWARDS } from "@/lib/site-data";
 import heroImg from "@/assets/hero-about.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — VisaGuide.world" },
-      { name: "description", content: "Our mission, our team and the story behind VisaGuide.world." },
+      { title: "About VisaEnter — Best Visa Consultants with 15+ Years Experience" },
+      {
+        name: "description",
+        content:
+          "Learn more about VisaEnter, Bangalore's trusted immigration agency. 15+ years handling student, business, tourist and family visa cases with a 99% success rate.",
+      },
+      { property: "og:title", content: "About VisaEnter — 15+ Years Visa Excellence" },
+      {
+        property: "og:description",
+        content:
+          "Dedicated to supporting your immigration and study abroad dreams with custom strategies, zero hassle, and near 100% approvals.",
+      },
     ],
   }),
-  component: Page,
+  component: AboutPage,
 });
 
 const VALUES = [
-  { icon: Target, title: "Accuracy first", text: "Every guide is cross-checked against official sources and updated the moment policies change." },
-  { icon: Globe, title: "Global perspective", text: "200+ nationalities, 200+ destinations — our editorial team is genuinely global." },
-  { icon: HandshakeIcon, title: "Applicant-first", text: "We answer to travellers, never to advertisers or agents. No paid placements. Ever." },
-  { icon: Rocket, title: "Continuously improving", text: "Reader feedback drives our roadmap. If you spot something, we fix it within 48 hours." },
+  {
+    icon: Target,
+    title: "Applicant-First Approach",
+    text: "We listen to your academic and professional goals to create a customized visa application strategy.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "15+ Years Handling Complex Cases",
+    text: "Deep expertise in overcoming visa refusals, gap years, complex financials, and APS certifications.",
+  },
+  {
+    icon: Award,
+    title: "Near 100% Success Rate",
+    text: "Proven methodology and meticulous documentation review delivering exceptional approval rates.",
+  },
+  {
+    icon: Rocket,
+    title: "End-to-End Support",
+    text: "From university admissions and SOP drafting to mock interviews, accommodation, and pre-departure.",
+  },
 ];
 
-function Page() {
+function AboutPage() {
   return (
     <PageLayout>
-      <Hero
-        image={heroImg}
-        eyebrow="About VisaGuide"
-        title={<>Making travel <span className="text-gradient">accessible</span> for everyone</>}
-        subtitle="We are an independent editorial team of researchers, former consular staff and travellers, obsessed with clarity."
-      />
-      <section className="py-24">
-        <div className="mx-auto grid max-w-7xl gap-16 px-6 lg:grid-cols-2">
-          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-            <p className="text-xs font-bold uppercase tracking-[0.3em]" style={{ color: "var(--primary)" }}>Our Story</p>
-            <h2 className="mt-3 text-4xl font-bold md:text-5xl">Twelve years of visa expertise, one honest resource.</h2>
-            <div className="mt-6 space-y-4 text-muted-foreground leading-relaxed">
+      {/* Hero */}
+      <section className="relative h-[65vh] min-h-[480px] w-full overflow-hidden bg-slate-950 flex items-center">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${heroImg})` }}
+          aria-hidden
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.92) 100%)",
+          }}
+          aria-hidden
+        />
+
+        <div className="relative z-10 mx-auto max-w-7xl px-6 text-white pt-12">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] backdrop-blur-md mb-4">
+            <span className="h-2 w-2 rounded-full animate-pulse" style={{ backgroundColor: "var(--accent)" }} />
+            ABOUT VISAENTER
+          </span>
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-tight">
+            Providing the <span className="text-gradient">Best Visa Services</span> to Clients
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg text-white/85 font-light">
+            Dedicated and motivated to turn your international dreams into reality with over 15 years of industry excellence.
+          </p>
+        </div>
+      </section>
+
+      {/* Story & Philosophy */}
+      <section className="py-24 bg-white">
+        <div className="mx-auto grid max-w-7xl gap-16 px-6 lg:grid-cols-2 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <p className="text-xs font-extrabold uppercase tracking-[0.3em]" style={{ color: "var(--primary)" }}>
+              OUR MISSION &amp; EXPERTISE
+            </p>
+            <h2 className="mt-3 text-3xl font-bold md:text-5xl text-foreground leading-tight">
+              A Strategic, Dedicated Pathway to Global Mobility
+            </h2>
+            <div className="mt-6 space-y-4 text-muted-foreground leading-relaxed text-base">
               <p>
-                VisaGuide.world was founded in 2014 by a group of travellers frustrated by conflicting information across
-                embassy websites and paid consultancies. We started with Schengen — one country, one guide.
+                At VisaEnter, we are all driven by dedication and highly motivated to support your immigration dream on its way to success. We achieve this by truly listening to your professional goals and needs and give all in for inspiring, creative, effective solutions to accelerate your preparation to achieve success.
               </p>
               <p>
-                Today we cover 200+ destinations across seven regions, publishing new updates weekly. Our small editorial team
-                works directly with consulates, immigration lawyers and thousands of readers who share their approval stories.
+                Our team of experts have been handling cases for 15+ years and hence we develop strategies for each case depending on the applicants’ background and current immigration situation to increase the chances of visa approvals.
               </p>
               <p>
-                We remain proudly independent, ad-supported and free. Because getting a visa should never be another obstacle
-                on the way to the trip of a lifetime.
+                Headquartered in Bangalore, India, we have guided thousands of students to prestigious universities across Germany, UK, Canada, USA, and Australia, and assisted hundreds of professionals with corporate and business visas.
               </p>
             </div>
+
+            <div className="mt-8 flex flex-wrap gap-4">
+              <a
+                href={CONTACT_INFO.phoneHref}
+                className="inline-flex items-center gap-2 rounded-full gradient-primary px-7 py-3.5 text-sm font-bold text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+              >
+                <Phone className="h-4 w-4" /> Call: {CONTACT_INFO.phone}
+              </a>
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 rounded-full border border-border px-7 py-3.5 text-sm font-bold text-foreground hover:bg-secondary transition-all"
+              >
+                Visit Bangalore Office
+              </Link>
+            </div>
           </motion.div>
-          <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="grid grid-cols-2 gap-4">
+
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="grid sm:grid-cols-2 gap-4"
+          >
             {VALUES.map((v) => (
-              <div key={v.title} className="rounded-2xl border bg-card p-6 shadow-card">
-                <div className="grid h-12 w-12 place-items-center rounded-xl gradient-primary text-white">
-                  <v.icon className="h-5 w-5" />
+              <div key={v.title} className="rounded-3xl border border-border/80 bg-card p-6 shadow-sm hover:shadow-card transition-all">
+                <div className="grid h-12 w-12 place-items-center rounded-2xl gradient-primary text-white mb-4 shadow">
+                  <v.icon className="h-6 w-6" />
                 </div>
-                <h3 className="mt-4 font-semibold">{v.title}</h3>
+                <h3 className="font-bold text-base text-foreground">{v.title}</h3>
                 <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{v.text}</p>
               </div>
             ))}
           </motion.div>
         </div>
       </section>
+
+      {/* Awards Section */}
+      <section className="py-20 bg-secondary/30">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="text-center mb-12">
+            <p className="text-xs font-extrabold uppercase tracking-[0.3em]" style={{ color: "var(--primary)" }}>
+              RECOGNITION
+            </p>
+            <h2 className="mt-3 text-3xl font-bold md:text-4xl text-foreground">
+              Agency Awards &amp; Milestones
+            </h2>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 max-w-3xl mx-auto">
+            {AWARDS.map((award) => (
+              <div
+                key={award.year}
+                className="flex items-start gap-5 rounded-3xl border border-border/80 bg-white p-7 shadow-sm"
+              >
+                <div className="text-4xl">{award.icon}</div>
+                <div>
+                  <div className="inline-block rounded-full bg-primary/10 px-3 py-0.5 text-xs font-extrabold text-primary mb-1">
+                    {award.year} AWARD
+                  </div>
+                  <h3 className="text-lg font-bold text-foreground">{award.title}</h3>
+                  <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
+                    {award.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <Testimonials />
     </PageLayout>
   );

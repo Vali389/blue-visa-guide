@@ -25,38 +25,38 @@ export function Hero({ image, eyebrow, title, subtitle, children }: HeroProps) {
       <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col items-start justify-center px-6 text-white">
         {eyebrow && (
           <motion.span
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, scale: 0.95, y: 15 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] backdrop-blur-md"
           >
-            <span className="h-1.5 w-1.5 rounded-full" style={{ background: "var(--accent)" }} />
+            <span className="h-1.5 w-1.5 rounded-full animate-pulse" style={{ background: "var(--accent)" }} />
             {eyebrow}
           </motion.span>
         )}
         <motion.h1
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.15 }}
-          className="mt-6 max-w-4xl text-5xl font-bold leading-[1.05] md:text-7xl"
+          transition={{ duration: 0.9, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-6 max-w-4xl text-5xl font-bold leading-[1.05] md:text-7xl tracking-tight"
         >
           {title}
         </motion.h1>
         {subtitle && (
           <motion.p
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="mt-6 max-w-2xl text-lg text-white/85 md:text-xl"
+            transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-6 max-w-2xl text-lg text-white/85 md:text-xl leading-relaxed font-light"
           >
             {subtitle}
           </motion.p>
         )}
         {children && (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.45 }}
+            transition={{ duration: 0.9, delay: 0.38, ease: [0.16, 1, 0.3, 1] }}
             className="mt-8"
           >
             {children}

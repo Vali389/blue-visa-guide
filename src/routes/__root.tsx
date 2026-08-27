@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { WhatsAppWidget } from "../components/site/WhatsAppWidget";
 
 function NotFoundComponent() {
   return (
@@ -77,16 +78,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "VisaGuide.world — Worldwide Travel Visa Guide" },
+      { title: "VisaEnter — Expert Visa & Immigration Services | Bangalore" },
       {
         name: "description",
         content:
-          "Learn visa requirements and application steps for any country. Schengen, US, UK, Canada, Australia and 200+ destinations.",
+          "VisaEnter offers expert visa & immigration services from Bangalore with 15+ years of experience. Student, business, tourist & family visas for Germany, UK, Canada, USA, Australia and more.",
       },
-      { property: "og:title", content: "VisaGuide.world — Worldwide Travel Visa Guide" },
+      { property: "og:title", content: "VisaEnter — Expert Visa & Immigration Services" },
       {
         property: "og:description",
-        content: "Your worldwide travel visa guide. Requirements, timelines, and application help.",
+        content: "Expert visa & immigration services with near 100% success rate. 15+ years experience. Call +91-81252 98332.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -129,6 +130,8 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      {/* Global WhatsApp floating widget — visible on every page */}
+      <WhatsAppWidget />
     </QueryClientProvider>
   );
 }

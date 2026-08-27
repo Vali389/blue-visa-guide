@@ -1,54 +1,58 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import {
+  Calendar,
   CheckCircle2,
+  Clock,
+  FileCheck2,
+  Globe2,
   Phone,
   Send,
   ShieldCheck,
-  Star,
   ArrowRight,
 } from "lucide-react";
 import { PageLayout } from "@/components/site/PageLayout";
-import { VISAENTER_SERVICES, CONTACT_INFO, VisaEnterService } from "@/lib/site-data";
+import {
+  VISA_CATEGORIES_DATA,
+  CONTACT_INFO,
+  VisaCategoryData,
+} from "@/lib/site-data";
 
-import admissionsImg from "@/assets/service-student.jpg";
-import appointmentImg from "@/assets/hero-home.jpg";
-import fundingImg from "@/assets/cta-bg.jpg";
-import insuranceImg from "@/assets/service-residency.jpg";
-import accommodationImg from "@/assets/hero-about.jpg";
-import flightImg from "@/assets/hero-country.jpg";
+import studentImg from "@/assets/service-student.jpg";
+import businessImg from "@/assets/service-business.jpg";
+import touristImg from "@/assets/service-tourist.jpg";
+import familyImg from "@/assets/service-family.jpg";
+import defaultHeroImg from "@/assets/hero-policy.jpg";
 
-const SERVICE_HERO_IMAGES: Record<string, string> = {
-  "university-admissions": admissionsImg,
-  "visa-appointment": appointmentImg,
-  funding: fundingImg,
-  "travel-medical-insurance": insuranceImg,
-  accommodation: accommodationImg,
-  "flight-booking": flightImg,
+const CATEGORY_HERO_IMAGES: Record<string, string> = {
+  "student-visa": studentImg,
+  "business-visa": businessImg,
+  "tourist-visa": touristImg,
+  "family-visa": familyImg,
 };
 
-export const Route = createFileRoute("/services/$slug")({
+export const Route = createFileRoute("/visa-categories/$slug")({
   loader: ({ params }) => {
-    const service = VISAENTER_SERVICES.find((s) => s.slug === params.slug);
-    if (!service) throw notFound();
-    return { service };
+    const category = VISA_CATEGORIES_DATA.find((c) => c.slug === params.slug);
+    if (!category) throw notFound();
+    return { category };
   },
   head: ({ loaderData }) => ({
     meta: loaderData
       ? [
-        { title: loaderData.service.metaTitle },
-        { name: "description", content: loaderData.service.metaDescription },
-        { property: "og:title", content: loaderData.service.metaTitle },
-        { property: "og:description", content: loaderData.service.metaDescription },
-      ]
-      : [{ title: "Immigration Services — VisaEnter" }],
+          { title: loaderData.category.metaTitle },
+          { name: "description", content: loaderData.category.metaDescription },
+          { property: "og:title", content: loaderData.category.metaTitle },
+          { property: "og:description", content: loaderData.category.metaDescription },
+        ]
+      : [{ title: "Visa Categories — VisaEnter" }],
   }),
-  component: ServicePage,
+  component: VisaCategoryPage,
   notFoundComponent: () => (
     <PageLayout>
       <div className="py-40 text-center">
-        <h1 className="text-4xl font-bold">Service Not Found</h1>
-        <p className="mt-2 text-muted-foreground">The requested service is not available.</p>
+        <h1 className="text-4xl font-bold">Category Not Found</h1>
+        <p className="mt-2 text-muted-foreground">The requested visa category does not exist.</p>
         <Link
           to="/"
           className="mt-6 inline-block rounded-full gradient-primary px-6 py-2.5 text-sm font-bold text-white"
@@ -60,10 +64,10 @@ export const Route = createFileRoute("/services/$slug")({
   ),
 });
 
-function ServicePage() {
-  const { service } = Route.useLoaderData<{ service: VisaEnterService }>();
-  const otherServices = VISAENTER_SERVICES.filter((s) => s.slug !== service.slug);
-  const heroImage = SERVICE_HERO_IMAGES[service.slug] || appointmentImg;
+function VisaCategoryPage() {
+  const { category } = Route.useLoaderData<{ category: VisaCategoryData }>();
+  const otherCategories = VISA_CATEGORIES_DATA.filter((c) => c.slug !== category.slug);
+  const heroImage = CATEGORY_HERO_IMAGES[category.slug] || defaultHeroImg;
 
   return (
     <PageLayout>
@@ -91,16 +95,16 @@ function ServicePage() {
             className="max-w-3xl"
           >
             <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">
-              <span className="text-white">{service.name}</span>{" "}
+              <span className="text-white">{category.name}</span>{" "}
               <span className="text-gradient">Services</span>
             </h1>
-            <p className="mt-4 max-w-2xl text-lg text-white/85 font-light">{service.tagline}</p>
+            <p className="mt-4 max-w-2xl text-lg text-white/85 font-light">{category.tagline}</p>
             <div className="mt-8 flex flex-wrap gap-4">
               <a
-                href="#service-inquiry"
+                href="#category-form"
                 className="inline-flex items-center gap-2 rounded-full gradient-primary px-7 py-3.5 text-sm font-bold text-white shadow-lg hover:scale-105 transition-all"
               >
-                Inquire Now <ArrowRight className="h-4 w-4" />
+                Apply for {category.name} <ArrowRight className="h-4 w-4" />
               </a>
               <a
                 href={CONTACT_INFO.whatsappHref}
@@ -118,25 +122,56 @@ function ServicePage() {
       {/* Main Content */}
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="grid gap-12 lg:grid-cols-3">
-            {/* Left 2 Cols: Description & Highlights */}
+          {/* Key Metrics */}
+          <div className="grid gap-6 sm:grid-cols-2 max-w-2xl">
+            <div className="rounded-3xl border border-border/80 bg-secondary/20 p-6 shadow-sm flex items-center gap-5">
+              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl gradient-primary text-white shadow-md">
+                <Clock className="h-6 w-6" />
+              </div>
+              <div>
+                <div className="text-xs font-bold uppercase text-muted-foreground tracking-wider">
+                  Typical Processing
+                </div>
+                <div className="text-xl font-bold text-foreground mt-0.5">
+                  {category.processingTime}
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-border/80 bg-secondary/20 p-6 shadow-sm flex items-center gap-5">
+              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl gradient-primary text-white shadow-md">
+                <Calendar className="h-6 w-6" />
+              </div>
+              <div>
+                <div className="text-xs font-bold uppercase text-muted-foreground tracking-wider">
+                  Visa Validity
+                </div>
+                <div className="text-xl font-bold text-foreground mt-0.5">
+                  {category.validityPeriod}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-16 grid gap-12 lg:grid-cols-3">
+            {/* Left 2 Cols: Details, Eligibility, Documents */}
             <div className="lg:col-span-2 space-y-12">
               <div>
                 <h2 className="text-2xl md:text-3xl font-bold text-foreground">
-                  Overview of {service.name}
+                  Overview of {category.name}
                 </h2>
                 <p className="mt-4 text-muted-foreground leading-relaxed text-base">
-                  {service.fullDescription}
+                  {category.fullDescription}
                 </p>
               </div>
 
-              {/* Highlights */}
+              {/* Eligibility */}
               <div>
                 <h3 className="text-xl md:text-2xl font-bold text-foreground">
-                  Key Service Inclusions
+                  Eligibility Criteria
                 </h3>
                 <div className="mt-6 space-y-3">
-                  {service.highlights.map((hl, idx) => (
+                  {category.eligibility.map((el, idx) => (
                     <motion.div
                       key={idx}
                       initial={{ opacity: 0, x: -10 }}
@@ -149,44 +184,60 @@ function ServicePage() {
                         className="h-5 w-5 shrink-0 mt-0.5"
                         style={{ color: "var(--accent)" }}
                       />
-                      <span className="text-sm font-medium text-foreground">{hl}</span>
+                      <span className="text-sm font-medium text-foreground">{el}</span>
                     </motion.div>
                   ))}
                 </div>
               </div>
 
-              {/* Why choose callout */}
-              <div className="rounded-3xl gradient-primary p-8 text-white shadow-card">
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider mb-2">
-                  <Star className="h-4 w-4 fill-white" /> VisaEnter Quality Promise
+              {/* Required Documents */}
+              <div>
+                <h3 className="text-xl md:text-2xl font-bold text-foreground">
+                  Required Documents
+                </h3>
+                <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                  {category.documents.map((doc, idx) => (
+                    <div
+                      key={idx}
+                      className="flex items-center gap-3 p-4 rounded-2xl border bg-secondary/30"
+                    >
+                      <FileCheck2 className="h-5 w-5 shrink-0 text-primary" />
+                      <span className="text-xs font-semibold text-foreground">{doc}</span>
+                    </div>
+                  ))}
                 </div>
-                <h3 className="text-2xl font-bold">Fast Turnaround &amp; Expert Advisory</h3>
-                <p className="mt-2 text-sm text-white/90 leading-relaxed">
-                  We handle every service request with utmost urgency and precision to ensure you never miss an embassy or university deadline.
-                </p>
-                <div className="mt-6">
-                  <a
-                    href={CONTACT_INFO.phoneHref}
-                    className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-2.5 text-sm font-bold text-foreground shadow hover:bg-white/90 transition-all"
-                  >
-                    <Phone className="h-4 w-4" /> Call for Assistance: {CONTACT_INFO.phone}
-                  </a>
+              </div>
+
+              {/* Popular countries banner */}
+              <div>
+                <h3 className="text-lg font-bold text-foreground mb-3">
+                  Top Destinations for {category.name}
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {category.popularCountries.map((pc) => (
+                    <span
+                      key={pc}
+                      className="rounded-full bg-secondary px-4 py-2 text-xs font-bold text-foreground border"
+                    >
+                      {pc}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
 
             {/* Right Col: Consultation Form */}
-            <div id="service-inquiry">
+            <div id="category-form">
               <div className="rounded-3xl border border-border/80 bg-white p-7 shadow-card sticky top-24">
-                <h3 className="text-xl font-bold text-foreground">Inquire About {service.name}</h3>
+                <h3 className="text-xl font-bold text-foreground">Apply for {category.name}</h3>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  Get a direct quote and timeline from our coordinators.
+                  Speak to our senior visa consultant for case assessment.
                 </p>
 
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
-                    alert(`Thank you! Our ${service.name} desk will get in touch shortly.`);
+                    alert(`Thank you! Our ${category.name} expert will contact you.`);
                   }}
                   className="mt-6 space-y-4"
                 >
@@ -215,10 +266,10 @@ function ServicePage() {
 
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1">
-                      Target Country / Intake
+                      Destination Country
                     </label>
                     <input
-                      placeholder="e.g. Germany Winter Intake"
+                      placeholder="e.g. Germany, UK, Canada, Dubai"
                       className="w-full rounded-xl border bg-background px-4 py-2.5 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
                     />
                   </div>
@@ -227,31 +278,31 @@ function ServicePage() {
                     type="submit"
                     className="w-full rounded-xl gradient-primary py-3 text-sm font-bold text-white shadow-md hover:scale-[1.02] transition-all flex items-center justify-center gap-2"
                   >
-                    <Send className="h-4 w-4" /> Request Service
+                    <Send className="h-4 w-4" /> Start Application
                   </button>
                 </form>
               </div>
             </div>
           </div>
 
-          {/* Other Services */}
+          {/* Other visa categories */}
           <div className="mt-24 border-t pt-16">
-            <h3 className="text-2xl font-bold text-foreground">Explore Other Services</h3>
+            <h3 className="text-2xl font-bold text-foreground">Other Visa Categories</h3>
             <div className="mt-8 grid gap-6 sm:grid-cols-3">
-              {otherServices.map((s) => (
+              {otherCategories.map((c) => (
                 <Link
-                  key={s.slug}
-                  to="/services/$slug"
-                  params={{ slug: s.slug }}
+                  key={c.slug}
+                  to="/visa-categories/$slug"
+                  params={{ slug: c.slug }}
                   className="rounded-3xl border border-border/80 p-6 hover:shadow-glow-primary hover:border-primary/40 transition-all flex items-center justify-between group"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="text-3xl">{s.icon}</span>
+                    <span className="text-3xl">{c.icon}</span>
                     <div>
                       <div className="font-bold text-foreground group-hover:text-primary transition-colors">
-                        {s.name}
+                        {c.name}
                       </div>
-                      <div className="text-xs text-muted-foreground">{s.tagline}</div>
+                      <div className="text-xs text-muted-foreground">{c.tagline}</div>
                     </div>
                   </div>
                   <span className="text-primary font-bold">→</span>

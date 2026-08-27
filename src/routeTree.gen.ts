@@ -12,11 +12,15 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as VisasByPolicyRouteImport } from './routes/visas-by-policy'
 import { Route as VisasByCountryRouteImport } from './routes/visas-by-country'
 import { Route as PassportIndexRouteImport } from './routes/passport-index'
+import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as VisaCategoriesSlugRouteImport } from './routes/visa-categories.$slug'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
+import { Route as CountriesSlugRouteImport } from './routes/countries.$slug'
+import { Route as CoachingSlugRouteImport } from './routes/coaching.$slug'
 
 const VisasByPolicyRoute = VisasByPolicyRouteImport.update({
   id: '/visas-by-policy',
@@ -31,6 +35,11 @@ const VisasByCountryRoute = VisasByCountryRouteImport.update({
 const PassportIndexRoute = PassportIndexRouteImport.update({
   id: '/passport-index',
   path: '/passport-index',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -53,9 +62,24 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VisaCategoriesSlugRoute = VisaCategoriesSlugRouteImport.update({
+  id: '/visa-categories/$slug',
+  path: '/visa-categories/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesSlugRoute = ServicesSlugRouteImport.update({
   id: '/services/$slug',
   path: '/services/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CountriesSlugRoute = CountriesSlugRouteImport.update({
+  id: '/countries/$slug',
+  path: '/countries/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoachingSlugRoute = CoachingSlugRouteImport.update({
+  id: '/coaching/$slug',
+  path: '/coaching/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -64,20 +88,28 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
+  '/gallery': typeof GalleryRoute
   '/passport-index': typeof PassportIndexRoute
   '/visas-by-country': typeof VisasByCountryRoute
   '/visas-by-policy': typeof VisasByPolicyRoute
+  '/coaching/$slug': typeof CoachingSlugRoute
+  '/countries/$slug': typeof CountriesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/visa-categories/$slug': typeof VisaCategoriesSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
+  '/gallery': typeof GalleryRoute
   '/passport-index': typeof PassportIndexRoute
   '/visas-by-country': typeof VisasByCountryRoute
   '/visas-by-policy': typeof VisasByPolicyRoute
+  '/coaching/$slug': typeof CoachingSlugRoute
+  '/countries/$slug': typeof CountriesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/visa-categories/$slug': typeof VisaCategoriesSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -85,10 +117,14 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
+  '/gallery': typeof GalleryRoute
   '/passport-index': typeof PassportIndexRoute
   '/visas-by-country': typeof VisasByCountryRoute
   '/visas-by-policy': typeof VisasByPolicyRoute
+  '/coaching/$slug': typeof CoachingSlugRoute
+  '/countries/$slug': typeof CountriesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/visa-categories/$slug': typeof VisaCategoriesSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -97,30 +133,42 @@ export interface FileRouteTypes {
     | '/about'
     | '/blog'
     | '/contact'
+    | '/gallery'
     | '/passport-index'
     | '/visas-by-country'
     | '/visas-by-policy'
+    | '/coaching/$slug'
+    | '/countries/$slug'
     | '/services/$slug'
+    | '/visa-categories/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
     | '/blog'
     | '/contact'
+    | '/gallery'
     | '/passport-index'
     | '/visas-by-country'
     | '/visas-by-policy'
+    | '/coaching/$slug'
+    | '/countries/$slug'
     | '/services/$slug'
+    | '/visa-categories/$slug'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/blog'
     | '/contact'
+    | '/gallery'
     | '/passport-index'
     | '/visas-by-country'
     | '/visas-by-policy'
+    | '/coaching/$slug'
+    | '/countries/$slug'
     | '/services/$slug'
+    | '/visa-categories/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -128,10 +176,14 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   BlogRoute: typeof BlogRoute
   ContactRoute: typeof ContactRoute
+  GalleryRoute: typeof GalleryRoute
   PassportIndexRoute: typeof PassportIndexRoute
   VisasByCountryRoute: typeof VisasByCountryRoute
   VisasByPolicyRoute: typeof VisasByPolicyRoute
+  CoachingSlugRoute: typeof CoachingSlugRoute
+  CountriesSlugRoute: typeof CountriesSlugRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
+  VisaCategoriesSlugRoute: typeof VisaCategoriesSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -155,6 +207,13 @@ declare module '@tanstack/react-router' {
       path: '/passport-index'
       fullPath: '/passport-index'
       preLoaderRoute: typeof PassportIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -185,11 +244,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/visa-categories/$slug': {
+      id: '/visa-categories/$slug'
+      path: '/visa-categories/$slug'
+      fullPath: '/visa-categories/$slug'
+      preLoaderRoute: typeof VisaCategoriesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services/$slug': {
       id: '/services/$slug'
       path: '/services/$slug'
       fullPath: '/services/$slug'
       preLoaderRoute: typeof ServicesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/countries/$slug': {
+      id: '/countries/$slug'
+      path: '/countries/$slug'
+      fullPath: '/countries/$slug'
+      preLoaderRoute: typeof CountriesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/coaching/$slug': {
+      id: '/coaching/$slug'
+      path: '/coaching/$slug'
+      fullPath: '/coaching/$slug'
+      preLoaderRoute: typeof CoachingSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -200,10 +280,14 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   BlogRoute: BlogRoute,
   ContactRoute: ContactRoute,
+  GalleryRoute: GalleryRoute,
   PassportIndexRoute: PassportIndexRoute,
   VisasByCountryRoute: VisasByCountryRoute,
   VisasByPolicyRoute: VisasByPolicyRoute,
+  CoachingSlugRoute: CoachingSlugRoute,
+  CountriesSlugRoute: CountriesSlugRoute,
   ServicesSlugRoute: ServicesSlugRoute,
+  VisaCategoriesSlugRoute: VisaCategoriesSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
