@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, MapPin, Phone, Globe2 } from "lucide-react";
 import { CONTACT_INFO } from "@/lib/site-data";
+import visaLogoWhite from "@/assets/visaenter-logo-white.png";
 
 const EXPLORE_LINKS = [
   { to: "/about", label: "About Us" },
@@ -83,25 +84,24 @@ function FooterLinkList({ title, links }: { title: string; links: { to: string; 
 
 export function Footer() {
   return (
-    <footer className="mt-24 bg-[oklch(0.18_0.03_240)] text-white border-t border-white/5 relative overflow-hidden">
+    <footer className="mt-24 bg-[#090d16] text-white border-t border-white/10 relative overflow-hidden">
       {/* Decorative gradient */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.04]"
-        style={{ backgroundImage: "radial-gradient(circle at 80% 20%, var(--primary) 0, transparent 40%), radial-gradient(circle at 10% 80%, var(--accent) 0, transparent 35%)" }}
+        className="pointer-events-none absolute inset-0 opacity-[0.05]"
+        style={{ backgroundImage: "radial-gradient(circle at 80% 20%, var(--primary) 0, transparent 40%)" }}
         aria-hidden
       />
 
       <div className="mx-auto max-w-7xl px-6 py-16 grid gap-12 sm:grid-cols-2 md:grid-cols-5 relative z-10">
         {/* Column 1: Brand */}
         <div className="md:col-span-2 space-y-5">
-          <div className="flex items-center gap-2.5">
-            <div className="grid h-10 w-10 place-items-center rounded-xl gradient-primary text-white shadow-lg">
-              <Globe2 className="h-5 w-5" />
-            </div>
-            <span className="text-2xl font-bold tracking-tight">
-              Visa<span style={{ color: "var(--accent)" }}>Enter</span>
-            </span>
-          </div>
+          <Link to="/" className="inline-block group focus:outline-none" aria-label="VisaEnter Home">
+            <img
+              src={visaLogoWhite}
+              alt="VisaEnter"
+              className="w-[200px] md:w-[240px] h-auto object-contain transition-opacity group-hover:opacity-90"
+            />
+          </Link>
 
           <p className="text-sm leading-relaxed text-white/60 max-w-xs">
             Get expert guidance from our visa team with over 15 years of experience. We are your trusted immigration partner.

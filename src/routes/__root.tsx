@@ -123,6 +123,9 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+import { Toaster } from "../components/ui/sonner";
+import { ScrollToTop } from "../components/site/ScrollToTop";
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
@@ -130,8 +133,12 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      {/* Global Toast notifications */}
+      <Toaster position="top-right" richColors />
       {/* Global WhatsApp floating widget — visible on every page */}
       <WhatsAppWidget />
+      {/* Global Scroll to top floating button */}
+      <ScrollToTop />
     </QueryClientProvider>
   );
 }

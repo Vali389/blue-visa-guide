@@ -104,20 +104,22 @@ function GalleryPage() {
           aria-hidden
         />
 
-        <div className="relative z-10 mx-auto max-w-7xl px-6 text-white pt-12">
+        <div className="relative z-10 mx-auto max-w-4xl px-6 text-white pt-12 text-center">
           <Link
             to="/"
             className="inline-flex items-center gap-2 text-xs font-semibold text-white/70 hover:text-white mb-6 transition-colors"
           >
             <ArrowLeft className="h-4 w-4" /> Back to Home
           </Link>
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] backdrop-blur-md mb-4">
-            <Sparkles className="h-3.5 w-3.5" style={{ color: "var(--accent)" }} /> Success Stories
-          </span>
-          <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-tight">
+          <div>
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] backdrop-blur-md mb-4">
+              <Sparkles className="h-3.5 w-3.5" style={{ color: "var(--accent)" }} /> Success Stories
+            </span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight md:whitespace-nowrap">
             VisaEnter <span className="text-gradient">Success Gallery</span>
           </h1>
-          <p className="mt-4 max-w-2xl text-lg text-white/80 font-light">
+          <p className="mt-3 max-w-3xl mx-auto text-sm md:text-base text-white/85 font-light md:whitespace-nowrap">
             Celebrating approvals, study abroad achievements, and client success for 15+ years.
           </p>
         </div>
@@ -126,17 +128,14 @@ function GalleryPage() {
       {/* Gallery Grid */}
       <section className="py-24 bg-white">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="mx-auto max-w-3xl text-center mb-16">
-            <p
-              className="text-xs font-extrabold uppercase tracking-[0.3em]"
-              style={{ color: "var(--primary)" }}
-            >
+          <div className="mx-auto max-w-4xl text-center mb-14">
+            <span className="inline-flex items-center gap-2 rounded-full border border-sky-500/20 bg-sky-50 px-4 py-1.5 text-xs font-extrabold uppercase tracking-[0.25em] text-primary shadow-sm mb-3">
               HALL OF SUCCESS
-            </p>
-            <h2 className="mt-3 text-3xl font-bold md:text-5xl text-foreground">
-              Our Journey of Approvals
+            </span>
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight md:whitespace-nowrap">
+              Our Journey of <span className="text-gradient">Visa Approvals</span>
             </h2>
-            <p className="mt-4 text-muted-foreground text-base">
+            <p className="mt-3 text-muted-foreground text-sm md:text-base max-w-3xl mx-auto leading-relaxed md:whitespace-nowrap">
               Every card below represents a real client dream fulfilled by our dedicated immigration team.
             </p>
           </div>

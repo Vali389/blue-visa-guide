@@ -35,34 +35,36 @@
 
 :root {
   --radius: 0.75rem;
-  /* Colors inspired by Visaenter logo */
+  /* Official VisaEnter Logo Palette: Electric Cyan Blue (#0099ff), Deep Jet Black (#090d16), Crisp White (#ffffff) */
   --background: #ffffff;
-  --foreground: #000000;
+  --foreground: #0f172a;
   --card: #ffffff;
-  --card-foreground: #000000;
+  --card-foreground: #0f172a;
   --popover: #ffffff;
-  --popover-foreground: #000000;
+  --popover-foreground: #0f172a;
   --primary: #0099ff;
   --primary-foreground: #ffffff;
   --primary-deep: #0077cc;
-  --accent: #f0f8ff;
+  --primary-light: #38bdf8;
+  --accent: #e0f2fe;
   --accent-foreground: #0099ff;
-  --secondary: #f4f4f5;
-  --secondary-foreground: #000000;
-  --muted: #f4f4f5;
-  --muted-foreground: #71717a;
+  --secondary: #f1f5f9;
+  --secondary-foreground: #0f172a;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: #e4e4e7;
-  --input: #e4e4e7;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
   --ring: #0099ff;
 
-  --gradient-primary: linear-gradient(135deg, #0099ff, #00c6ff);
-  --gradient-hero: linear-gradient(180deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.85));
-  --shadow-soft: 0 10px 30px -12px rgba(0, 0, 0, 0.18);
-  --shadow-card: 0 20px 40px -20px rgba(0, 0, 0, 0.25);
-  --shadow-glow-primary: 0 12px 25px -5px rgba(0, 153, 255, 0.4), 0 8px 10px -6px rgba(0, 153, 255, 0.4);
-  --shadow-glow-accent: 0 12px 25px -5px rgba(0, 153, 255, 0.4), 0 8px 10px -6px rgba(0, 153, 255, 0.4);
+  --gradient-primary: linear-gradient(135deg, #0099ff 0%, #0077cc 50%, #00c6ff 100%);
+  --gradient-dark: linear-gradient(180deg, #050811 0%, #090d16 50%, #0d1527 100%);
+  --gradient-hero: linear-gradient(180deg, rgba(5, 8, 17, 0.6) 0%, rgba(9, 13, 22, 0.88) 100%);
+  --shadow-soft: 0 10px 30px -12px rgba(0, 153, 255, 0.15);
+  --shadow-card: 0 20px 40px -20px rgba(0, 153, 255, 0.18);
+  --shadow-glow-primary: 0 12px 30px -5px rgba(0, 153, 255, 0.45), 0 8px 12px -6px rgba(0, 153, 255, 0.35);
+  --shadow-glow-accent: 0 12px 30px -5px rgba(0, 153, 255, 0.45), 0 8px 12px -6px rgba(0, 153, 255, 0.35);
 }
 
 @layer base {
@@ -83,8 +85,23 @@
 
 @keyframes hero-zoom {
   0% { transform: scale(1); }
-  50% { transform: scale(1.15); }
+  50% { transform: scale(1.06); }
   100% { transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(26, 86, 219, 0.4); }
+  50% { box-shadow: 0 0 40px rgba(26, 86, 219, 0.7); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
 }
 
 @keyframes marquee {
@@ -113,8 +130,19 @@
   background: var(--gradient-primary);
 }
 
+@utility gradient-gold {
+  background: var(--gradient-gold);
+}
+
 @utility text-gradient {
   background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility text-gradient-gold {
+  background: var(--gradient-gold);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -130,4 +158,12 @@
 
 @utility shadow-glow-accent {
   box-shadow: var(--shadow-glow-accent);
+}
+
+@utility shadow-glow-gold {
+  box-shadow: var(--shadow-glow-gold);
+}
+
+@utility animate-float {
+  animation: float 4s ease-in-out infinite;
 }

@@ -268,9 +268,73 @@ export interface CoachingData {
 
 export const COACHING_DATA: CoachingData[] = [
   {
+    slug: "ielts-coaching",
+    name: "IELTS Coaching",
+    tagline: "Academic & General Training (Band 7.5+ Target)",
+    icon: "🎓",
+    description:
+      "Master the IELTS examination with certified British Council & IDP faculty. Comprehensive modules for Reading, Writing, Speaking, and Listening.",
+    fullDescription:
+      "Our IELTS coaching program is designed to help students and professionals achieve Band 7.5+ on their first attempt. With proven strategies for Academic and General modules, personalized feedback on writing tasks, and daily mock speaking sessions, we prepare you for admissions in the UK, Canada, Australia, and Europe.",
+    highlights: [
+      "Target Band 7.5+ curriculum & strategy",
+      "Daily 1-on-1 speaking mock sessions",
+      "In-depth writing task 1 & 2 evaluation",
+      "Cambridge practice tests with explanations",
+      "Flexible morning, evening & weekend batches",
+      "Comprehensive study materials & portal access",
+    ],
+    syllabus: [
+      "IELTS Listening — Accent variations & note-taking",
+      "IELTS Reading — Skimming, scanning & time management",
+      "IELTS Writing — Report writing & argumentative essays",
+      "IELTS Speaking — Fluency, lexical resource & coherence",
+      "Grammar & vocabulary booster sessions",
+      "Weekly full-length timed mock tests",
+    ],
+    duration: "1.5–2 Months",
+    batchSize: "10–15 Students",
+    mode: "Online & Classroom",
+    metaTitle: "IELTS Coaching — VisaEnter",
+    metaDescription:
+      "Score Band 7.5+ in IELTS with VisaEnter's certified master faculty. Comprehensive training for study abroad and immigration.",
+  },
+  {
+    slug: "pte-coaching",
+    name: "PTE Academic",
+    tagline: "Pearson Test of English (Score 65–79+ Focus)",
+    icon: "⚡",
+    description:
+      "Fast-track computer-based PTE preparation with AI-powered mock tests, proven scoring templates, and computerized feedback.",
+    fullDescription:
+      "The PTE Academic test is widely accepted for study abroad and PR visas in Australia, Canada, the UK, and New Zealand. Our specialized coaching focuses on proprietary speaking templates, repeat sentence mastery, and AI-scored practice tests that mimic official Pearson test conditions.",
+    highlights: [
+      "AI-scored practice tests with instant analytics",
+      "Proven templates for Describe Image & Retell Lecture",
+      "Repeat sentence & Write From Dictation mastery",
+      "Computer lab practice sessions with headsets",
+      "Fast-track 2-week to 1-month crash batches",
+      "Real exam memory question bank access",
+    ],
+    syllabus: [
+      "PTE Speaking & Writing — Read aloud & summarize written text",
+      "PTE Reading — Fill in the blanks & reorder paragraphs",
+      "PTE Listening — Summarize spoken text & write from dictation",
+      "Oral fluency & pronunciation coaching",
+      "AI scoring algorithm optimization tips",
+      "Full computerized mock test simulations",
+    ],
+    duration: "1–1.5 Months",
+    batchSize: "10–12 Students",
+    mode: "Online & Lab Practice",
+    metaTitle: "PTE Academic Coaching — VisaEnter",
+    metaDescription:
+      "Achieve 65+ to 79+ in PTE Academic with VisaEnter. AI-scored mock tests and proven templates for fast results.",
+  },
+  {
     slug: "oet-coaching",
     name: "OET Coaching",
-    tagline: "Occupational English Test Preparation",
+    tagline: "Occupational English Test for Healthcare",
     icon: "🏥",
     description:
       "Specialized English language test coaching for healthcare professionals planning to work in English-speaking countries.",
@@ -302,7 +366,7 @@ export const COACHING_DATA: CoachingData[] = [
   {
     slug: "tofel-coaching",
     name: "TOFEL Coaching",
-    tagline: "TOFEL Exam Preparation",
+    tagline: "TOFEL iBT Exam Preparation (100+ Score)",
     icon: "📚",
     description:
       "Comprehensive TOFEL preparation for students planning to study at universities in the USA, Canada, and other English-speaking countries.",
@@ -637,7 +701,7 @@ export const TESTIMONIALS = [
     avatar: "M",
     rating: 5,
     review:
-      "When I was researching for companies that could assist me with visa appointment and visa application filing for a Germany Student Visa I was recommended to contact Guide visa. This proved to be great advice. Guide Visa provided invaluable assistance throughout the process and finally got my visa in just 3 weeks. I would not hesitate to recommend it to my friends and colleagues.",
+      "When researching agencies for my Germany Student Visa and blocked account filing, VisaEnter was recommended by seniors. Their invaluable guidance helped me secure my visa in just 3 weeks. Highly recommend their team!",
   },
   {
     name: "Shajauddin",
@@ -645,15 +709,39 @@ export const TESTIMONIALS = [
     avatar: "S",
     rating: 5,
     review:
-      "The GuideVisa team is extremely professional and knowledgeable. I really had challenges to secure my visa from Pakistan but when I contacted GuideVisa team from the day one I felt I am in safe hands. Some unusual circumstances in my application were thoroughly analyzed and taken care. Hence, I am now with my approved visa.",
+      "The VisaEnter team is exceptionally knowledgeable. I faced complex hurdles with consulate appointments, but from day one I felt in safe hands. Every single query was resolved and my visa was approved promptly.",
   },
   {
     name: "Neha",
-    role: "Satisfied Client",
+    role: "UK Work Permit Visa",
     avatar: "N",
     rating: 5,
     review:
-      "I appreciate everything that Guide Visa team have done for me. I am extremely satisfied with your efforts and I am confident that I will come back to Guide Visa in the future should I need any services.",
+      "I appreciate everything that the VisaEnter team has done for me. Their SOP drafting and priority slot scheduling were flawless. I am extremely satisfied with their efforts and will definitely return for future visas.",
+  },
+  {
+    name: "Rahul Sharma",
+    role: "Canada Express Entry PR",
+    avatar: "R",
+    rating: 5,
+    review:
+      "VisaEnter helped me navigate CRS score optimization, ECA credential evaluation, and PNP nomination smoothly. Their dedicated case manager gave me end-to-end clarity until my permanent residency was stamped.",
+  },
+  {
+    name: "Ananya Iyer",
+    role: "France Campus Art Student",
+    avatar: "A",
+    rating: 5,
+    review:
+      "Securing admission and a long-stay student visa for Paris seemed intimidating until I met VisaEnter counselors. They coached me through the Études en France interview with flying colors. A 10/10 service!",
+  },
+  {
+    name: "Vikramjit Singh",
+    role: "Australia Skilled Graduate",
+    avatar: "V",
+    rating: 5,
+    review:
+      "From skills assessment submission to state sponsorship and biometric clearance, VisaEnter delivered a 100% transparent and stress-free process. Truly Bangalore's most trusted immigration consultants.",
   },
 ];
 

@@ -22,13 +22,13 @@ export function Hero({ image, eyebrow, title, subtitle, children }: HeroProps) {
         style={{ background: "var(--gradient-hero)" }}
         aria-hidden
       />
-      <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col items-start justify-center px-6 text-white">
+      <div className="relative z-10 mx-auto flex h-full max-w-5xl flex-col items-center justify-center px-6 text-white text-center">
         {eyebrow && (
           <motion.span
             initial={{ opacity: 0, scale: 0.95, y: 15 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] backdrop-blur-md"
+            className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] backdrop-blur-md mb-2"
           >
             <span className="h-1.5 w-1.5 rounded-full animate-pulse" style={{ background: "var(--accent)" }} />
             {eyebrow}
@@ -38,7 +38,7 @@ export function Hero({ image, eyebrow, title, subtitle, children }: HeroProps) {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-6 max-w-4xl text-5xl font-bold leading-[1.05] md:text-7xl tracking-tight"
+          className="mt-3 max-w-4xl text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-[1.15] tracking-tight md:whitespace-nowrap"
         >
           {title}
         </motion.h1>
@@ -47,7 +47,7 @@ export function Hero({ image, eyebrow, title, subtitle, children }: HeroProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-6 max-w-2xl text-lg text-white/85 md:text-xl leading-relaxed font-light"
+            className="mt-3 max-w-3xl text-sm md:text-base text-white/85 leading-relaxed font-light md:whitespace-nowrap mx-auto"
           >
             {subtitle}
           </motion.p>
@@ -57,7 +57,7 @@ export function Hero({ image, eyebrow, title, subtitle, children }: HeroProps) {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.38, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-8"
+            className="mt-8 flex flex-wrap justify-center items-center gap-4"
           >
             {children}
           </motion.div>

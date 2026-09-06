@@ -1,5 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
+import visaLogo from "@/assets/visaenter-logo.png";
 import {
   Menu,
   X,
@@ -200,9 +201,7 @@ function MegaDropdown({
         className={`flex items-center gap-1.5 px-3.5 py-2 text-sm font-semibold transition-all relative group ${
           isActive
             ? "text-primary"
-            : scrolled
-            ? "text-foreground/80 hover:text-primary"
-            : "text-white/90 hover:text-white"
+            : "text-slate-700 hover:text-primary"
         }`}
       >
         <span>{label}</span>
@@ -277,33 +276,15 @@ export function Header() {
   }, []);
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white/95 backdrop-blur-xl shadow-[0_2px_20px_-8px_rgba(0,0,0,0.15)]"
-          : "bg-gradient-to-b from-black/75 via-black/40 to-transparent"
-      }`}
-    >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
-        {/* Brand Logo */}
-        <Link to="/" className="flex items-center gap-2 group">
-          <div className="grid h-9 w-9 place-items-center rounded-xl gradient-primary text-white shadow-md group-hover:scale-110 transition-transform">
-            <Globe2 className="h-5 w-5" />
-          </div>
-          <div className="flex items-baseline">
-            <span
-              className="text-xl font-extrabold tracking-tight"
-              style={{ color: "var(--primary)" }}
-            >
-              Visa
-            </span>
-            <span
-              className="text-xl font-extrabold tracking-tight"
-              style={{ color: scrolled ? "var(--foreground)" : "#ffffff" }}
-            >
-              Enter
-            </span>
-          </div>
+    <header className="fixed inset-x-0 top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-slate-200/80 shadow-[0_2px_15px_-4px_rgba(0,0,0,0.08)] transition-all duration-300">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2.5">
+        {/* Brand Logo - Clean transparent artwork without card background */}
+        <Link to="/" className="flex items-center group shrink-0 py-0.5 focus:outline-none" aria-label="VisaEnter Home">
+          <img
+            src={visaLogo}
+            alt="VisaEnter"
+            className="w-[160px] sm:w-[185px] md:w-[200px] lg:w-[215px] h-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
+          />
         </Link>
 
         {/* Desktop Navigation */}
@@ -314,10 +295,8 @@ export function Header() {
             activeOptions={{ exact: true }}
             className={`px-3.5 py-2 text-sm font-semibold transition-all relative group ${
               isHomeActive
-                ? "text-primary"
-                : scrolled
-                ? "text-foreground/80 hover:text-primary"
-                : "text-white/90 hover:text-white"
+                ? "text-primary font-extrabold"
+                : "text-slate-700 hover:text-primary"
             }`}
           >
             Home
@@ -331,10 +310,8 @@ export function Header() {
             to="/about"
             className={`px-3.5 py-2 text-sm font-semibold transition-all relative group ${
               isAboutActive
-                ? "text-primary"
-                : scrolled
-                ? "text-foreground/80 hover:text-primary"
-                : "text-white/90 hover:text-white"
+                ? "text-primary font-extrabold"
+                : "text-slate-700 hover:text-primary"
             }`}
           >
             About
@@ -348,28 +325,28 @@ export function Header() {
             label="Countries"
             items={COUNTRIES_MENU}
             isActive={isCountriesActive}
-            scrolled={scrolled}
+            scrolled={true}
             columns={2}
           />
           <MegaDropdown
             label="Coaching"
             items={COACHING_MENU}
             isActive={isCoachingActive}
-            scrolled={scrolled}
+            scrolled={true}
             columns={1}
           />
           <MegaDropdown
             label="Visa Categories"
             items={VISA_CATEGORIES_MENU}
             isActive={isVisaCategoriesActive}
-            scrolled={scrolled}
+            scrolled={true}
             columns={2}
           />
           <MegaDropdown
             label="Services"
             items={SERVICES_MENU}
             isActive={isServicesActive}
-            scrolled={scrolled}
+            scrolled={true}
             columns={2}
           />
 
@@ -378,7 +355,7 @@ export function Header() {
             to="/contact"
             className={`ml-2 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-xs font-extrabold shadow-md hover:scale-105 transition-all ${
               isContactActive
-                ? "bg-white text-primary ring-2 ring-primary"
+                ? "bg-slate-100 text-primary ring-2 ring-primary"
                 : "gradient-primary text-white hover:shadow-lg"
             }`}
           >
@@ -388,11 +365,7 @@ export function Header() {
 
         {/* Mobile Hamburger Button */}
         <button
-          className={`lg:hidden p-2 rounded-xl transition-colors ${
-            scrolled
-              ? "hover:bg-secondary text-foreground"
-              : "hover:bg-white/10 text-white"
-          }`}
+          className="lg:hidden p-2 rounded-xl text-slate-800 hover:bg-slate-100 transition-colors"
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
         >

@@ -18,6 +18,8 @@ import oetHeroImg from "@/assets/hero-about.jpg";
 import tofelHeroImg from "@/assets/hero-passport.jpg";
 
 const COACHING_HERO_IMAGES: Record<string, string> = {
+  "ielts-coaching": oetHeroImg,
+  "pte-coaching": tofelHeroImg,
   "oet-coaching": oetHeroImg,
   "tofel-coaching": tofelHeroImg,
 };
@@ -78,19 +80,19 @@ function CoachingPage() {
           aria-hidden
         />
 
-        <div className="relative z-10 mx-auto max-w-7xl px-6 text-white pt-16">
+        <div className="relative z-10 mx-auto max-w-4xl px-6 text-white pt-16 text-center">
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="max-w-3xl"
+            className="max-w-3xl mx-auto"
           >
-            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight md:whitespace-nowrap">
               <span className="text-white">{coach.name}</span>{" "}
               <span className="text-gradient">Training</span>
             </h1>
-            <p className="mt-4 max-w-2xl text-lg text-white/85 font-light">{coach.tagline}</p>
-            <div className="mt-8 flex flex-wrap gap-4">
+            <p className="mt-3 max-w-2xl mx-auto text-sm md:text-base text-white/85 font-light md:whitespace-nowrap">{coach.tagline}</p>
+            <div className="mt-8 flex flex-wrap justify-center items-center gap-4">
               <a
                 href="#enroll-form"
                 className="inline-flex items-center gap-2 rounded-full gradient-primary px-7 py-3.5 text-sm font-bold text-white shadow-lg hover:scale-105 transition-all"
