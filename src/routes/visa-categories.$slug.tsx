@@ -145,7 +145,7 @@ function CategoryApplyForm({ categoryName }: { categoryName: string }) {
 ----------------------------------------
 Please schedule my consultation with the ${categoryName} specialist.`;
 
-    const whatsappUrl = `https://wa.me/918125298332?text=${encodeURIComponent(formattedMessage)}`;
+    const whatsappUrl = `https://wa.me/919000898811?text=${encodeURIComponent(formattedMessage)}`;
 
     setIsSubmitting(false);
     window.open(whatsappUrl, "_blank");
@@ -475,7 +475,7 @@ function VisaCategoryPage() {
               Complete Guide to <span className="text-gradient">{category.name} Services</span>
             </h2>
             <p className="mt-3 text-slate-700 font-medium text-sm md:text-base max-w-3xl mx-auto leading-relaxed md:whitespace-nowrap">
-              {category.tagline} — Guaranteed documentation precision and strategic embassy filing.
+              {category.tagline} — Professional documentation precision and strategic embassy filing.
             </p>
           </div>
 
@@ -611,21 +611,30 @@ function VisaCategoryPage() {
                 <div className="flex items-center gap-3 mb-2">
                   <ShieldCheck className="h-6 w-6" />
                   <span className="text-sm font-bold uppercase tracking-wider">
-                    VisaEnter Guarantee
+                    VisaEnter: Navigate Your Journey with Confidence
                   </span>
                 </div>
                 <h3 className="text-xl sm:text-2xl font-extrabold">15+ Years Specializing in {category.name} Cases</h3>
                 <p className="mt-2 text-sm text-white/90 leading-relaxed font-medium">
-                  Whether addressing previous refusals, complex sponsorship rules, or urgent filings, our specialists handle your entire dossier with near 100% approval rate.
+                  Whether addressing previous refusals, complex sponsorship rules, or urgent filings, our specialists handle your entire dossier with dedicated expertise and proven success.
                 </p>
-                <div className="mt-6">
+                <div className="mt-6 flex flex-wrap items-center gap-3">
                   <a
-                    href={CONTACT_INFO.phoneHref}
-                    className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-2.5 text-sm font-bold text-slate-900 shadow hover:bg-white/95 hover:scale-105 transition-all"
+                    href={CONTACT_INFO.phoneIndiaHref}
+                    className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-900 shadow hover:bg-white/95 hover:scale-105 transition-all"
                   >
-                    <Phone className="h-4 w-4 text-primary" /> Call Specialist: {CONTACT_INFO.phone}
+                    <Phone className="h-4 w-4 text-primary" /> India: {CONTACT_INFO.phoneIndia}
+                  </a>
+                  <a
+                    href={CONTACT_INFO.phoneUSAHref}
+                    className="inline-flex items-center gap-2 rounded-full bg-white/15 border border-white/40 px-5 py-2.5 text-sm font-bold text-white shadow hover:bg-white/25 hover:scale-105 transition-all backdrop-blur-md"
+                  >
+                    <Phone className="h-4 w-4 text-white" /> USA: {CONTACT_INFO.phoneUSA}
                   </a>
                 </div>
+                <p className="mt-3 text-xs text-white/80 font-medium">
+                  Turnaround time for callback: within 24 hours
+                </p>
               </div>
             </div>
 

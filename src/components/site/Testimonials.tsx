@@ -66,7 +66,7 @@ export function Testimonials() {
                 onClick={() => setCurrent(reviewIdx)}
                 className="cursor-pointer flex flex-col items-center group h-full justify-between"
               >
-                {/* Speech Bubble Card with Guaranteed Equal Height */}
+                {/* Speech Bubble Card with Consistent Equal Height */}
                 <div
                   className={`relative w-full rounded-3xl bg-white border pt-10 pb-8 px-6 sm:px-7 transition-all duration-300 flex flex-col justify-between h-[215px] sm:h-[200px] ${
                     isFeatured

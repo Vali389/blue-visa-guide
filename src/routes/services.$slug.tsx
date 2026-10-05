@@ -144,7 +144,7 @@ function ServiceInquiryForm({ serviceName }: { serviceName: string }) {
 ----------------------------------------
 Please provide quotation and next steps.`;
 
-    const whatsappUrl = `https://wa.me/918125298332?text=${encodeURIComponent(formattedMessage)}`;
+    const whatsappUrl = `https://wa.me/919000898811?text=${encodeURIComponent(formattedMessage)}`;
 
     setIsSubmitting(false);
     window.open(whatsappUrl, "_blank");
@@ -440,7 +440,7 @@ function ServicePage() {
               <span className="text-gradient">Services</span>
             </h1>
             <p className="mt-3 max-w-3xl mx-auto text-sm md:text-base text-white/85 font-light leading-relaxed md:whitespace-nowrap">
-              {service.tagline} — Guaranteed precision and direct embassy coordination by VisaEnter.
+              {service.tagline} — Professional precision and direct embassy coordination by VisaEnter.
             </p>
             <div className="mt-8 flex flex-wrap justify-center items-center gap-4">
               <a
@@ -529,20 +529,29 @@ function ServicePage() {
               {/* Why choose callout */}
               <div className="rounded-3xl gradient-primary p-7 sm:p-8 text-white shadow-xl">
                 <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider mb-2">
-                  <Star className="h-4 w-4 fill-white" /> VisaEnter Quality Promise
+                  <Star className="h-4 w-4 fill-white" /> VisaEnter: Navigate Your Journey with Confidence
                 </div>
                 <h3 className="text-xl sm:text-2xl font-extrabold">Fast Turnaround &amp; Expert Advisory</h3>
                 <p className="mt-2 text-sm text-white/90 leading-relaxed font-medium">
                   We handle every service request with utmost urgency and precision to ensure you never miss an embassy or university deadline.
                 </p>
-                <div className="mt-6">
+                <div className="mt-6 flex flex-wrap items-center gap-3">
                   <a
-                    href={CONTACT_INFO.phoneHref}
-                    className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-2.5 text-sm font-bold text-slate-900 shadow hover:bg-white/95 hover:scale-105 transition-all"
+                    href={CONTACT_INFO.phoneIndiaHref}
+                    className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-900 shadow hover:bg-white/95 hover:scale-105 transition-all"
                   >
-                    <Phone className="h-4 w-4 text-primary" /> Call for Assistance: {CONTACT_INFO.phone}
+                    <Phone className="h-4 w-4 text-primary" /> India: {CONTACT_INFO.phoneIndia}
+                  </a>
+                  <a
+                    href={CONTACT_INFO.phoneUSAHref}
+                    className="inline-flex items-center gap-2 rounded-full bg-white/15 border border-white/40 px-5 py-2.5 text-sm font-bold text-white shadow hover:bg-white/25 hover:scale-105 transition-all backdrop-blur-md"
+                  >
+                    <Phone className="h-4 w-4 text-white" /> USA: {CONTACT_INFO.phoneUSA}
                   </a>
                 </div>
+                <p className="mt-3 text-xs text-white/80 font-medium">
+                  Turnaround time for callback: within 24 hours
+                </p>
               </div>
             </div>
 

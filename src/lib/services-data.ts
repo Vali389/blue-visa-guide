@@ -44,7 +44,7 @@ export const SERVICES: (Service & {
     benefits: ["Corporate discount packages", "Multi-country coverage", "Invitation letter drafting", "Executive fast-track service", "Team application handling", "Dedicated account manager"],
     process: [
       { step: "Corporate Onboarding", detail: "KYC and travel policy alignment for your organisation." },
-      { step: "Documentation", detail: "Company letters, itinerary, and financial guarantees." },
+      { step: "Documentation", detail: "Company letters, itinerary, and financial sponsorships." },
       { step: "Filing", detail: "Priority filing with the appropriate consulate." },
       { step: "Delivery", detail: "Doorstep passport delivery to your office." },
     ],

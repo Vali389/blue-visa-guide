@@ -11,20 +11,19 @@ import {
   Plane,
   Users,
   Building2,
-  MapPin,
   Calendar,
   CreditCard,
   ShieldCheck,
   Home,
   PlaneTakeoff,
-  Stethoscope,
   BookOpen,
   Compass,
   Landmark,
   Sun,
-  Award,
+  Phone,
 } from "lucide-react";
 import { type LucideIcon } from "lucide-react";
+import { CONTACT_INFO } from "@/lib/site-data";
 
 interface MenuItem {
   to: string;
@@ -86,10 +85,10 @@ const COUNTRIES_MENU: MenuItem[] = [
 
 const COACHING_MENU: MenuItem[] = [
   {
-    to: "/coaching/oet-coaching",
-    title: "OET Coaching",
-    subtitle: "Occupational English test for doctors & nurses",
-    icon: Stethoscope,
+    to: "/coaching/duolingo-coaching",
+    title: "Duolingo Coaching",
+    subtitle: "Duolingo English Test Preparation",
+    icon: GraduationCap,
   },
   {
     to: "/coaching/tofel-coaching",
@@ -165,194 +164,388 @@ const SERVICES_MENU: MenuItem[] = [
   },
 ];
 
-function MegaDropdown({
-  label,
-  items,
-  isActive,
-  scrolled,
-  columns = 2,
-}: {
-  label: string;
-  items: MenuItem[];
-  isActive: boolean;
-  scrolled: boolean;
-  columns?: number;
-}) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function handle(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
-    }
-    document.addEventListener("mousedown", handle);
-    return () => document.removeEventListener("mousedown", handle);
-  }, []);
-
-  return (
-    <div
-      ref={ref}
-      className="relative"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-    >
-      <button
-        onClick={() => setOpen((v) => !v)}
-        className={`flex items-center gap-1.5 px-3.5 py-2 text-sm font-semibold transition-all relative group ${
-          isActive
-            ? "text-primary"
-            : "text-slate-700 hover:text-primary"
-        }`}
-      >
-        <span>{label}</span>
-        <ChevronDown
-          className={`h-3.5 w-3.5 transition-transform duration-200 ${
-            open ? "rotate-180 text-primary" : ""
-          }`}
-        />
-        {/* Active Indicator Underline */}
-        {isActive && (
-          <span className="absolute inset-x-3.5 -bottom-0.5 h-0.5 gradient-primary rounded-full shadow-glow-primary" />
-        )}
-      </button>
-
-      {open && (
-        <div
-          className={`absolute left-1/2 -translate-x-1/2 top-full z-50 mt-2 p-3 bg-white rounded-3xl border border-border/80 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.2)] animate-float-up ${
-            columns === 2 ? "w-[540px] grid grid-cols-2 gap-2" : "w-[300px] flex flex-col gap-1.5"
-          }`}
-        >
-          {items.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              onClick={() => setOpen(false)}
-              className="group flex items-start gap-3.5 p-3 rounded-2xl transition-all duration-200 hover:bg-secondary/60 hover:shadow-sm"
-              activeProps={{ className: "bg-primary/10 border border-primary/20" }}
-            >
-              {/* Rounded Icon Container */}
-              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary group-hover:gradient-primary group-hover:text-white transition-all duration-300 shadow-sm">
-                <item.icon className="h-5 w-5" />
-              </div>
-
-              {/* Title & Subtitle */}
-              <div className="flex-1 min-w-0">
-                <div className="text-sm font-bold text-foreground group-hover:text-primary transition-colors truncate">
-                  {item.title}
-                </div>
-                <div className="text-xs text-muted-foreground mt-0.5 line-clamp-1">
-                  {item.subtitle}
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
+type DropdownKey = "services" | "countries" | "visas" | "coaching";
 
 export function Header() {
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
+  const [activeDropdown, setActiveDropdown] = useState<DropdownKey | null>(null);
+
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const navRef = useRef<HTMLElement>(null);
 
   // Get current pathname to highlight active header links
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   const isHomeActive = pathname === "/";
   const isAboutActive = pathname === "/about";
-  const isCountriesActive = pathname.startsWith("/countries");
-  const isCoachingActive = pathname.startsWith("/coaching");
-  const isVisaCategoriesActive = pathname.startsWith("/visa-categories");
   const isServicesActive = pathname.startsWith("/services");
+  const isCountriesActive = pathname.startsWith("/countries");
+  const isVisaCategoriesActive = pathname.startsWith("/visa-categories");
+  const isCoachingActive = pathname.startsWith("/coaching");
   const isContactActive = pathname === "/contact";
 
+  const handleMouseEnter = (dropdown: DropdownKey) => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    setActiveDropdown(dropdown);
+  };
+
+  const handleMouseLeave = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 150);
+  };
+
+  const handleNavItemHover = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    setActiveDropdown(null);
+  };
+
+  const handleToggle = (dropdown: DropdownKey) => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    setActiveDropdown((prev) => (prev === dropdown ? null : dropdown));
+  };
+
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    function handleClickOutside(e: MouseEvent) {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setActiveDropdown(null);
+      }
+    }
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        setActiveDropdown(null);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
   }, []);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-slate-200/80 shadow-[0_2px_15px_-4px_rgba(0,0,0,0.08)] transition-all duration-300">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2.5">
-        {/* Brand Logo - Clean transparent artwork without card background */}
-        <Link to="/" className="flex items-center group shrink-0 py-0.5 focus:outline-none" aria-label="VisaEnter Home">
+    <header className="fixed inset-x-0 top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-slate-200/80 shadow-[0_2px_15px_-4px_rgba(0,0,0,0.08)]">
+      <div className="mx-auto flex max-w-7xl h-[92px] items-center justify-between px-6">
+        {/* Brand Logo */}
+        <Link
+          to="/"
+          onMouseEnter={handleNavItemHover}
+          className="flex items-center group shrink-0 py-0.5 focus:outline-none"
+          aria-label="VisaEnter Home"
+        >
           <img
             src={visaLogo}
             alt="VisaEnter"
-            className="w-[160px] sm:w-[185px] md:w-[200px] lg:w-[215px] h-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
+            className="w-[185px] sm:w-[210px] md:w-[230px] lg:w-[245px] h-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
           />
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-1">
-          {/* Home Link */}
+        <nav
+          ref={navRef}
+          className="hidden lg:flex items-center gap-1"
+          aria-label="Main Navigation"
+        >
+          {/* 1. Home */}
           <Link
             to="/"
             activeOptions={{ exact: true }}
-            className={`px-3.5 py-2 text-sm font-semibold transition-all relative group ${
+            onMouseEnter={handleNavItemHover}
+            className={`px-3 py-2 text-sm font-semibold transition-colors relative group ${
               isHomeActive
-                ? "text-primary font-extrabold"
+                ? "text-primary"
                 : "text-slate-700 hover:text-primary"
             }`}
           >
             Home
             {isHomeActive && (
-              <span className="absolute inset-x-3.5 -bottom-0.5 h-0.5 gradient-primary rounded-full shadow-glow-primary" />
+              <span className="absolute inset-x-3 -bottom-0.5 h-0.5 gradient-primary rounded-full shadow-glow-primary" />
             )}
           </Link>
 
-          {/* About Link */}
+          {/* 2. About */}
           <Link
             to="/about"
-            className={`px-3.5 py-2 text-sm font-semibold transition-all relative group ${
+            onMouseEnter={handleNavItemHover}
+            className={`px-3 py-2 text-sm font-semibold transition-colors relative group ${
               isAboutActive
-                ? "text-primary font-extrabold"
+                ? "text-primary"
                 : "text-slate-700 hover:text-primary"
             }`}
           >
             About
             {isAboutActive && (
-              <span className="absolute inset-x-3.5 -bottom-0.5 h-0.5 gradient-primary rounded-full shadow-glow-primary" />
+              <span className="absolute inset-x-3 -bottom-0.5 h-0.5 gradient-primary rounded-full shadow-glow-primary" />
             )}
           </Link>
 
-          {/* Dropdown Mega Menus */}
-          <MegaDropdown
-            label="Countries"
-            items={COUNTRIES_MENU}
-            isActive={isCountriesActive}
-            scrolled={true}
-            columns={2}
-          />
-          <MegaDropdown
-            label="Coaching"
-            items={COACHING_MENU}
-            isActive={isCoachingActive}
-            scrolled={true}
-            columns={1}
-          />
-          <MegaDropdown
-            label="Visa Categories"
-            items={VISA_CATEGORIES_MENU}
-            isActive={isVisaCategoriesActive}
-            scrolled={true}
-            columns={2}
-          />
-          <MegaDropdown
-            label="Services"
-            items={SERVICES_MENU}
-            isActive={isServicesActive}
-            scrolled={true}
-            columns={2}
-          />
+          {/* 3. Services ▾ */}
+          <div
+            className="relative"
+            onMouseEnter={() => handleMouseEnter("services")}
+            onMouseLeave={handleMouseLeave}
+          >
+            <button
+              type="button"
+              onClick={() => handleToggle("services")}
+              className={`flex items-center gap-1.5 px-3 py-2 text-sm font-semibold transition-colors relative group ${
+                isServicesActive || activeDropdown === "services"
+                  ? "text-primary"
+                  : "text-slate-700 hover:text-primary"
+              }`}
+              aria-expanded={activeDropdown === "services"}
+              aria-haspopup="true"
+            >
+              <span>Services</span>
+              <ChevronDown
+                className={`h-3.5 w-3.5 transition-transform duration-200 ${
+                  activeDropdown === "services" ? "rotate-180 text-primary" : ""
+                }`}
+              />
+              {isServicesActive && (
+                <span className="absolute inset-x-3 -bottom-0.5 h-0.5 gradient-primary rounded-full shadow-glow-primary" />
+              )}
+            </button>
 
-          {/* Contact Button */}
+            {activeDropdown === "services" && (
+              <div
+                className="absolute left-1/2 -translate-x-1/2 top-full pt-2 z-50 pointer-events-auto"
+                onMouseEnter={() => handleMouseEnter("services")}
+                onMouseLeave={handleMouseLeave}
+              >
+                <div className="absolute -top-3 inset-x-0 h-4" />
+                <div className="w-[540px] grid grid-cols-2 gap-2 p-3 bg-white rounded-3xl border border-border/80 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.2)]">
+                  {SERVICES_MENU.map((item) => (
+                    <Link
+                      key={item.to}
+                      to={item.to}
+                      onClick={() => setActiveDropdown(null)}
+                      className="group flex items-start gap-3.5 p-3 rounded-2xl transition-all duration-200 hover:bg-secondary/60 hover:shadow-sm"
+                      activeProps={{ className: "bg-primary/10 border border-primary/20" }}
+                    >
+                      <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary group-hover:gradient-primary group-hover:text-white transition-all duration-300 shadow-sm">
+                        <item.icon className="h-5 w-5" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-sm font-bold text-foreground group-hover:text-primary transition-colors truncate">
+                          {item.title}
+                        </div>
+                        <div className="text-xs text-muted-foreground mt-0.5 line-clamp-1">
+                          {item.subtitle}
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* 4. Countries ▾ */}
+          <div
+            className="relative"
+            onMouseEnter={() => handleMouseEnter("countries")}
+            onMouseLeave={handleMouseLeave}
+          >
+            <button
+              type="button"
+              onClick={() => handleToggle("countries")}
+              className={`flex items-center gap-1.5 px-3 py-2 text-sm font-semibold transition-colors relative group ${
+                isCountriesActive || activeDropdown === "countries"
+                  ? "text-primary"
+                  : "text-slate-700 hover:text-primary"
+              }`}
+              aria-expanded={activeDropdown === "countries"}
+              aria-haspopup="true"
+            >
+              <span>Countries</span>
+              <ChevronDown
+                className={`h-3.5 w-3.5 transition-transform duration-200 ${
+                  activeDropdown === "countries" ? "rotate-180 text-primary" : ""
+                }`}
+              />
+              {isCountriesActive && (
+                <span className="absolute inset-x-3 -bottom-0.5 h-0.5 gradient-primary rounded-full shadow-glow-primary" />
+              )}
+            </button>
+
+            {activeDropdown === "countries" && (
+              <div
+                className="absolute left-1/2 -translate-x-1/2 top-full pt-2 z-50 pointer-events-auto"
+                onMouseEnter={() => handleMouseEnter("countries")}
+                onMouseLeave={handleMouseLeave}
+              >
+                <div className="absolute -top-3 inset-x-0 h-4" />
+                <div className="w-[540px] grid grid-cols-2 gap-2 p-3 bg-white rounded-3xl border border-border/80 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.2)]">
+                  {COUNTRIES_MENU.map((item) => (
+                    <Link
+                      key={item.to}
+                      to={item.to}
+                      onClick={() => setActiveDropdown(null)}
+                      className="group flex items-start gap-3.5 p-3 rounded-2xl transition-all duration-200 hover:bg-secondary/60 hover:shadow-sm"
+                      activeProps={{ className: "bg-primary/10 border border-primary/20" }}
+                    >
+                      <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary group-hover:gradient-primary group-hover:text-white transition-all duration-300 shadow-sm">
+                        <item.icon className="h-5 w-5" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-sm font-bold text-foreground group-hover:text-primary transition-colors truncate">
+                          {item.title}
+                        </div>
+                        <div className="text-xs text-muted-foreground mt-0.5 line-clamp-1">
+                          {item.subtitle}
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* 5. Visa Categories ▾ */}
+          <div
+            className="relative"
+            onMouseEnter={() => handleMouseEnter("visas")}
+            onMouseLeave={handleMouseLeave}
+          >
+            <button
+              type="button"
+              onClick={() => handleToggle("visas")}
+              className={`flex items-center gap-1.5 px-3 py-2 text-sm font-semibold transition-colors relative group ${
+                isVisaCategoriesActive || activeDropdown === "visas"
+                  ? "text-primary"
+                  : "text-slate-700 hover:text-primary"
+              }`}
+              aria-expanded={activeDropdown === "visas"}
+              aria-haspopup="true"
+            >
+              <span>Visa Categories</span>
+              <ChevronDown
+                className={`h-3.5 w-3.5 transition-transform duration-200 ${
+                  activeDropdown === "visas" ? "rotate-180 text-primary" : ""
+                }`}
+              />
+              {isVisaCategoriesActive && (
+                <span className="absolute inset-x-3 -bottom-0.5 h-0.5 gradient-primary rounded-full shadow-glow-primary" />
+              )}
+            </button>
+
+            {activeDropdown === "visas" && (
+              <div
+                className="absolute left-1/2 -translate-x-1/2 top-full pt-2 z-50 pointer-events-auto"
+                onMouseEnter={() => handleMouseEnter("visas")}
+                onMouseLeave={handleMouseLeave}
+              >
+                <div className="absolute -top-3 inset-x-0 h-4" />
+                <div className="w-[520px] grid grid-cols-2 gap-2 p-3 bg-white rounded-3xl border border-border/80 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.2)]">
+                  {VISA_CATEGORIES_MENU.map((item) => (
+                    <Link
+                      key={item.to}
+                      to={item.to}
+                      onClick={() => setActiveDropdown(null)}
+                      className="group flex items-start gap-3.5 p-3 rounded-2xl transition-all duration-200 hover:bg-secondary/60 hover:shadow-sm"
+                      activeProps={{ className: "bg-primary/10 border border-primary/20" }}
+                    >
+                      <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary group-hover:gradient-primary group-hover:text-white transition-all duration-300 shadow-sm">
+                        <item.icon className="h-5 w-5" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-sm font-bold text-foreground group-hover:text-primary transition-colors truncate">
+                          {item.title}
+                        </div>
+                        <div className="text-xs text-muted-foreground mt-0.5 line-clamp-1">
+                          {item.subtitle}
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* 6. Coaching ▾ */}
+          <div
+            className="relative"
+            onMouseEnter={() => handleMouseEnter("coaching")}
+            onMouseLeave={handleMouseLeave}
+          >
+            <button
+              type="button"
+              onClick={() => handleToggle("coaching")}
+              className={`flex items-center gap-1.5 px-3 py-2 text-sm font-semibold transition-colors relative group ${
+                isCoachingActive || activeDropdown === "coaching"
+                  ? "text-primary"
+                  : "text-slate-700 hover:text-primary"
+              }`}
+              aria-expanded={activeDropdown === "coaching"}
+              aria-haspopup="true"
+            >
+              <span>Coaching</span>
+              <ChevronDown
+                className={`h-3.5 w-3.5 transition-transform duration-200 ${
+                  activeDropdown === "coaching" ? "rotate-180 text-primary" : ""
+                }`}
+              />
+              {isCoachingActive && (
+                <span className="absolute inset-x-3 -bottom-0.5 h-0.5 gradient-primary rounded-full shadow-glow-primary" />
+              )}
+            </button>
+
+            {activeDropdown === "coaching" && (
+              <div
+                className="absolute right-0 top-full pt-2 z-50 pointer-events-auto"
+                onMouseEnter={() => handleMouseEnter("coaching")}
+                onMouseLeave={handleMouseLeave}
+              >
+                <div className="absolute -top-3 inset-x-0 h-4" />
+                <div className="w-[320px] flex flex-col gap-1.5 p-3 bg-white rounded-3xl border border-border/80 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.2)]">
+                  {COACHING_MENU.map((item) => (
+                    <Link
+                      key={item.to}
+                      to={item.to}
+                      onClick={() => setActiveDropdown(null)}
+                      className="group flex items-start gap-3.5 p-3 rounded-2xl transition-all duration-200 hover:bg-secondary/60 hover:shadow-sm"
+                      activeProps={{ className: "bg-primary/10 border border-primary/20" }}
+                    >
+                      <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary group-hover:gradient-primary group-hover:text-white transition-all duration-300 shadow-sm">
+                        <item.icon className="h-5 w-5" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-sm font-bold text-foreground group-hover:text-primary transition-colors truncate">
+                          {item.title}
+                        </div>
+                        <div className="text-xs text-muted-foreground mt-0.5 line-clamp-1">
+                          {item.subtitle}
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* 7. Contact Us Button */}
           <Link
             to="/contact"
+            onMouseEnter={handleNavItemHover}
             className={`ml-2 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-xs font-extrabold shadow-md hover:scale-105 transition-all ${
               isContactActive
                 ? "bg-slate-100 text-primary ring-2 ring-primary"
@@ -365,6 +558,7 @@ export function Header() {
 
         {/* Mobile Hamburger Button */}
         <button
+          type="button"
           className="lg:hidden p-2 rounded-xl text-slate-800 hover:bg-slate-100 transition-colors"
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
@@ -377,76 +571,193 @@ export function Header() {
       {open && (
         <div className="lg:hidden bg-white border-t shadow-xl max-h-[85vh] overflow-y-auto">
           <nav className="flex flex-col p-4 gap-1">
+            {/* 1. Home */}
             <Link
               to="/"
               onClick={() => setOpen(false)}
-              className={`py-3 px-3 text-sm font-bold border-b rounded-xl ${
-                isHomeActive ? "bg-primary/10 text-primary" : "text-foreground hover:text-primary"
+              className={`py-3 px-3 text-sm font-semibold border-b rounded-xl ${
+                isHomeActive ? "bg-primary/10 text-primary font-bold" : "text-foreground hover:text-primary"
               }`}
             >
               Home
             </Link>
+
+            {/* 2. About */}
             <Link
               to="/about"
               onClick={() => setOpen(false)}
-              className={`py-3 px-3 text-sm font-bold border-b rounded-xl ${
-                isAboutActive ? "bg-primary/10 text-primary" : "text-foreground hover:text-primary"
+              className={`py-3 px-3 text-sm font-semibold border-b rounded-xl ${
+                isAboutActive ? "bg-primary/10 text-primary font-bold" : "text-foreground hover:text-primary"
               }`}
             >
               About
             </Link>
 
-            {/* Mobile Dropdown Groups */}
-            {[
-              { label: "Countries", links: COUNTRIES_MENU, active: isCountriesActive },
-              { label: "Coaching", links: COACHING_MENU, active: isCoachingActive },
-              {
-                label: "Visa Categories",
-                links: VISA_CATEGORIES_MENU,
-                active: isVisaCategoriesActive,
-              },
-              { label: "Services", links: SERVICES_MENU, active: isServicesActive },
-            ].map((group) => (
-              <div key={group.label} className="border-b">
-                <button
-                  className={`flex w-full items-center justify-between py-3 px-3 text-sm font-bold ${
-                    group.active ? "text-primary" : "text-foreground hover:text-primary"
+            {/* 3. Services (Accordion Dropdown) */}
+            <div className="border-b">
+              <button
+                type="button"
+                className={`flex w-full items-center justify-between py-3 px-3 text-sm font-semibold ${
+                  isServicesActive || mobileExpanded === "Services" ? "text-primary" : "text-foreground hover:text-primary"
+                }`}
+                onClick={() =>
+                  setMobileExpanded(mobileExpanded === "Services" ? null : "Services")
+                }
+              >
+                <span>Services</span>
+                <ChevronDown
+                  className={`h-4 w-4 transition-transform ${
+                    mobileExpanded === "Services" ? "rotate-180 text-primary" : ""
                   }`}
-                  onClick={() =>
-                    setMobileExpanded(mobileExpanded === group.label ? null : group.label)
-                  }
-                >
-                  <span>{group.label}</span>
-                  <ChevronDown
-                    className={`h-4 w-4 transition-transform ${
-                      mobileExpanded === group.label ? "rotate-180 text-primary" : ""
-                    }`}
-                  />
-                </button>
-                {mobileExpanded === group.label && (
-                  <div className="pb-3 pl-3 pr-2 flex flex-col gap-1.5 bg-secondary/30 rounded-2xl p-2 mb-2">
-                    {group.links.map((link) => (
-                      <Link
-                        key={link.to}
-                        to={link.to}
-                        onClick={() => setOpen(false)}
-                        className="flex items-center gap-3 p-2 rounded-xl text-sm font-semibold text-foreground/80 hover:bg-white hover:text-primary transition-colors"
-                        activeProps={{ className: "bg-white text-primary shadow-sm" }}
-                      >
-                        <link.icon className="h-4 w-4 text-primary shrink-0" />
-                        <div>
-                          <div className="text-xs font-bold leading-tight">{link.title}</div>
-                          <div className="text-[10px] text-muted-foreground truncate">
-                            {link.subtitle}
-                          </div>
+                />
+              </button>
+              {mobileExpanded === "Services" && (
+                <div className="pb-3 pl-3 pr-2 flex flex-col gap-1.5 bg-secondary/30 rounded-2xl p-2 mb-2">
+                  {SERVICES_MENU.map((link) => (
+                    <Link
+                      key={link.to}
+                      to={link.to}
+                      onClick={() => setOpen(false)}
+                      className="flex items-center gap-3 p-2 rounded-xl text-sm font-semibold text-foreground/80 hover:bg-white hover:text-primary transition-colors"
+                      activeProps={{ className: "bg-white text-primary shadow-sm" }}
+                    >
+                      <link.icon className="h-4 w-4 text-primary shrink-0" />
+                      <div>
+                        <div className="text-xs font-bold leading-tight">{link.title}</div>
+                        <div className="text-[10px] text-muted-foreground truncate">
+                          {link.subtitle}
                         </div>
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
 
+            {/* 4. Countries (Accordion Dropdown) */}
+            <div className="border-b">
+              <button
+                type="button"
+                className={`flex w-full items-center justify-between py-3 px-3 text-sm font-semibold ${
+                  isCountriesActive || mobileExpanded === "Countries" ? "text-primary" : "text-foreground hover:text-primary"
+                }`}
+                onClick={() =>
+                  setMobileExpanded(mobileExpanded === "Countries" ? null : "Countries")
+                }
+              >
+                <span>Countries</span>
+                <ChevronDown
+                  className={`h-4 w-4 transition-transform ${
+                    mobileExpanded === "Countries" ? "rotate-180 text-primary" : ""
+                  }`}
+                />
+              </button>
+              {mobileExpanded === "Countries" && (
+                <div className="pb-3 pl-3 pr-2 flex flex-col gap-1.5 bg-secondary/30 rounded-2xl p-2 mb-2">
+                  {COUNTRIES_MENU.map((link) => (
+                    <Link
+                      key={link.to}
+                      to={link.to}
+                      onClick={() => setOpen(false)}
+                      className="flex items-center gap-3 p-2 rounded-xl text-sm font-semibold text-foreground/80 hover:bg-white hover:text-primary transition-colors"
+                      activeProps={{ className: "bg-white text-primary shadow-sm" }}
+                    >
+                      <link.icon className="h-4 w-4 text-primary shrink-0" />
+                      <div>
+                        <div className="text-xs font-bold leading-tight">{link.title}</div>
+                        <div className="text-[10px] text-muted-foreground truncate">
+                          {link.subtitle}
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* 5. Visa Categories (Accordion Dropdown) */}
+            <div className="border-b">
+              <button
+                type="button"
+                className={`flex w-full items-center justify-between py-3 px-3 text-sm font-semibold ${
+                  isVisaCategoriesActive || mobileExpanded === "Visa Categories" ? "text-primary" : "text-foreground hover:text-primary"
+                }`}
+                onClick={() =>
+                  setMobileExpanded(mobileExpanded === "Visa Categories" ? null : "Visa Categories")
+                }
+              >
+                <span>Visa Categories</span>
+                <ChevronDown
+                  className={`h-4 w-4 transition-transform ${
+                    mobileExpanded === "Visa Categories" ? "rotate-180 text-primary" : ""
+                  }`}
+                />
+              </button>
+              {mobileExpanded === "Visa Categories" && (
+                <div className="pb-3 pl-3 pr-2 flex flex-col gap-1.5 bg-secondary/30 rounded-2xl p-2 mb-2">
+                  {VISA_CATEGORIES_MENU.map((link) => (
+                    <Link
+                      key={link.to}
+                      to={link.to}
+                      onClick={() => setOpen(false)}
+                      className="flex items-center gap-3 p-2 rounded-xl text-sm font-semibold text-foreground/80 hover:bg-white hover:text-primary transition-colors"
+                      activeProps={{ className: "bg-white text-primary shadow-sm" }}
+                    >
+                      <link.icon className="h-4 w-4 text-primary shrink-0" />
+                      <div>
+                        <div className="text-xs font-bold leading-tight">{link.title}</div>
+                        <div className="text-[10px] text-muted-foreground truncate">
+                          {link.subtitle}
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* 6. Coaching (Accordion Dropdown) */}
+            <div className="border-b">
+              <button
+                type="button"
+                className={`flex w-full items-center justify-between py-3 px-3 text-sm font-semibold ${
+                  isCoachingActive || mobileExpanded === "Coaching" ? "text-primary" : "text-foreground hover:text-primary"
+                }`}
+                onClick={() =>
+                  setMobileExpanded(mobileExpanded === "Coaching" ? null : "Coaching")
+                }
+              >
+                <span>Coaching</span>
+                <ChevronDown
+                  className={`h-4 w-4 transition-transform ${
+                    mobileExpanded === "Coaching" ? "rotate-180 text-primary" : ""
+                  }`}
+                />
+              </button>
+              {mobileExpanded === "Coaching" && (
+                <div className="pb-3 pl-3 pr-2 flex flex-col gap-1.5 bg-secondary/30 rounded-2xl p-2 mb-2">
+                  {COACHING_MENU.map((link) => (
+                    <Link
+                      key={link.to}
+                      to={link.to}
+                      onClick={() => setOpen(false)}
+                      className="flex items-center gap-3 p-2 rounded-xl text-sm font-semibold text-foreground/80 hover:bg-white hover:text-primary transition-colors"
+                      activeProps={{ className: "bg-white text-primary shadow-sm" }}
+                    >
+                      <link.icon className="h-4 w-4 text-primary shrink-0" />
+                      <div>
+                        <div className="text-xs font-bold leading-tight">{link.title}</div>
+                        <div className="text-[10px] text-muted-foreground truncate">
+                          {link.subtitle}
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* 7. Contact Us */}
             <Link
               to="/contact"
               onClick={() => setOpen(false)}
@@ -454,6 +765,22 @@ export function Header() {
             >
               Contact Us
             </Link>
+
+            {/* Helpline Numbers */}
+            <div className="mt-4 pt-3 border-t border-slate-100 flex flex-col gap-2">
+              <a
+                href={CONTACT_INFO.phoneIndiaHref}
+                className="flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-primary transition-colors"
+              >
+                <Phone className="h-3.5 w-3.5 text-primary" /> India: {CONTACT_INFO.phoneIndia}
+              </a>
+              <a
+                href={CONTACT_INFO.phoneUSAHref}
+                className="flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-primary transition-colors"
+              >
+                <Phone className="h-3.5 w-3.5 text-primary" /> USA: {CONTACT_INFO.phoneUSA}
+              </a>
+            </div>
           </nav>
         </div>
       )}

@@ -68,12 +68,12 @@ const GALLERY_ITEMS = [
     icon: "🇦🇪",
   },
   {
-    title: "OET Healthcare Cohort High Scores",
+    title: "Duolingo English Test High Scores",
     category: "Coaching Excellence",
-    desc: "Nurses and healthcare specialists achieving straight Grade A/B scores in their first OET exam attempts.",
-    tag: "OET Coaching",
+    desc: "Students achieving 125+ scores in their Duolingo English Test with comprehensive mock exams and preparation.",
+    tag: "Duolingo Coaching",
     color: "from-cyan-600/80 to-emerald-500/80",
-    icon: "🏥",
+    icon: "🎓",
   },
   {
     title: "Annual Pre-Departure Briefing Bangalore",

@@ -87,7 +87,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:title", content: "VisaEnter — Expert Visa & Immigration Services" },
       {
         property: "og:description",
-        content: "Expert visa & immigration services with near 100% success rate. 15+ years experience. Call +91-81252 98332.",
+        content: "Expert visa & immigration services. VisaEnter: Navigate Your Journey with Confidence. Call India: 9000-89-8811 or USA: 786-938-3318.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

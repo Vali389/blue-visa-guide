@@ -119,10 +119,16 @@ function AboutPage() {
 
               <div className="mt-8 flex flex-wrap gap-4">
                 <a
-                  href={CONTACT_INFO.phoneHref}
-                  className="inline-flex items-center gap-2 rounded-full gradient-primary px-7 py-3.5 text-sm font-bold text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+                  href={CONTACT_INFO.phoneIndiaHref}
+                  className="inline-flex items-center gap-2 rounded-full gradient-primary px-6 py-3.5 text-sm font-bold text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all"
                 >
-                  <Phone className="h-4 w-4" /> Call: {CONTACT_INFO.phone}
+                  <Phone className="h-4 w-4" /> India: {CONTACT_INFO.phoneIndia}
+                </a>
+                <a
+                  href={CONTACT_INFO.phoneUSAHref}
+                  className="inline-flex items-center gap-2 rounded-full border border-primary text-primary bg-primary/5 px-6 py-3.5 text-sm font-bold shadow-sm hover:bg-primary/10 hover:scale-105 transition-all"
+                >
+                  <Phone className="h-4 w-4" /> USA: {CONTACT_INFO.phoneUSA}
                 </a>
                 <Link
                   to="/contact"

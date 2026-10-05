@@ -109,13 +109,22 @@ export function Footer() {
 
           {/* Contact */}
           <div className="space-y-3 text-sm text-white/70">
-            <a
-              href={CONTACT_INFO.phoneHref}
-              className="flex items-center gap-3 hover:text-white transition-colors group"
-            >
-              <Phone className="h-4 w-4 shrink-0 group-hover:scale-110 transition-transform" style={{ color: "var(--accent)" }} />
-              {CONTACT_INFO.phone}
-            </a>
+            <div className="space-y-1.5">
+              <a
+                href={CONTACT_INFO.phoneIndiaHref}
+                className="flex items-center gap-3 hover:text-white transition-colors group"
+              >
+                <Phone className="h-4 w-4 shrink-0 group-hover:scale-110 transition-transform" style={{ color: "var(--accent)" }} />
+                <span>India: {CONTACT_INFO.phoneIndia}</span>
+              </a>
+              <a
+                href={CONTACT_INFO.phoneUSAHref}
+                className="flex items-center gap-3 hover:text-white transition-colors group"
+              >
+                <Phone className="h-4 w-4 shrink-0 group-hover:scale-110 transition-transform" style={{ color: "var(--accent)" }} />
+                <span>USA: {CONTACT_INFO.phoneUSA}</span>
+              </a>
+            </div>
             <a
               href={CONTACT_INFO.emailHref}
               className="flex items-center gap-3 hover:text-white transition-colors group"

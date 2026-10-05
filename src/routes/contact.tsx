@@ -28,7 +28,7 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Feel Free to Get in Touch with VisaEnter. Visit our Bangalore office in Hebbal Kempapura or call +91-81252 98332 for immediate visa assistance.",
+          "Feel Free to Get in Touch with VisaEnter. Visit our Bangalore office in Hebbal Kempapura or call India: 9000-89-8811 or USA: 786-938-3318 for immediate visa assistance.",
       },
       { property: "og:title", content: "Contact VisaEnter — Bangalore Office" },
       {
@@ -47,7 +47,7 @@ const SERVICE_OPTIONS = [
   { value: "United States (F1 / B1-B2)", label: "United States", sub: "F1 Student / B1-B2 Visitor", icon: "🇺🇸" },
   { value: "Australia (Subclass 500 / PR)", label: "Australia", sub: "Subclass 500 / PR", icon: "🇦🇺" },
   { value: "Dubai (UAE Business / Golden Visa)", label: "Dubai (UAE)", sub: "Business / Golden Visa", icon: "🇦🇪" },
-  { value: "IELTS / PTE / OET Coaching", label: "Language Coaching", sub: "IELTS / PTE / OET Masterclass", icon: "🎓" },
+  { value: "IELTS / PTE / Duolingo Coaching", label: "Language Coaching", sub: "IELTS / PTE / Duolingo Masterclass", icon: "🎓" },
   { value: "Visa Refusal Consultation", label: "Refusal Overturn", sub: "Refusal Analysis & Re-filing", icon: "🛡️" },
   { value: "General Visa Inquiry", label: "General Inquiry", sub: "Consultation & Profile Check", icon: "🌐" },
 ];
@@ -151,7 +151,7 @@ function ContactPage() {
 ----------------------------------------
 Please schedule my consultation appointment.`;
 
-    const whatsappUrl = `https://wa.me/918125298332?text=${encodeURIComponent(formattedMessage)}`;
+    const whatsappUrl = `https://wa.me/919000898811?text=${encodeURIComponent(formattedMessage)}`;
 
     setIsSubmitting(false);
     setSent(true);
@@ -226,11 +226,16 @@ Please schedule my consultation appointment.`;
                   <Phone className="h-6 w-6 stroke-[2.2]" />
                 </div>
                 <div>
-                  <div className="text-xs font-bold uppercase tracking-wider text-slate-500">Phone Number</div>
-                  <a href={CONTACT_INFO.phoneHref} className="mt-1 text-base font-extrabold text-primary block hover:underline">
-                    {CONTACT_INFO.phone}
-                  </a>
-                  <div className="text-xs text-slate-500 font-medium mt-0.5">Mon–Sat, 9:30am–7:00pm</div>
+                  <div className="text-xs font-bold uppercase tracking-wider text-slate-500">Phone Numbers</div>
+                  <div className="mt-1 space-y-1">
+                    <a href={CONTACT_INFO.phoneIndiaHref} className="text-base font-extrabold text-primary block hover:underline">
+                      <span className="text-xs text-slate-500 font-semibold">India: </span>{CONTACT_INFO.phoneIndia}
+                    </a>
+                    <a href={CONTACT_INFO.phoneUSAHref} className="text-base font-extrabold text-primary block hover:underline">
+                      <span className="text-xs text-slate-500 font-semibold">USA: </span>{CONTACT_INFO.phoneUSA}
+                    </a>
+                  </div>
+                  <div className="text-xs text-slate-500 font-medium mt-1">Mon–Sat, 9:30am–7:00pm</div>
                 </div>
               </div>
 
@@ -243,7 +248,7 @@ Please schedule my consultation appointment.`;
                   <a href={CONTACT_INFO.emailHref} className="mt-1 text-base font-extrabold text-primary block hover:underline">
                     {CONTACT_INFO.email}
                   </a>
-                  <div className="text-xs text-slate-500 font-medium mt-0.5">Fast response within 2 hours</div>
+                  <div className="text-xs text-slate-500 font-medium mt-0.5">Turnaround time for callback: within 24 hours</div>
                 </div>
               </div>
 
@@ -301,10 +306,16 @@ Please schedule my consultation appointment.`;
                       Send Another Message
                     </button>
                     <a
-                      href={CONTACT_INFO.phoneHref}
-                      className="rounded-full bg-white border border-emerald-300 px-6 py-2.5 text-xs font-bold text-slate-800 shadow-sm hover:bg-slate-50 transition-all"
+                      href={CONTACT_INFO.phoneIndiaHref}
+                      className="rounded-full bg-white border border-slate-300 px-4 py-2.5 text-xs font-bold text-slate-800 shadow-sm hover:bg-slate-50 transition-all flex items-center gap-1.5"
                     >
-                      Call Now: {CONTACT_INFO.phone}
+                      <Phone className="h-3.5 w-3.5 text-primary" /> India: {CONTACT_INFO.phoneIndia}
+                    </a>
+                    <a
+                      href={CONTACT_INFO.phoneUSAHref}
+                      className="rounded-full bg-white border border-slate-300 px-4 py-2.5 text-xs font-bold text-slate-800 shadow-sm hover:bg-slate-50 transition-all flex items-center gap-1.5"
+                    >
+                      <Phone className="h-3.5 w-3.5 text-primary" /> USA: {CONTACT_INFO.phoneUSA}
                     </a>
                   </div>
                 </div>

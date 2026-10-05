@@ -47,6 +47,7 @@ import {
 
 // Asset Imports for Rich Cards
 import heroSlider1 from "@/assets/hero-slider-1.jpg";
+import heroSliderAppointment from "@/assets/hero-slider-appointment.jpg";
 import heroSlider2 from "@/assets/hero-slider-2.jpg";
 import heroSlider3 from "@/assets/hero-slider-3.jpg";
 
@@ -87,20 +88,20 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "VisaEnter provides premier visa services with near 100% success rate. Student, Tourist, Business & Family visas for Germany, UK, Canada, USA, Australia, and Dubai.",
+          "VisaEnter provides premier visa & immigration services. VisaEnter: Navigate Your Journey with Confidence. Student, Tourist, Business & Family visas for Germany, UK, Canada, USA, Australia, and Dubai.",
       },
       { property: "og:title", content: "VisaEnter — Best Visa & Immigration Consultants" },
       {
         property: "og:description",
         content:
-          "Helping clients achieve their immigration and study abroad dreams for 15+ years. 99% visa approval rate. Call +91-81252 98332.",
+          "Helping clients achieve their immigration and study abroad dreams for 15+ years. VisaEnter: Navigate Your Journey with Confidence. Call India: 9000-89-8811 or USA: 786-938-3318.",
       },
     ],
   }),
   component: Index,
 });
 
-const HERO_IMAGES = [heroSlider1, heroSlider2, heroSlider3];
+const HERO_IMAGES = [heroSlider1, heroSliderAppointment, heroSlider2, heroSlider3];
 
 const COUNTRY_CARDS_IMAGES: Record<string, string> = {
   germany: germanyImg,
@@ -147,22 +148,22 @@ function HeroSlider() {
       <AnimatePresence mode="wait">
         <motion.div
           key={current}
-          initial={{ opacity: 0, scale: 1.08 }}
+          initial={{ opacity: 0, scale: 1.04 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
+          transition={{ duration: 1.0, ease: "easeOut" }}
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${HERO_IMAGES[current % HERO_IMAGES.length]})` }}
           aria-hidden
         />
       </AnimatePresence>
 
-      {/* Hero overlay */}
+      {/* Hero overlay: Crisp, natural directional gradient that keeps text 100% legible on the left while preserving full photographic sharpness, bright daylight, and realism on the right */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg, rgba(15, 23, 42, 0.65) 0%, rgba(15, 23, 42, 0.85) 100%)",
+            "linear-gradient(90deg, rgba(10, 20, 40, 0.88) 0%, rgba(10, 20, 40, 0.70) 42%, rgba(10, 20, 40, 0.22) 75%, rgba(10, 20, 40, 0.32) 100%), linear-gradient(180deg, rgba(10, 20, 40, 0.25) 0%, transparent 40%, rgba(10, 20, 40, 0.65) 100%)",
         }}
         aria-hidden
       />
@@ -187,8 +188,8 @@ function HeroSlider() {
               {slide.eyebrow}
             </span>
 
-            {/* Main H1 Title - Formatted to fit on a single line on desktop */}
-            <h1 className="mt-3 text-xl sm:text-2xl md:text-3xl lg:text-[2.4rem] font-extrabold leading-tight tracking-tight text-white drop-shadow-md md:whitespace-nowrap">
+            {/* Main H1 Title - Responsive dominant typography */}
+            <h1 className="mt-3 text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-extrabold leading-[1.12] tracking-tight text-white drop-shadow-lg max-w-4xl">
               <span className="text-white">{slide.title.split(" ").slice(0, 2).join(" ")} </span>
               <span className="text-gradient">
                 {slide.title.split(" ").slice(2).join(" ")}
@@ -335,7 +336,7 @@ function TestimonialsSlider() {
                 onClick={() => setCurrent(reviewIdx)}
                 className="cursor-pointer flex flex-col items-center group h-full justify-between"
               >
-                {/* Speech Bubble Card with Guaranteed Equal Height */}
+                {/* Speech Bubble Card with Consistent Equal Height */}
                 <div
                   className={`relative w-full rounded-3xl bg-white border pt-10 pb-8 px-6 sm:px-7 transition-all duration-300 flex flex-col justify-between h-[215px] sm:h-[200px] ${
                     isFeatured
@@ -570,7 +571,7 @@ const SERVICE_OPTIONS = [
   { value: "United States (F1 / B1-B2)", label: "United States", sub: "F1 Student / B1-B2 Visitor", icon: "🇺🇸" },
   { value: "Australia (Subclass 500 / PR)", label: "Australia", sub: "Subclass 500 / PR", icon: "🇦🇺" },
   { value: "Dubai (UAE Business / Golden Visa)", label: "Dubai (UAE)", sub: "Business / Golden Visa", icon: "🇦🇪" },
-  { value: "IELTS / PTE / OET Coaching", label: "Coaching Programs", sub: "IELTS / PTE / OET Masterclass", icon: "🎓" },
+  { value: "IELTS / PTE / Duolingo Coaching", label: "Coaching Programs", sub: "IELTS / PTE / Duolingo Masterclass", icon: "🎓" },
   { value: "Visa Refusal Consultation", label: "Refusal Overturn", sub: "Refusal Analysis & Re-filing", icon: "🛡️" },
 ];
 
@@ -681,7 +682,7 @@ function ConsultationForm() {
 ----------------------------------------
 Please schedule my free consultation appointment.`;
 
-    const whatsappUrl = `https://wa.me/918125298332?text=${encodeURIComponent(formattedMessage)}`;
+    const whatsappUrl = `https://wa.me/919000898811?text=${encodeURIComponent(formattedMessage)}`;
 
     setIsSubmitting(false);
 
@@ -970,7 +971,7 @@ function Index() {
             >
               <div className="space-y-4 text-slate-700 font-medium text-base leading-relaxed">
                 <p>
-                  At <strong className="font-bold text-slate-900">VisaEnter</strong>, we are driven by unwavering dedication to turn your global immigration ambition into guaranteed success. By listening closely to your individual academic and professional goals, our senior counselors build airtight, compliant applications tailored for optimal consulate approval.
+                  At <strong className="font-bold text-slate-900">VisaEnter</strong>, we are driven by unwavering dedication to turn your global immigration ambition into a confident reality. VisaEnter: Navigate Your Journey with Confidence. By listening closely to your individual academic and professional goals, our senior counselors build airtight, compliant applications tailored for optimal consulate approval.
                 </p>
                 <p>
                   With over <strong className="font-bold text-slate-900">15+ years of case-handling mastery</strong> across Europe, North America, and Australasia, we specialize in high-complexity filings, previous refusal overturns, and fast-track admissions.
@@ -1030,15 +1031,18 @@ function Index() {
               {/* Interactive CTA Buttons */}
               <div className="pt-2 flex flex-wrap items-center gap-4">
                 <a
-                  href={CONTACT_INFO.phoneHref}
-                  className="inline-flex items-center gap-3 rounded-full gradient-primary px-7 py-3.5 text-sm font-extrabold text-white shadow-glow-primary hover:scale-105 transition-all duration-300 group"
+                  href={CONTACT_INFO.phoneIndiaHref}
+                  className="inline-flex items-center gap-2.5 rounded-full gradient-primary px-6 py-3.5 text-sm font-extrabold text-white shadow-glow-primary hover:scale-105 transition-all duration-300 group"
                 >
-                  <span className="relative flex h-3 w-3">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
-                  </span>
                   <Phone className="h-4 w-4" />
-                  <span>Call Free: {CONTACT_INFO.phone}</span>
+                  <span>India: {CONTACT_INFO.phoneIndia}</span>
+                </a>
+                <a
+                  href={CONTACT_INFO.phoneUSAHref}
+                  className="inline-flex items-center gap-2.5 rounded-full border-2 border-primary bg-primary/5 px-6 py-3.5 text-sm font-extrabold text-primary hover:bg-primary/10 hover:scale-105 transition-all duration-300"
+                >
+                  <Phone className="h-4 w-4" />
+                  <span>USA: {CONTACT_INFO.phoneUSA}</span>
                 </a>
                 <Link
                   to="/about"
@@ -1048,6 +1052,9 @@ function Index() {
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
+              <p className="mt-2 text-xs text-slate-500 font-medium">
+                Turnaround time for callback: within 24 hours
+              </p>
             </motion.div>
 
             {/* Right Showcase: Real VisaEnter Counseling & Excellence Showcase */}
@@ -1723,13 +1730,15 @@ function Index() {
                 </div>
                 <div>
                   <div className="font-bold text-sm text-slate-900 group-hover:text-primary transition-colors">Direct Helpline</div>
-                  <a
-                    href={CONTACT_INFO.phoneHref}
-                    className="text-sm font-bold text-primary mt-1 inline-block hover:underline"
-                  >
-                    {CONTACT_INFO.phone}
-                  </a>
-                  <div className="text-[11px] text-slate-500 mt-0.5">Mon – Sat: 9:30 AM to 6:30 PM</div>
+                  <div className="flex flex-col gap-1 mt-1 text-sm font-bold text-primary">
+                    <a href={CONTACT_INFO.phoneIndiaHref} className="hover:underline flex items-center gap-1.5">
+                      <span className="text-xs text-slate-500 font-semibold">India:</span> {CONTACT_INFO.phoneIndia}
+                    </a>
+                    <a href={CONTACT_INFO.phoneUSAHref} className="hover:underline flex items-center gap-1.5">
+                      <span className="text-xs text-slate-500 font-semibold">USA:</span> {CONTACT_INFO.phoneUSA}
+                    </a>
+                  </div>
+                  <div className="text-[11px] text-slate-500 mt-1">Mon – Sat: 9:30 AM to 6:30 PM</div>
                 </div>
               </motion.div>
 
@@ -1748,7 +1757,7 @@ function Index() {
                   >
                     {CONTACT_INFO.email}
                   </a>
-                  <div className="text-[11px] text-slate-500 mt-0.5">Guaranteed response within 2 hours</div>
+                  <div className="text-[11px] text-slate-500 mt-0.5">Turnaround time for callback: within 24 hours</div>
                 </div>
               </motion.div>
             </motion.div>

@@ -14,19 +14,21 @@ import {
 } from "lucide-react";
 import { PageLayout } from "@/components/site/PageLayout";
 import { COACHING_DATA, CONTACT_INFO, CoachingData } from "@/lib/site-data";
-import oetHeroImg from "@/assets/hero-about.jpg";
+import duolingoHeroImg from "@/assets/hero-about.jpg";
 import tofelHeroImg from "@/assets/hero-passport.jpg";
 
 const COACHING_HERO_IMAGES: Record<string, string> = {
-  "ielts-coaching": oetHeroImg,
+  "ielts-coaching": duolingoHeroImg,
   "pte-coaching": tofelHeroImg,
-  "oet-coaching": oetHeroImg,
+  "duolingo-coaching": duolingoHeroImg,
+  "oet-coaching": duolingoHeroImg,
   "tofel-coaching": tofelHeroImg,
 };
 
 export const Route = createFileRoute("/coaching/$slug")({
   loader: ({ params }) => {
-    const coach = COACHING_DATA.find((c) => c.slug === params.slug);
+    const slug = params.slug === "oet-coaching" ? "duolingo-coaching" : params.slug;
+    const coach = COACHING_DATA.find((c) => c.slug === slug);
     if (!coach) throw notFound();
     return { coach };
   },
@@ -60,7 +62,7 @@ export const Route = createFileRoute("/coaching/$slug")({
 function CoachingPage() {
   const { coach } = Route.useLoaderData<{ coach: CoachingData }>();
   const otherCoaching = COACHING_DATA.filter((c) => c.slug !== coach.slug);
-  const heroImg = COACHING_HERO_IMAGES[coach.slug] || oetHeroImg;
+  const heroImg = COACHING_HERO_IMAGES[coach.slug] || duolingoHeroImg;
 
   return (
     <PageLayout>
@@ -100,10 +102,16 @@ function CoachingPage() {
                 Enroll in Next Batch <ArrowRight className="h-4 w-4" />
               </a>
               <a
-                href={CONTACT_INFO.phoneHref}
-                className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-7 py-3.5 text-sm font-bold text-white backdrop-blur-md hover:bg-white/20 transition-all"
+                href={CONTACT_INFO.phoneIndiaHref}
+                className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-5 py-3.5 text-sm font-bold text-white backdrop-blur-md hover:bg-white/20 transition-all"
               >
-                Call Instructor: {CONTACT_INFO.phone}
+                <Phone className="h-4 w-4" /> India: {CONTACT_INFO.phoneIndia}
+              </a>
+              <a
+                href={CONTACT_INFO.phoneUSAHref}
+                className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-5 py-3.5 text-sm font-bold text-white backdrop-blur-md hover:bg-white/20 transition-all"
+              >
+                <Phone className="h-4 w-4" /> USA: {CONTACT_INFO.phoneUSA}
               </a>
             </div>
           </motion.div>
@@ -197,19 +205,25 @@ function CoachingPage() {
                 <div className="flex items-center gap-3 mb-2">
                   <Award className="h-6 w-6" />
                   <span className="text-sm font-bold uppercase tracking-wider">
-                    Score Guarantee
+                    Score Improvement Support
                   </span>
                 </div>
                 <h3 className="text-2xl font-bold">Targeted Score Preparation</h3>
                 <p className="mt-2 text-sm text-white/90 leading-relaxed">
                   Join our upcoming batch or book a 1-on-1 diagnostic test session with our lead instructor.
                 </p>
-                <div className="mt-6">
+                <div className="mt-6 flex flex-wrap gap-2.5">
                   <a
-                    href={CONTACT_INFO.phoneHref}
-                    className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-2.5 text-sm font-bold text-foreground shadow hover:bg-white/90 transition-all"
+                    href={CONTACT_INFO.phoneIndiaHref}
+                    className="inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-xs font-bold text-foreground shadow hover:bg-white/90 transition-all"
                   >
-                    <Phone className="h-4 w-4" /> Call Instructor: {CONTACT_INFO.phone}
+                    <Phone className="h-3.5 w-3.5 text-primary" /> India: {CONTACT_INFO.phoneIndia}
+                  </a>
+                  <a
+                    href={CONTACT_INFO.phoneUSAHref}
+                    className="inline-flex items-center gap-1.5 rounded-full bg-white/20 border border-white/40 px-4 py-2 text-xs font-bold text-white shadow hover:bg-white/30 transition-all backdrop-blur-md"
+                  >
+                    <Phone className="h-3.5 w-3.5 text-white" /> USA: {CONTACT_INFO.phoneUSA}
                   </a>
                 </div>
               </div>
