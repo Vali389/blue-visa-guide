@@ -48,8 +48,8 @@ import {
 // Asset Imports for Rich Cards
 import heroSlider1 from "@/assets/hero-slider-1.jpg";
 import heroSliderAppointment from "@/assets/hero-slider-appointment.jpg";
-import heroSlider2 from "@/assets/hero-slider-2.jpg";
-import heroSlider3 from "@/assets/hero-slider-3.jpg";
+import heroSliderStudyAbroad from "@/assets/hero-slider-study-abroad.jpg";
+import heroSliderClientGuidance from "@/assets/hero-slider-client-guidance.jpg";
 
 import canadaImg from "@/assets/service-canada.jpg";
 import germanyImg from "@/assets/service-schengen.jpg";
@@ -101,7 +101,12 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const HERO_IMAGES = [heroSlider1, heroSliderAppointment, heroSlider2, heroSlider3];
+const HERO_IMAGES = [
+  heroSlider1,
+  heroSliderAppointment,
+  heroSliderStudyAbroad,
+  heroSliderClientGuidance,
+];
 
 const COUNTRY_CARDS_IMAGES: Record<string, string> = {
   germany: germanyImg,
