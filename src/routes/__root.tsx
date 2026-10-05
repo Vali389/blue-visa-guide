@@ -4,12 +4,9 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
-  HeadContent,
-  Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect } from "react";
 
-import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { WhatsAppWidget } from "../components/site/WhatsAppWidget";
 
@@ -74,54 +71,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "VisaEnter — Expert Visa & Immigration Services | Bangalore" },
-      {
-        name: "description",
-        content:
-          "VisaEnter offers expert visa & immigration services from Bangalore with 15+ years of experience. Student, business, tourist & family visas for Germany, UK, Canada, USA, Australia and more.",
-      },
-      { property: "og:title", content: "VisaEnter — Expert Visa & Immigration Services" },
-      {
-        property: "og:description",
-        content: "Expert visa & immigration services. VisaEnter: Navigate Your Journey with Confidence. Call India: 9000-89-8811 or USA: 786-938-3318.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [
-      { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap",
-      },
-    ],
-  }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
-
-function RootShell({ children }: { children: ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
 
 import { Toaster } from "../components/ui/sonner";
 import { ScrollToTop } from "../components/site/ScrollToTop";
