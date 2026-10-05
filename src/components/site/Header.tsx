@@ -199,7 +199,7 @@ export function Header() {
     }
     timeoutRef.current = setTimeout(() => {
       setActiveDropdown(null);
-    }, 150);
+    }, 200);
   };
 
   const handleNavItemHover = () => {
