@@ -86,14 +86,14 @@ const COUNTRIES_MENU: MenuItem[] = [
 const COACHING_MENU: MenuItem[] = [
   {
     to: "/coaching/duolingo-coaching",
-    title: "Duolingo Coaching",
-    subtitle: "Duolingo English Test Preparation",
+    title: "Duolingo Training",
+    subtitle: "Duolingo English Test — Coming Soon",
     icon: GraduationCap,
   },
   {
     to: "/coaching/tofel-coaching",
-    title: "TOFEL Coaching",
-    subtitle: "High score training for global universities",
+    title: "IELTS / TOEFL Training",
+    subtitle: "Exam Preparation — Coming Soon",
     icon: BookOpen,
   },
 ];
@@ -480,7 +480,7 @@ export function Header() {
             )}
           </div>
 
-          {/* 6. Coaching ▾ */}
+          {/* 6. POE Training ▾ */}
           <div
             className="relative"
             onMouseEnter={() => handleMouseEnter("coaching")}
@@ -497,7 +497,7 @@ export function Header() {
               aria-expanded={activeDropdown === "coaching"}
               aria-haspopup="true"
             >
-              <span>Coaching</span>
+              <span>POE Training</span>
               <ChevronDown
                 className={`h-3.5 w-3.5 transition-transform duration-200 ${
                   activeDropdown === "coaching" ? "rotate-180 text-primary" : ""
@@ -716,25 +716,25 @@ export function Header() {
               )}
             </div>
 
-            {/* 6. Coaching (Accordion Dropdown) */}
+            {/* 6. POE Training (Accordion Dropdown) */}
             <div className="border-b">
               <button
                 type="button"
                 className={`flex w-full items-center justify-between py-3 px-3 text-sm font-semibold ${
-                  isCoachingActive || mobileExpanded === "Coaching" ? "text-primary" : "text-foreground hover:text-primary"
+                  isCoachingActive || mobileExpanded === "POE Training" ? "text-primary" : "text-foreground hover:text-primary"
                 }`}
                 onClick={() =>
-                  setMobileExpanded(mobileExpanded === "Coaching" ? null : "Coaching")
+                  setMobileExpanded(mobileExpanded === "POE Training" ? null : "POE Training")
                 }
               >
-                <span>Coaching</span>
+                <span>POE Training</span>
                 <ChevronDown
                   className={`h-4 w-4 transition-transform ${
-                    mobileExpanded === "Coaching" ? "rotate-180 text-primary" : ""
+                    mobileExpanded === "POE Training" ? "rotate-180 text-primary" : ""
                   }`}
                 />
               </button>
-              {mobileExpanded === "Coaching" && (
+              {mobileExpanded === "POE Training" && (
                 <div className="pb-3 pl-3 pr-2 flex flex-col gap-1.5 bg-secondary/30 rounded-2xl p-2 mb-2">
                   {COACHING_MENU.map((link) => (
                     <Link

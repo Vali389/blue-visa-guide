@@ -34,10 +34,10 @@ export function ScrollToTop() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.6, y: 10 }}
           transition={{ duration: 0.2 }}
-          className="fixed bottom-24 right-6 z-40 flex items-center group"
+          className="fixed bottom-18 right-4 sm:bottom-24 sm:right-6 z-40 flex items-center group"
         >
           {/* Tooltip Label */}
-          <span className="opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0 bg-slate-900 text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg whitespace-nowrap mr-2.5 pointer-events-none">
+          <span className="hidden sm:inline-block opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0 bg-slate-900 text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg whitespace-nowrap mr-2.5 pointer-events-none">
             Back to Top
           </span>
 
@@ -46,9 +46,9 @@ export function ScrollToTop() {
             type="button"
             onClick={scrollToTop}
             aria-label="Scroll to top"
-            className="grid h-12 w-12 place-items-center rounded-full bg-[#0099ff] text-white shadow-lg shadow-sky-500/30 hover:bg-[#0088ee] hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer border-2 border-white/50"
+            className="grid h-10 w-10 sm:h-12 sm:w-12 place-items-center rounded-full bg-[#0099ff] text-white shadow-md shadow-sky-500/30 hover:bg-[#0088ee] hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer border-2 border-white/50"
           >
-            <ArrowUp className="h-5 w-5 stroke-[2.6]" />
+            <ArrowUp className="h-4 w-4 sm:h-5 sm:w-5 stroke-[2.6]" />
           </button>
         </motion.div>
       )}

@@ -264,6 +264,9 @@ export const COUNTRIES_DATA: CountryData[] = [
 export interface CoachingData {
   slug: string;
   name: string;
+  heroTitleWhite?: string;
+  heroTitleGradient?: string;
+  hideHeroTagline?: boolean;
   tagline: string;
   icon: string;
   description: string;
@@ -280,7 +283,10 @@ export interface CoachingData {
 export const COACHING_DATA: CoachingData[] = [
   {
     slug: "ielts-coaching",
-    name: "IELTS Coaching",
+    name: "IELTS / TOEFL Training",
+    heroTitleWhite: "IELTS/TOEFL Training",
+    heroTitleGradient: "Coming Soon!",
+    hideHeroTagline: true,
     tagline: "Academic & General Training (Band 7.5+ Target)",
     icon: "🎓",
     description:
@@ -344,7 +350,10 @@ export const COACHING_DATA: CoachingData[] = [
   },
   {
     slug: "duolingo-coaching",
-    name: "Duolingo Coaching",
+    name: "Duolingo Training",
+    heroTitleWhite: "Duolingo Training",
+    heroTitleGradient: "Coming Soon!",
+    hideHeroTagline: true,
     tagline: "Duolingo English Test Preparation",
     icon: "🎓",
     description:
@@ -370,13 +379,16 @@ export const COACHING_DATA: CoachingData[] = [
     duration: "1–1.5 Months",
     batchSize: "10–12 Students",
     mode: "Online & Lab Practice",
-    metaTitle: "Duolingo Coaching — VisaEnter",
+    metaTitle: "Duolingo Training — Coming Soon | VisaEnter",
     metaDescription:
       "Prepare for the Duolingo English Test with VisaEnter. Structured training, practice tests, personalized guidance, and proven preparation strategies.",
   },
   {
     slug: "tofel-coaching",
-    name: "TOFEL Coaching",
+    name: "IELTS / TOEFL Training",
+    heroTitleWhite: "IELTS/TOEFL Training",
+    heroTitleGradient: "Coming Soon!",
+    hideHeroTagline: true,
     tagline: "TOFEL iBT Exam Preparation (100+ Score)",
     icon: "📚",
     description:
@@ -402,7 +414,7 @@ export const COACHING_DATA: CoachingData[] = [
     duration: "1.5–2 Months",
     batchSize: "12–20 Students",
     mode: "Online & Offline",
-    metaTitle: "TOFEL Coaching — VisaEnter",
+    metaTitle: "IELTS / TOEFL Training — Coming Soon | VisaEnter",
     metaDescription:
       "Expert TOFEL coaching at VisaEnter. Prepare for US, Canada, UK university admissions with our comprehensive TOFEL training program.",
   },

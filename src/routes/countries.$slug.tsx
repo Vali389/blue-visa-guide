@@ -33,26 +33,26 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-// Unique background images for each country
-import canadaImg from "@/assets/service-canada.jpg";
-import germanyImg from "@/assets/service-schengen.jpg";
-import franceImg from "@/assets/hero-about.jpg";
-import spainImg from "@/assets/hero-passport.jpg";
-import ukImg from "@/assets/service-uk.jpg";
-import usaImg from "@/assets/service-us.jpg";
-import australiaImg from "@/assets/service-australia.jpg";
-import dubaiImg from "@/assets/service-business.jpg";
+// Unique, high-resolution photorealistic landmark background images for each country
+import germanyHeroImg from "@/assets/hero-country-germany.jpg";
+import canadaHeroImg from "@/assets/hero-country-canada.jpg";
+import franceHeroImg from "@/assets/hero-country-france.jpg";
+import spainHeroImg from "@/assets/hero-country-spain.jpg";
+import ukHeroImg from "@/assets/hero-country-uk.jpg";
+import usaHeroImg from "@/assets/hero-country-usa.jpg";
+import australiaHeroImg from "@/assets/hero-country-australia.jpg";
+import dubaiHeroImg from "@/assets/hero-country-dubai.jpg";
 import defaultHeroImg from "@/assets/hero-country.jpg";
 
-const COUNTRY_HERO_IMAGES: Record<string, string> = {
-  germany: germanyImg,
-  canada: canadaImg,
-  france: franceImg,
-  spain: spainImg,
-  "united-kingdom": ukImg,
-  "united-states": usaImg,
-  australia: australiaImg,
-  dubai: dubaiImg,
+export const COUNTRY_HERO_IMAGES: Record<string, string> = {
+  germany: germanyHeroImg,
+  canada: canadaHeroImg,
+  france: franceHeroImg,
+  spain: spainHeroImg,
+  "united-kingdom": ukHeroImg,
+  "united-states": usaHeroImg,
+  australia: australiaHeroImg,
+  dubai: dubaiHeroImg,
 };
 
 const COUNTRY_SPECIFIC_FAQS: Record<string, { question: string; answer: string }[]> = {
@@ -578,17 +578,17 @@ function CountryPage() {
           style={{ backgroundImage: `url(${heroImage})` }}
           aria-hidden
         />
-        {/* Darkening Gradient Overlay */}
+        {/* Rich photographic overlay that showcases landmark details while keeping text crisp */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(180deg, rgba(15, 23, 42, 0.72) 0%, rgba(15, 23, 42, 0.9) 100%)",
+              "linear-gradient(180deg, rgba(10, 20, 40, 0.62) 0%, rgba(10, 20, 40, 0.38) 45%, rgba(10, 20, 40, 0.78) 100%)",
           }}
           aria-hidden
         />
 
-        <div className="relative z-10 mx-auto max-w-4xl px-6 text-white pt-10 text-center">
+        <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 text-white pt-[110px] sm:pt-[120px] pb-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -602,13 +602,13 @@ function CountryPage() {
             </span>
 
             {/* Single-Line Gradient Title with Decreased Balanced Size */}
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight md:whitespace-nowrap">
+            <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold sm:font-extrabold tracking-tight leading-[1.22] sm:leading-tight break-words">
               <span className="text-white">{country.name} </span>
               <span className="text-gradient">Visa Services</span>
             </h1>
 
             {/* Subtitle */}
-            <p className="mt-3 text-sm md:text-base text-white/85 leading-relaxed font-light max-w-3xl mx-auto md:whitespace-nowrap">
+            <p className="mt-3 text-xs sm:text-sm md:text-base text-white/85 leading-relaxed font-light max-w-3xl mx-auto">
               {country.tagline} — Expert assistance with near 100% approval rate by VisaEnter.
             </p>
 
@@ -674,10 +674,10 @@ function CountryPage() {
             <span className="inline-flex items-center gap-2 rounded-full border border-sky-500/20 bg-sky-50 px-4 py-1.5 text-xs font-extrabold uppercase tracking-[0.25em] text-primary shadow-sm mb-3">
               <Sparkles className="h-3.5 w-3.5 text-primary" /> COMPREHENSIVE GUIDANCE
             </span>
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight md:whitespace-nowrap">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
               About <span className="text-gradient">{country.name} Visa Services</span>
             </h2>
-            <p className="mt-3 text-slate-700 font-medium text-sm md:text-base max-w-3xl mx-auto leading-relaxed md:whitespace-nowrap">
+            <p className="mt-3 text-slate-700 font-medium text-sm md:text-base max-w-3xl mx-auto leading-relaxed">
               {country.tagline} — Professional end-to-end processing with near 100% approval success.
             </p>
           </div>
@@ -828,10 +828,10 @@ function CountryPage() {
             <span className="inline-flex items-center gap-2 rounded-full border border-sky-500/20 bg-sky-50 px-4 py-1.5 text-xs font-extrabold uppercase tracking-[0.25em] text-primary shadow-sm mb-3">
               <Sparkles className="h-3.5 w-3.5 text-primary" /> STEP-BY-STEP PATHWAY
             </span>
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight md:whitespace-nowrap text-center">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight text-center">
               How We Process Your <span className="text-gradient">{country.name} Visa</span>
             </h2>
-            <p className="mt-3 text-slate-700 font-medium text-sm md:text-base max-w-3xl mx-auto leading-relaxed md:whitespace-nowrap text-center">
+            <p className="mt-3 text-slate-700 font-medium text-sm md:text-base max-w-3xl mx-auto leading-relaxed text-center">
               A transparent, structured 5-step roadmap ensuring fast turnaround and zero delays.
             </p>
           </div>
@@ -892,10 +892,10 @@ function CountryPage() {
             <span className="inline-flex items-center gap-2 rounded-full border border-sky-500/20 bg-sky-50 px-4 py-1.5 text-xs font-extrabold uppercase tracking-[0.25em] text-primary shadow-sm mb-3">
               <Sparkles className="h-3.5 w-3.5 text-primary" /> FREQUENTLY ASKED
             </span>
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight md:whitespace-nowrap text-center">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight text-center">
               Common Questions on <span className="text-gradient">{country.name} Visas</span>
             </h2>
-            <p className="mt-3 text-slate-700 font-medium text-sm md:text-base max-w-3xl mx-auto leading-relaxed md:whitespace-nowrap text-center">
+            <p className="mt-3 text-slate-700 font-medium text-sm md:text-base max-w-3xl mx-auto leading-relaxed text-center">
               Get clarity on documentation, funds, embassy rules, and visa timelines.
             </p>
           </div>
@@ -926,10 +926,10 @@ function CountryPage() {
             <span className="inline-flex items-center gap-2 rounded-full border border-sky-500/20 bg-sky-50 px-4 py-1.5 text-xs font-extrabold uppercase tracking-[0.25em] text-primary shadow-sm mb-3">
               <Sparkles className="h-3.5 w-3.5 text-primary" /> EXPLORE MORE
             </span>
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight md:whitespace-nowrap text-center">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight text-center">
               Explore Other <span className="text-gradient">Global Destinations</span>
             </h2>
-            <p className="mt-3 text-slate-700 font-medium text-sm md:text-base max-w-3xl mx-auto leading-relaxed md:whitespace-nowrap text-center">
+            <p className="mt-3 text-slate-700 font-medium text-sm md:text-base max-w-3xl mx-auto leading-relaxed text-center">
               Expert visa guidance across top study, work, and migration countries worldwide.
             </p>
           </div>

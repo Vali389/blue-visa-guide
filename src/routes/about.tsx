@@ -53,7 +53,7 @@ function AboutPage() {
   return (
     <PageLayout>
       {/* Hero */}
-      <section className="relative h-[65vh] min-h-[480px] w-full overflow-hidden bg-slate-950 flex items-center">
+      <section className="relative min-h-[380px] sm:min-h-[440px] md:h-[60vh] w-full overflow-hidden bg-slate-950 flex items-center">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${heroImg})` }}
@@ -63,49 +63,49 @@ function AboutPage() {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(180deg, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.92) 100%)",
+              "linear-gradient(180deg, rgba(10, 20, 40, 0.88) 0%, rgba(10, 20, 40, 0.80) 50%, rgba(10, 20, 40, 0.94) 100%)",
           }}
           aria-hidden
         />
 
-        <div className="relative z-10 mx-auto max-w-4xl px-6 text-white pt-12 text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] backdrop-blur-md mb-4">
-            <span className="h-2 w-2 rounded-full animate-pulse" style={{ backgroundColor: "var(--accent)" }} />
+        <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 text-white pt-[98px] sm:pt-[116px] pb-8 sm:pb-10 text-center w-full">
+          <span className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 sm:px-4 sm:py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-wider sm:tracking-[0.2em] backdrop-blur-md mb-3 sm:mb-4">
+            <span className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full animate-pulse" style={{ backgroundColor: "var(--accent)" }} />
             ABOUT VISAENTER
           </span>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight md:whitespace-nowrap">
+          <h1 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold sm:font-extrabold leading-[1.2] tracking-tight break-words drop-shadow-md">
             Providing the <span className="text-gradient">Best Visa Services</span> to Clients
           </h1>
-          <p className="mt-3 max-w-3xl mx-auto text-sm md:text-base text-white/85 font-light md:whitespace-nowrap">
+          <p className="mt-2.5 sm:mt-3 max-w-2xl mx-auto text-xs sm:text-sm md:text-base text-white/90 font-light leading-relaxed drop-shadow-sm">
             Dedicated to turning your international dreams into reality with over 15 years of industry excellence.
           </p>
         </div>
       </section>
 
       {/* Story & Philosophy */}
-      <section className="py-24 bg-white">
-        <div className="mx-auto max-w-7xl px-6">
+      <section className="py-14 sm:py-20 md:py-24 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
           {/* Centered Section Header */}
-          <div className="mx-auto max-w-4xl text-center mb-14">
-            <span className="inline-flex items-center gap-2 rounded-full border border-sky-500/20 bg-sky-50 px-4 py-1.5 text-xs font-extrabold uppercase tracking-[0.25em] text-primary shadow-sm mb-3">
+          <div className="mx-auto max-w-4xl text-center mb-8 sm:mb-14">
+            <span className="inline-flex items-center gap-2 rounded-full border border-sky-500/20 bg-sky-50 px-3 py-1 sm:px-4 sm:py-1.5 text-[10px] sm:text-xs font-extrabold uppercase tracking-wider sm:tracking-[0.25em] text-primary shadow-sm mb-2 sm:mb-3">
               OUR MISSION &amp; EXPERTISE
             </span>
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight md:whitespace-nowrap">
+            <h2 className="text-lg sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
               A Strategic Pathway to <span className="text-gradient">Global Mobility</span>
             </h2>
-            <p className="mt-3 text-slate-700 text-sm md:text-base max-w-3xl mx-auto leading-relaxed md:whitespace-nowrap font-medium">
+            <p className="mt-2 sm:mt-3 text-slate-700 text-xs sm:text-sm md:text-base max-w-3xl mx-auto leading-relaxed font-medium">
               Empowering students and professionals with tailored immigration roadmaps and proven guidance.
             </p>
           </div>
 
-          <div className="grid gap-12 lg:grid-cols-2 items-stretch">
+          <div className="grid gap-8 sm:gap-12 lg:grid-cols-2 items-stretch">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="flex flex-col justify-between"
             >
-              <div className="space-y-4 text-slate-700 font-medium leading-relaxed text-base">
+              <div className="space-y-3.5 sm:space-y-4 text-slate-700 font-medium leading-relaxed text-xs sm:text-sm md:text-base">
                 <p>
                   At <strong className="font-bold text-slate-900">VisaEnter</strong>, we are all driven by dedication and highly motivated to support your immigration dream on its way to success. We achieve this by truly listening to your professional goals and needs and give all in for inspiring, creative, effective solutions to accelerate your preparation to achieve success.
                 </p>
@@ -180,10 +180,10 @@ function AboutPage() {
             <span className="inline-flex items-center gap-2 rounded-full border border-sky-500/20 bg-sky-50 px-4 py-1.5 text-xs font-extrabold uppercase tracking-[0.25em] text-primary shadow-sm mb-3">
               <Sparkles className="h-3.5 w-3.5 text-primary" /> RECOGNITION
             </span>
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight md:whitespace-nowrap">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
               Agency Awards &amp; <span className="text-gradient">Milestones</span>
             </h2>
-            <p className="mt-3 text-slate-700 font-medium text-sm md:text-base max-w-3xl mx-auto leading-relaxed md:whitespace-nowrap">
+            <p className="mt-3 text-slate-700 font-medium text-sm md:text-base max-w-3xl mx-auto leading-relaxed">
               Honored internationally for outstanding visa advisory, compliance, and client satisfaction.
             </p>
           </div>

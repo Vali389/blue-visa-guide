@@ -176,15 +176,15 @@ Please schedule my consultation appointment.`;
           aria-hidden
         />
 
-        <div className="relative z-10 mx-auto max-w-4xl px-6 text-white pt-10 text-center">
+        <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 text-white pt-[110px] sm:pt-[120px] pb-10 text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] backdrop-blur-md mb-4">
             <span className="h-2 w-2 rounded-full animate-pulse bg-emerald-400" />
             CONTACT WITH US
           </span>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight md:whitespace-nowrap">
+          <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold sm:font-extrabold leading-[1.22] sm:leading-[1.15] tracking-tight break-words">
             Feel Free to <span className="text-gradient">Get in Touch with Us</span>
           </h1>
-          <p className="mt-3 max-w-3xl mx-auto text-sm md:text-base text-white/85 font-light leading-relaxed md:whitespace-nowrap">
+          <p className="mt-3 max-w-3xl mx-auto text-xs sm:text-sm md:text-base text-white/85 font-light leading-relaxed">
             Our senior visa advisors are available to answer your queries and plan your application roadmap.
           </p>
         </div>
@@ -197,10 +197,10 @@ Please schedule my consultation appointment.`;
             <span className="inline-flex items-center gap-2 rounded-full border border-sky-500/20 bg-sky-50 px-4 py-1.5 text-xs font-extrabold uppercase tracking-[0.25em] text-primary shadow-sm mb-3">
               <Sparkles className="h-3.5 w-3.5 text-primary" /> VISAENTER OFFICE
             </span>
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight md:whitespace-nowrap">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
               Connect With Our <span className="text-gradient">Bangalore Office</span>
             </h2>
-            <p className="mt-3 text-slate-700 font-medium text-sm md:text-base max-w-3xl mx-auto leading-relaxed md:whitespace-nowrap">
+            <p className="mt-3 text-slate-700 font-medium text-sm md:text-base max-w-3xl mx-auto leading-relaxed">
               Visit our office in Hebbal Kempapura or call us directly. We provide in-person and online video consultations.
             </p>
           </div>

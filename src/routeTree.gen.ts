@@ -9,47 +9,22 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as VisasByPolicyRouteImport } from './routes/visas-by-policy'
-import { Route as VisasByCountryRouteImport } from './routes/visas-by-country'
-import { Route as PassportIndexRouteImport } from './routes/passport-index'
-import { Route as GalleryRouteImport } from './routes/gallery'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as BlogRouteImport } from './routes/blog'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as VisaCategoriesSlugRouteImport } from './routes/visa-categories.$slug'
-import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
-import { Route as CountriesSlugRouteImport } from './routes/countries.$slug'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as BlogRouteImport } from './routes/blog'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as PassportIndexRouteImport } from './routes/passport-index'
+import { Route as VisasByCountryRouteImport } from './routes/visas-by-country'
+import { Route as VisasByPolicyRouteImport } from './routes/visas-by-policy'
 import { Route as CoachingSlugRouteImport } from './routes/coaching.$slug'
+import { Route as CountriesSlugRouteImport } from './routes/countries.$slug'
+import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
+import { Route as VisaCategoriesSlugRouteImport } from './routes/visa-categories.$slug'
 
-const VisasByPolicyRoute = VisasByPolicyRouteImport.update({
-  id: '/visas-by-policy',
-  path: '/visas-by-policy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const VisasByCountryRoute = VisasByCountryRouteImport.update({
-  id: '/visas-by-country',
-  path: '/visas-by-country',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PassportIndexRoute = PassportIndexRouteImport.update({
-  id: '/passport-index',
-  path: '/passport-index',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const GalleryRoute = GalleryRouteImport.update({
-  id: '/gallery',
-  path: '/gallery',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BlogRoute = BlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -57,19 +32,39 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
-const VisaCategoriesSlugRoute = VisaCategoriesSlugRouteImport.update({
-  id: '/visa-categories/$slug',
-  path: '/visa-categories/$slug',
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicesSlugRoute = ServicesSlugRouteImport.update({
-  id: '/services/$slug',
-  path: '/services/$slug',
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PassportIndexRoute = PassportIndexRouteImport.update({
+  id: '/passport-index',
+  path: '/passport-index',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VisasByCountryRoute = VisasByCountryRouteImport.update({
+  id: '/visas-by-country',
+  path: '/visas-by-country',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VisasByPolicyRoute = VisasByPolicyRouteImport.update({
+  id: '/visas-by-policy',
+  path: '/visas-by-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoachingSlugRoute = CoachingSlugRouteImport.update({
+  id: '/coaching/$slug',
+  path: '/coaching/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CountriesSlugRoute = CountriesSlugRouteImport.update({
@@ -77,9 +72,14 @@ const CountriesSlugRoute = CountriesSlugRouteImport.update({
   path: '/countries/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CoachingSlugRoute = CoachingSlugRouteImport.update({
-  id: '/coaching/$slug',
-  path: '/coaching/$slug',
+const ServicesSlugRoute = ServicesSlugRouteImport.update({
+  id: '/services/$slug',
+  path: '/services/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VisaCategoriesSlugRoute = VisaCategoriesSlugRouteImport.update({
+  id: '/visa-categories/$slug',
+  path: '/visa-categories/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -188,46 +188,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/visas-by-policy': {
-      id: '/visas-by-policy'
-      path: '/visas-by-policy'
-      fullPath: '/visas-by-policy'
-      preLoaderRoute: typeof VisasByPolicyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/visas-by-country': {
-      id: '/visas-by-country'
-      path: '/visas-by-country'
-      fullPath: '/visas-by-country'
-      preLoaderRoute: typeof VisasByCountryRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/passport-index': {
-      id: '/passport-index'
-      path: '/passport-index'
-      fullPath: '/passport-index'
-      preLoaderRoute: typeof PassportIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/gallery': {
-      id: '/gallery'
-      path: '/gallery'
-      fullPath: '/gallery'
-      preLoaderRoute: typeof GalleryRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -237,25 +202,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/visa-categories/$slug': {
-      id: '/visa-categories/$slug'
-      path: '/visa-categories/$slug'
-      fullPath: '/visa-categories/$slug'
-      preLoaderRoute: typeof VisaCategoriesSlugRouteImport
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services/$slug': {
-      id: '/services/$slug'
-      path: '/services/$slug'
-      fullPath: '/services/$slug'
-      preLoaderRoute: typeof ServicesSlugRouteImport
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/passport-index': {
+      id: '/passport-index'
+      path: '/passport-index'
+      fullPath: '/passport-index'
+      preLoaderRoute: typeof PassportIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/visas-by-country': {
+      id: '/visas-by-country'
+      path: '/visas-by-country'
+      fullPath: '/visas-by-country'
+      preLoaderRoute: typeof VisasByCountryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/visas-by-policy': {
+      id: '/visas-by-policy'
+      path: '/visas-by-policy'
+      fullPath: '/visas-by-policy'
+      preLoaderRoute: typeof VisasByPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/coaching/$slug': {
+      id: '/coaching/$slug'
+      path: '/coaching/$slug'
+      fullPath: '/coaching/$slug'
+      preLoaderRoute: typeof CoachingSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/countries/$slug': {
@@ -265,11 +258,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CountriesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/coaching/$slug': {
-      id: '/coaching/$slug'
-      path: '/coaching/$slug'
-      fullPath: '/coaching/$slug'
-      preLoaderRoute: typeof CoachingSlugRouteImport
+    '/services/$slug': {
+      id: '/services/$slug'
+      path: '/services/$slug'
+      fullPath: '/services/$slug'
+      preLoaderRoute: typeof ServicesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/visa-categories/$slug': {
+      id: '/visa-categories/$slug'
+      path: '/visa-categories/$slug'
+      fullPath: '/visa-categories/$slug'
+      preLoaderRoute: typeof VisaCategoriesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
   }

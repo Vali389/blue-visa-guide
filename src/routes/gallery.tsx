@@ -104,10 +104,10 @@ function GalleryPage() {
           aria-hidden
         />
 
-        <div className="relative z-10 mx-auto max-w-4xl px-6 text-white pt-12 text-center">
+        <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 text-white pt-[110px] sm:pt-[120px] pb-10 text-center">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 text-xs font-semibold text-white/70 hover:text-white mb-6 transition-colors"
+            className="inline-flex items-center gap-2 text-xs font-semibold text-white/70 hover:text-white mb-4 transition-colors"
           >
             <ArrowLeft className="h-4 w-4" /> Back to Home
           </Link>
@@ -116,10 +116,10 @@ function GalleryPage() {
               <Sparkles className="h-3.5 w-3.5" style={{ color: "var(--accent)" }} /> Success Stories
             </span>
           </div>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight md:whitespace-nowrap">
+          <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold sm:font-extrabold leading-[1.22] sm:leading-[1.15] tracking-tight break-words">
             VisaEnter <span className="text-gradient">Success Gallery</span>
           </h1>
-          <p className="mt-3 max-w-3xl mx-auto text-sm md:text-base text-white/85 font-light md:whitespace-nowrap">
+          <p className="mt-3 max-w-3xl mx-auto text-xs sm:text-sm md:text-base text-white/85 font-light">
             Celebrating approvals, study abroad achievements, and client success for 15+ years.
           </p>
         </div>
@@ -132,10 +132,10 @@ function GalleryPage() {
             <span className="inline-flex items-center gap-2 rounded-full border border-sky-500/20 bg-sky-50 px-4 py-1.5 text-xs font-extrabold uppercase tracking-[0.25em] text-primary shadow-sm mb-3">
               HALL OF SUCCESS
             </span>
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight md:whitespace-nowrap">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
               Our Journey of <span className="text-gradient">Visa Approvals</span>
             </h2>
-            <p className="mt-3 text-muted-foreground text-sm md:text-base max-w-3xl mx-auto leading-relaxed md:whitespace-nowrap">
+            <p className="mt-3 text-muted-foreground text-sm md:text-base max-w-3xl mx-auto leading-relaxed">
               Every card below represents a real client dream fulfilled by our dedicated immigration team.
             </p>
           </div>
