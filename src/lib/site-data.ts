@@ -724,15 +724,7 @@ export const TESTIMONIALS = [
     avatar: "M",
     rating: 5,
     review:
-      "When researching agencies for my Germany Student Visa and blocked account filing, VisaEnter was recommended by seniors. Their invaluable guidance helped me secure my visa in just 3 weeks. Highly recommend their team!",
-  },
-  {
-    name: "Shajauddin",
-    role: "Approved Visa Client",
-    avatar: "S",
-    rating: 5,
-    review:
-      "The VisaEnter team is exceptionally knowledgeable. I faced complex hurdles with consulate appointments, but from day one I felt in safe hands. Every single query was resolved and my visa was approved promptly.",
+      "When I was researching for companies that could assist me with visa appointment and visa application filing for a Germany Student Visa I was recommended to contact Guide visa. This proved to be great advice. Guide Visa provided invaluable assistance throughout the process and finally got my visa in just 3 weeks. I would not hesitate to recommend to my friends and colleagues.",
   },
   {
     name: "Neha",
@@ -740,7 +732,15 @@ export const TESTIMONIALS = [
     avatar: "N",
     rating: 5,
     review:
-      "I appreciate everything that the VisaEnter team has done for me. Their SOP drafting and priority slot scheduling were flawless. I am extremely satisfied with their efforts and will definitely return for future visas.",
+      "I appreciate everything that Guide Visa team have done for me. I am extremely satisfied with your efforts and I am confident that I will come back to Guide Visa in the future should I need any services.",
+  },
+  {
+    name: "Shajauddin",
+    role: "Approved Visa Client",
+    avatar: "S",
+    rating: 5,
+    review:
+      "The GuideVisa team is extremely professional and knowledgeable. I really had challenges to secure my visa from Pakistan but when I contacted GuideVisa team from the day one I felt I am in safe hands. Some unusual circumstances in my application were thoroughly analyzed and taken care. Hence, I am now with my approved visa.",
   },
   {
     name: "Rahul Sharma",

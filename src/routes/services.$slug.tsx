@@ -21,7 +21,7 @@ import { PageLayout } from "@/components/site/PageLayout";
 import { VISAENTER_SERVICES, CONTACT_INFO, VisaEnterService } from "@/lib/site-data";
 
 import admissionsImg from "@/assets/service-student.jpg";
-import appointmentImg from "@/assets/hero-home.jpg";
+import appointmentImg from "@/assets/appointment-background-img.jpeg";
 import fundingImg from "@/assets/cta-bg.jpg";
 import insuranceImg from "@/assets/service-residency.jpg";
 import accommodationImg from "@/assets/hero-about.jpg";

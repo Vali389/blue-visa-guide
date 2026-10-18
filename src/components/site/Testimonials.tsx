@@ -75,7 +75,7 @@ export function Testimonials() {
               >
                 {/* Speech Bubble Card with Consistent Equal Height */}
                 <div
-                  className={`relative w-full rounded-3xl bg-white border pt-10 pb-8 px-6 sm:px-7 transition-all duration-300 flex flex-col justify-between h-[215px] sm:h-[200px] ${
+                  className={`relative w-full rounded-3xl bg-white border pt-10 pb-8 px-6 sm:px-7 transition-all duration-300 flex flex-col justify-between min-h-[200px] sm:min-h-[210px] md:min-h-[235px] ${
                     isFeatured
                       ? "border-blue-400 shadow-xl shadow-blue-500/10 -translate-y-1.5 ring-2 ring-blue-300/40"
                       : "border-sky-300/80 shadow-sm hover:border-blue-400 hover:shadow-md hover:-translate-y-1"
@@ -97,7 +97,7 @@ export function Testimonials() {
                     </div>
 
                     {/* Centered Review Text */}
-                    <p className="text-xs sm:text-sm text-slate-700 leading-relaxed text-center font-medium line-clamp-4">
+                    <p className="text-xs sm:text-sm text-slate-700 leading-relaxed text-center font-medium line-clamp-6">
                       "{t.review}"
                     </p>
                   </div>

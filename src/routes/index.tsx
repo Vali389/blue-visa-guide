@@ -47,7 +47,7 @@ import {
 
 // Asset Imports for Rich Cards
 import heroSlider1 from "@/assets/hero-slider-1.jpg";
-import heroSliderAppointment from "@/assets/hero-slider-appointment.jpg";
+import heroSliderAppointment from "@/assets/appointment-background-img.jpeg";
 import heroSliderStudyAbroad from "@/assets/hero-slider-study-abroad.jpg";
 import heroSliderClientGuidance from "@/assets/hero-slider-client-guidance.jpg";
 
@@ -67,7 +67,7 @@ import touristCatImg from "@/assets/service-tourist.jpg";
 import familyCatImg from "@/assets/service-family.jpg";
 
 import admissionsSrvImg from "@/assets/service-student.jpg";
-import appointmentSrvImg from "@/assets/hero-home.jpg";
+import appointmentSrvImg from "@/assets/appointment-background-img.jpeg";
 import fundingSrvImg from "@/assets/cta-bg.jpg";
 import insuranceSrvImg from "@/assets/service-residency.jpg";
 import accommodationSrvImg from "@/assets/hero-about.jpg";
@@ -136,6 +136,10 @@ const SERVICE_CARDS_IMAGES: Record<string, string> = {
 
 function HeroSlider() {
   const [current, setCurrent] = useState(0);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
+  const minSwipeDistance = 45;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -144,10 +148,34 @@ function HeroSlider() {
     return () => clearInterval(timer);
   }, [current]);
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    if (distance > minSwipeDistance) {
+      setCurrent((prev) => (prev + 1) % HERO_SLIDES.length);
+    } else if (distance < -minSwipeDistance) {
+      setCurrent((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
+    }
+  };
+
   const slide = HERO_SLIDES[current];
 
   return (
-    <section className="relative min-h-[480px] sm:min-h-[560px] md:h-[84vh] md:min-h-[600px] md:max-h-[750px] w-full overflow-hidden bg-slate-950 flex flex-col justify-center">
+    <section
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      className="relative min-h-[480px] sm:min-h-[560px] md:h-[84vh] md:min-h-[600px] md:max-h-[750px] w-full overflow-hidden bg-slate-950 flex flex-col justify-center select-none"
+    >
       {/* Background Images with Crossfade */}
       <AnimatePresence mode="wait">
         <motion.div
@@ -247,24 +275,24 @@ function HeroSlider() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Slider Controls - Hidden on mobile devices, shown on medium/desktop screens */}
-        <div className="hidden md:flex absolute bottom-6 md:bottom-8 right-6 items-center gap-3 z-20">
+        {/* Slider Controls: On mobile view only dots are shown (no arrows), on desktop both arrows and dots are shown */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 md:bottom-8 md:right-6 md:left-auto md:translate-x-0 flex items-center gap-2.5 sm:gap-3 z-20">
           <button
             onClick={() =>
               setCurrent((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length)
             }
-            className="grid h-10 w-10 md:h-11 md:w-11 place-items-center rounded-full border border-white/30 bg-black/50 text-white backdrop-blur-md hover:bg-white/20 transition-all"
+            className="hidden md:grid h-10 w-10 md:h-11 md:w-11 place-items-center rounded-full border border-white/30 bg-black/50 text-white backdrop-blur-md hover:bg-white/20 transition-all active:scale-95"
             aria-label="Previous Slide"
           >
             <ChevronLeft className="h-4 w-4 md:h-5 md:w-5" />
           </button>
-          <div className="flex gap-2">
+          <div className="flex items-center gap-2">
             {HERO_SLIDES.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setCurrent(i)}
-                className={`h-2.5 rounded-full transition-all duration-300 ${
-                  current === i ? "w-8 bg-sky-400 shadow-sm" : "w-2.5 bg-white/40 hover:bg-white/70"
+                className={`h-2 sm:h-2.5 rounded-full transition-all duration-300 ${
+                  current === i ? "w-7 sm:w-8 bg-sky-400 shadow-sm" : "w-2 sm:w-2.5 bg-white/50 hover:bg-white/80"
                 }`}
                 style={{ backgroundColor: current === i ? "var(--accent)" : undefined }}
                 aria-label={`Go to slide ${i + 1}`}
@@ -273,7 +301,7 @@ function HeroSlider() {
           </div>
           <button
             onClick={() => setCurrent((prev) => (prev + 1) % HERO_SLIDES.length)}
-            className="grid h-10 w-10 md:h-11 md:w-11 place-items-center rounded-full border border-white/30 bg-black/50 text-white backdrop-blur-md hover:bg-white/20 transition-all"
+            className="hidden md:grid h-10 w-10 md:h-11 md:w-11 place-items-center rounded-full border border-white/30 bg-black/50 text-white backdrop-blur-md hover:bg-white/20 transition-all active:scale-95"
             aria-label="Next Slide"
           >
             <ChevronRight className="h-4 w-4 md:h-5 md:w-5" />
@@ -358,7 +386,7 @@ function TestimonialsSlider() {
               >
                 {/* Speech Bubble Card with Consistent Equal Height */}
                 <div
-                  className={`relative w-full rounded-2xl sm:rounded-3xl bg-white border pt-8 sm:pt-10 pb-6 sm:pb-8 px-4 sm:px-7 transition-all duration-300 flex flex-col justify-between min-h-[170px] sm:min-h-[190px] md:h-[210px] ${
+                  className={`relative w-full rounded-2xl sm:rounded-3xl bg-white border pt-8 sm:pt-10 pb-6 sm:pb-8 px-4 sm:px-7 transition-all duration-300 flex flex-col justify-between min-h-[190px] sm:min-h-[210px] md:min-h-[235px] ${
                     isFeatured
                       ? "border-blue-400 shadow-xl shadow-blue-500/10 -translate-y-1 sm:-translate-y-1.5 ring-2 ring-blue-300/40"
                       : "border-sky-300/80 shadow-sm hover:border-blue-400 hover:shadow-md hover:-translate-y-1"
@@ -380,7 +408,7 @@ function TestimonialsSlider() {
                     </div>
 
                     {/* Centered Review Text */}
-                    <p className="text-xs sm:text-sm text-slate-700 leading-relaxed text-center font-medium line-clamp-4">
+                    <p className="text-xs sm:text-sm text-slate-700 leading-relaxed text-center font-medium line-clamp-6">
                       "{t.review}"
                     </p>
                   </div>
