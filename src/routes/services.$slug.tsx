@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { PageLayout } from "@/components/site/PageLayout";
 import { VISAENTER_SERVICES, CONTACT_INFO, VisaEnterService } from "@/lib/site-data";
+import { submitToWeb3Forms } from "@/lib/web3forms";
 
 import admissionsImg from "@/assets/service-student.jpg";
 import appointmentImg from "@/assets/appointment-background-img.jpeg";
@@ -129,11 +130,23 @@ function ServiceInquiryForm({ serviceName }: { serviceName: string }) {
     }
 
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 800));
 
-    toast.success(`Inquiry for ${serviceName} received! Connecting with service desk...`);
+    const res = await submitToWeb3Forms({
+      subject: `New Service Request: ${serviceName} — ${form.name.trim()} (${form.destination})`,
+      name: form.name.trim(),
+      phone: form.phone.trim(),
+      email: form.email.trim(),
+      service: serviceName,
+      destination: form.destination,
+      message: form.notes.trim() || `Inquiring about ${serviceName} process and quote.`,
+    });
 
-    const formattedMessage = `*New Service Request — ${serviceName}*
+    setIsSubmitting(false);
+
+    if (res.success) {
+      toast.success(`Inquiry for ${serviceName} submitted successfully! Connecting with coordinator...`);
+
+      const formattedMessage = `*New Service Request — ${serviceName}*
 ----------------------------------------
 *Applicant Name:* ${form.name.trim()}
 *Phone Number:* ${form.phone.trim()}
@@ -144,20 +157,21 @@ function ServiceInquiryForm({ serviceName }: { serviceName: string }) {
 ----------------------------------------
 Please provide quotation and next steps.`;
 
-    const whatsappUrl = `https://wa.me/919000898811?text=${encodeURIComponent(formattedMessage)}`;
+      const whatsappUrl = `https://wa.me/919000898811?text=${encodeURIComponent(formattedMessage)}`;
+      window.open(whatsappUrl, "_blank");
 
-    setIsSubmitting(false);
-    window.open(whatsappUrl, "_blank");
-
-    setForm({
-      name: "",
-      phone: "",
-      email: "",
-      destination: "Germany",
-      notes: "",
-    });
-    setTouched({});
-    setErrors({});
+      setForm({
+        name: "",
+        phone: "",
+        email: "",
+        destination: "Germany",
+        notes: "",
+      });
+      setTouched({});
+      setErrors({});
+    } else {
+      toast.error(res.message || "Failed to submit form. Please try again.");
+    }
   };
 
   return (

@@ -71,7 +71,9 @@ export function Testimonials() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.35, delay: slotIdx * 0.08 }}
                 onClick={() => setCurrent(reviewIdx)}
-                className="cursor-pointer flex flex-col items-center group h-full justify-between"
+                className={`cursor-pointer flex flex-col items-center group h-full justify-between ${
+                  slotIdx > 0 ? "hidden md:flex" : "flex"
+                }`}
               >
                 {/* Speech Bubble Card with Consistent Equal Height */}
                 <div
@@ -108,9 +110,20 @@ export function Testimonials() {
 
                 {/* Author Avatar & Info Below Speech Bubble */}
                 <div className="mt-6 flex flex-col items-center text-center">
-                  {/* Rotating Circular Avatar on Card Hover */}
-                  <div className="grid h-12 w-12 place-items-center rounded-full bg-blue-600 text-white font-black text-lg shadow-md ring-4 ring-white transition-transform duration-500 ease-in-out group-hover:rotate-[360deg] group-hover:scale-110">
-                    {t.avatar}
+                  {/* Circular Avatar on Card Hover */}
+                  <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-full overflow-hidden shadow-md ring-4 ring-white border border-sky-200 transition-transform duration-300 group-hover:scale-110 shrink-0 bg-blue-600">
+                    {t.image ? (
+                      <img
+                        src={t.image}
+                        alt={t.name}
+                        className="h-full w-full object-cover object-center"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="grid h-full w-full place-items-center text-white font-black text-lg">
+                        {t.avatar}
+                      </div>
+                    )}
                   </div>
                   <div className="font-bold text-slate-900 text-sm sm:text-base mt-2.5 leading-snug group-hover:text-primary transition-colors">
                     {t.name}

@@ -20,6 +20,7 @@ import {
 import { PageLayout } from "@/components/site/PageLayout";
 import { CONTACT_INFO } from "@/lib/site-data";
 import heroImg from "@/assets/contact-hero.jpg";
+import { submitToWeb3Forms } from "@/lib/web3forms";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -137,11 +138,23 @@ function ContactPage() {
     }
 
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 800));
 
-    toast.success("Inquiry received! Connecting with senior visa counselor...");
+    const res = await submitToWeb3Forms({
+      subject: `New Contact Inquiry: ${form.name.trim()} (${form.service})`,
+      name: form.name.trim(),
+      phone: form.phone.trim(),
+      email: form.email.trim(),
+      service: form.service,
+      message: form.message.trim() || "Interested in consultation and profile check.",
+    });
 
-    const formattedMessage = `*New Contact Inquiry — VisaEnter Bangalore*
+    setIsSubmitting(false);
+
+    if (res.success) {
+      toast.success("Form submitted successfully! Connecting with visa counselor...");
+      setSent(true);
+
+      const formattedMessage = `*New Contact Inquiry — VisaEnter Bangalore*
 ----------------------------------------
 *Applicant Name:* ${form.name.trim()}
 *Phone Number:* ${form.phone.trim()}
@@ -151,11 +164,11 @@ function ContactPage() {
 ----------------------------------------
 Please schedule my consultation appointment.`;
 
-    const whatsappUrl = `https://wa.me/919000898811?text=${encodeURIComponent(formattedMessage)}`;
-
-    setIsSubmitting(false);
-    setSent(true);
-    window.open(whatsappUrl, "_blank");
+      const whatsappUrl = `https://wa.me/919000898811?text=${encodeURIComponent(formattedMessage)}`;
+      window.open(whatsappUrl, "_blank");
+    } else {
+      toast.error(res.message || "Failed to submit form. Please try again.");
+    }
   };
 
   return (

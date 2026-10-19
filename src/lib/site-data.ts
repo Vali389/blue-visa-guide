@@ -1,4 +1,7 @@
 // VisaEnter — Central Site Data
+import hussainAvatar from "@/assets/hussain-180x180.jpg";
+import mazharAvatar from "@/assets/mazhar-180x180.jpg";
+import shariqAvatar from "@/assets/shariq-180x180.jpg";
 
 // ---------- HERO SLIDERS ----------
 export const HERO_SLIDES = [
@@ -717,54 +720,42 @@ export const VISAENTER_SERVICES: VisaEnterService[] = [
 ];
 
 // ---------- TESTIMONIALS ----------
-export const TESTIMONIALS = [
+export interface TestimonialItem {
+  name: string;
+  role: string;
+  avatar: string;
+  image?: string;
+  rating: number;
+  review: string;
+}
+
+export const TESTIMONIALS: TestimonialItem[] = [
+  {
+    name: "Hussain",
+    role: "Approved Visa Client",
+    avatar: "H",
+    image: hussainAvatar,
+    rating: 5,
+    review:
+      "The VisaEnter team is extremely professional and knowledgeable. I really had challenges to secure my visa from Pakistan but when I contacted VisaEnter team from the day one I felt I am in safe hands. Some unusual circumstances in my application were thoroughly analyzed and taken care. Hence, I am now with my approved visa.",
+  },
   {
     name: "Mazhar",
     role: "Germany Student Visa",
     avatar: "M",
+    image: mazharAvatar,
     rating: 5,
     review:
-      "When I was researching for companies that could assist me with visa appointment and visa application filing for a Germany Student Visa I was recommended to contact Guide visa. This proved to be great advice. Guide Visa provided invaluable assistance throughout the process and finally got my visa in just 3 weeks. I would not hesitate to recommend to my friends and colleagues.",
+      "When I was researching for companies that could assist me with visa appointment and visa application filing for a Germany Student Visa I was recommended to contact VisaEnter. This proved to be great advice. VisaEnter provided invaluable assistance throughout the process and finally got my visa in just 3 weeks. I would not hesitate to recommend to my friends and colleagues.",
   },
   {
-    name: "Neha",
-    role: "UK Work Permit Visa",
-    avatar: "N",
-    rating: 5,
-    review:
-      "I appreciate everything that Guide Visa team have done for me. I am extremely satisfied with your efforts and I am confident that I will come back to Guide Visa in the future should I need any services.",
-  },
-  {
-    name: "Shajauddin",
-    role: "Approved Visa Client",
+    name: "Shariq",
+    role: "Visa Services Client",
     avatar: "S",
+    image: shariqAvatar,
     rating: 5,
     review:
-      "The GuideVisa team is extremely professional and knowledgeable. I really had challenges to secure my visa from Pakistan but when I contacted GuideVisa team from the day one I felt I am in safe hands. Some unusual circumstances in my application were thoroughly analyzed and taken care. Hence, I am now with my approved visa.",
-  },
-  {
-    name: "Rahul Sharma",
-    role: "Canada Express Entry PR",
-    avatar: "R",
-    rating: 5,
-    review:
-      "VisaEnter helped me navigate CRS score optimization, ECA credential evaluation, and PNP nomination smoothly. Their dedicated case manager gave me end-to-end clarity until my permanent residency was stamped.",
-  },
-  {
-    name: "Ananya Iyer",
-    role: "France Campus Art Student",
-    avatar: "A",
-    rating: 5,
-    review:
-      "Securing admission and a long-stay student visa for Paris seemed intimidating until I met VisaEnter counselors. They coached me through the Études en France interview with flying colors. A 10/10 service!",
-  },
-  {
-    name: "Vikramjit Singh",
-    role: "Australia Skilled Graduate",
-    avatar: "V",
-    rating: 5,
-    review:
-      "From skills assessment submission to state sponsorship and biometric clearance, VisaEnter delivered a 100% transparent and stress-free process. Truly Bangalore's most trusted immigration consultants.",
+      "I appreciate everything that VisaEnter team have done for me. I am extremely satisfied with your efforts and I am confident that I will come back to VisaEnter in the future should I need any services.",
   },
 ];
 

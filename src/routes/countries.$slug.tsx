@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 import { PageLayout } from "@/components/site/PageLayout";
 import { COUNTRIES_DATA, CONTACT_INFO, CountryData } from "@/lib/site-data";
+import { submitToWeb3Forms } from "@/lib/web3forms";
 import {
   Accordion,
   AccordionContent,
@@ -279,11 +280,23 @@ function CountryApplyForm({ countryName }: { countryName: string }) {
     }
 
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 800));
 
-    toast.success(`Application for ${countryName} submitted! Connecting with assigned visa counselor...`);
+    const res = await submitToWeb3Forms({
+      subject: `New Visa Inquiry: ${countryName} — ${form.name.trim()} (${form.category})`,
+      name: form.name.trim(),
+      phone: form.phone.trim(),
+      email: form.email.trim(),
+      destination: countryName,
+      category: form.category,
+      message: form.notes.trim() || `Interested in ${countryName} visa checklist and step-by-step guidance.`,
+    });
 
-    const formattedMessage = `*New Visa Inquiry — ${countryName} VisaEnter*
+    setIsSubmitting(false);
+
+    if (res.success) {
+      toast.success(`Application for ${countryName} submitted successfully! Connecting with counselor...`);
+
+      const formattedMessage = `*New Visa Inquiry — ${countryName} VisaEnter*
 ----------------------------------------
 *Applicant Name:* ${form.name.trim()}
 *Phone Number:* ${form.phone.trim()}
@@ -294,20 +307,21 @@ function CountryApplyForm({ countryName }: { countryName: string }) {
 ----------------------------------------
 Please schedule my appointment with the ${countryName} visa specialist.`;
 
-    const whatsappUrl = `https://wa.me/919000898811?text=${encodeURIComponent(formattedMessage)}`;
+      const whatsappUrl = `https://wa.me/919000898811?text=${encodeURIComponent(formattedMessage)}`;
+      window.open(whatsappUrl, "_blank");
 
-    setIsSubmitting(false);
-    window.open(whatsappUrl, "_blank");
-
-    setForm({
-      name: "",
-      phone: "",
-      email: "",
-      category: "Student Visa",
-      notes: "",
-    });
-    setTouched({});
-    setErrors({});
+      setForm({
+        name: "",
+        phone: "",
+        email: "",
+        category: "Student Visa",
+        notes: "",
+      });
+      setTouched({});
+      setErrors({});
+    } else {
+      toast.error(res.message || "Failed to submit form. Please try again.");
+    }
   };
 
   return (

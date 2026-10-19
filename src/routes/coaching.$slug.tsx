@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 import {
   BookOpen,
   CheckCircle2,
@@ -11,9 +13,11 @@ import {
   Award,
   ArrowRight,
   ShieldCheck,
+  Loader2,
 } from "lucide-react";
 import { PageLayout } from "@/components/site/PageLayout";
 import { COACHING_DATA, CONTACT_INFO, CoachingData } from "@/lib/site-data";
+import { submitToWeb3Forms } from "@/lib/web3forms";
 import duolingoHeroImg from "@/assets/hero-about.jpg";
 import tofelHeroImg from "@/assets/hero-passport.jpg";
 
@@ -63,6 +67,42 @@ function CoachingPage() {
   const { coach } = Route.useLoaderData<{ coach: CoachingData }>();
   const otherCoaching = COACHING_DATA.filter((c) => c.slug !== coach.slug);
   const heroImg = COACHING_HERO_IMAGES[coach.slug] || duolingoHeroImg;
+
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    mode: "Online Live Classes",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const res = await submitToWeb3Forms({
+      subject: `New Coaching Enrollment: ${coach.name} — ${form.name.trim()}`,
+      name: form.name.trim(),
+      phone: form.phone.trim(),
+      email: form.email.trim(),
+      program: coach.name,
+      mode: form.mode,
+    });
+
+    setIsSubmitting(false);
+
+    if (res.success) {
+      toast.success(`Registered for ${coach.name}! Our faculty team will contact you.`);
+      setForm({
+        name: "",
+        phone: "",
+        email: "",
+        mode: "Online Live Classes",
+      });
+    } else {
+      toast.error(res.message || "Failed to submit. Please try again.");
+    }
+  };
 
   return (
     <PageLayout>
@@ -239,19 +279,15 @@ function CoachingPage() {
                   Reserve your seat for the upcoming weekday or weekend batch.
                 </p>
 
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    alert(`Thank you! You have registered for ${coach.name}. Our team will contact you.`);
-                  }}
-                  className="mt-6 space-y-4"
-                >
+                <form onSubmit={handleSubmit} className="mt-6 space-y-4">
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1">
                       Full Name *
                     </label>
                     <input
                       required
+                      value={form.name}
+                      onChange={(e) => setForm({ ...form, name: e.target.value })}
                       placeholder="Your name"
                       className="w-full rounded-xl border bg-background px-4 py-2.5 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
                     />
@@ -264,6 +300,8 @@ function CoachingPage() {
                     <input
                       required
                       type="tel"
+                      value={form.phone}
+                      onChange={(e) => setForm({ ...form, phone: e.target.value })}
                       placeholder="+91-XXXXX XXXXX"
                       className="w-full rounded-xl border bg-background px-4 py-2.5 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
                     />
@@ -276,6 +314,8 @@ function CoachingPage() {
                     <input
                       required
                       type="email"
+                      value={form.email}
+                      onChange={(e) => setForm({ ...form, email: e.target.value })}
                       placeholder="you@email.com"
                       className="w-full rounded-xl border bg-background px-4 py-2.5 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
                     />
@@ -285,7 +325,11 @@ function CoachingPage() {
                     <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1">
                       Preferred Mode
                     </label>
-                    <select className="w-full rounded-xl border bg-background px-4 py-2.5 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20">
+                    <select
+                      value={form.mode}
+                      onChange={(e) => setForm({ ...form, mode: e.target.value })}
+                      className="w-full rounded-xl border bg-background px-4 py-2.5 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+                    >
                       <option>Online Live Classes</option>
                       <option>Classroom (Bangalore)</option>
                       <option>1-on-1 Private Tutoring</option>
@@ -294,9 +338,18 @@ function CoachingPage() {
 
                   <button
                     type="submit"
-                    className="w-full rounded-xl gradient-primary py-3 text-sm font-bold text-white shadow-md hover:scale-[1.02] transition-all flex items-center justify-center gap-2"
+                    disabled={isSubmitting}
+                    className="w-full rounded-xl gradient-primary py-3 text-sm font-bold text-white shadow-md hover:scale-[1.02] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70 disabled:hover:scale-100"
                   >
-                    <Send className="h-4 w-4" /> Book Demo Class
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin" /> Submitting...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="h-4 w-4" /> Book Demo Class
+                      </>
+                    )}
                   </button>
                 </form>
               </div>
